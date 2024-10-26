@@ -1,0 +1,56 @@
+services:
+  node-app:
+    build:
+      context: .
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}  # Pass ENVIRONMENT variable to Dockerfile
+    develop:
+      watch:
+        - action: sync
+          path: ./website
+          target: /app/website
+          ignore:
+            - node_modules
+        - action: rebuild
+          path: Dockerfile
+        - action: rebuild
+          path: compose.yaml
+        - action: sync+restart
+          path: ./website/package.json
+          target: /app/website/package.json
+    ports:
+      - "5173:5173"
+    depends_on:
+      - mongodb
+    environment:
+      - NODE_ENV=${ENVIRONMENT}
+    networks:
+      - node-mongodb
+    volumes:
+      - ./:/app  # Volume mount for dev mode
+    # command: tail -f /dev/null  # Keep container running
+  
+  mongodb:
+    image: mongo
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
+    networks:
+      - node-mongodb
+    ports:
+      - '27017:27017'
+    restart: always
+    secrets:
+      - mongodb_credentials
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  node-mongodb:
+    driver: bridge
+
+secrets:
+  mongodb_credentials:
+    file: ./secrets/mongodb_credentials.secret
+
+volumes:
+  mongo-data:
