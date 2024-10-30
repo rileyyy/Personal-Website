@@ -2,6 +2,7 @@ services:
   node-app:
     build:
       context: .
+      dockerfile: Dockerfile.node
       args:
         ENVIRONMENT: ${ENVIRONMENT}  # Pass ENVIRONMENT variable to Dockerfile
     develop:
@@ -10,7 +11,7 @@ services:
           path: ./website
           target: /app/website
           ignore:
-            - node_modules
+            - website/node_modules
         - action: rebuild
           path: Dockerfile
         - action: rebuild
@@ -24,18 +25,29 @@ services:
       - mongodb
     environment:
       - NODE_ENV=${ENVIRONMENT}
-    networks:
-      - node-mongodb
     volumes:
       - ./:/app  # Volume mount for dev mode
     # command: tail -f /dev/null  # Keep container running
   
+  asp-net:
+    build:
+      context: .
+      dockerfile: Dockerfile.aspnet
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}  # Pass ENVIRONMENT
+    ports:
+      - "25052:25052"
+    networks:
+      - asp-mongodb
+    secrets:
+      - mongodb_credentials
+
   mongodb:
     image: mongo
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
     networks:
-      - node-mongodb
+      - asp-mongodb
     ports:
       - '27017:27017'
     restart: always
@@ -45,7 +57,7 @@ services:
       - mongo-data:/data/db
 
 networks:
-  node-mongodb:
+  asp-mongodb:
     driver: bridge
 
 secrets:
