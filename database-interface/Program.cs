@@ -1,8 +1,13 @@
 using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+app.UseSwagger();
+app.UseSwaggerUI();
 
 var username = string.Empty;
 var password = string.Empty;
@@ -22,4 +27,6 @@ app.MapGet("/", () => {
          $"Database names: {string.Join(", ", client.ListDatabaseNames().ToList())}";
 });
 
+app.UseAuthorization();
+app.MapControllers();
 app.Run("http://*:25052/");
