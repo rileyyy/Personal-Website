@@ -33,17 +33,20 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.aspnet
-      args:
-        ENVIRONMENT: ${ENVIRONMENT}  # Pass ENVIRONMENT
     ports:
       - "25052:25052"
     networks:
       - asp-mongodb
     secrets:
-      - mongodb_credentials
+      - mongodb_username
+      - mongodb_password
 
   mongodb:
     image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME_FILE: /run/secrets/mongodb_username
+      MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongodb_password
+      MONGO_INITDB_DATABASE: chat_app
     healthcheck:
       test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
     networks:
@@ -52,17 +55,18 @@ services:
       - '27017:27017'
     restart: always
     secrets:
-      - mongodb_credentials
+      - mongodb_username
+      - mongodb_password
     volumes:
-      - mongo-data:/data/db
+      - ./docker/mongodb_data:/data/db
+      # - ./docker/mongodb_init.js:/docker-entrypoint-initdb.d/mongodb_init.js
 
 networks:
   asp-mongodb:
     driver: bridge
 
 secrets:
-  mongodb_credentials:
-    file: ./secrets/mongodb_credentials.secret
-
-volumes:
-  mongo-data:
+  mongodb_username:
+    file: ./secrets/mongodb_username.secret
+  mongodb_password:
+    file: ./secrets/mongodb_password.secret
