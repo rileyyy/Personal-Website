@@ -18,17 +18,20 @@ public class NodeController : ControllerBase
 
   public NodeController(MongoService mongoService, ILogger<NodeController> logger)
   {
-    this.nodes = mongoService.NodesDatabase.GetCollection<Node>("nodes");
+    this.nodes = mongoService.WebsiteDesignDatabase.GetCollection<Node>("nodes");
     this.logger = logger;
   }
 
   [HttpGet]
-  public async Task<IEnumerable<Node>> GetNodes() =>
-    await this.nodes.Find(node => true).ToListAsync();
+  public async Task<IEnumerable<Node>> GetNodes()
+  {
+    this.logger.LogInformation("Getting all nodes");
+    return await this.nodes.Find(node => true).ToListAsync();
+  }
 
   [HttpGet("{id}")]
   public async Task<Node> GetById(string id) =>
-    await this.nodes.Find(node => node.Id == id).FirstOrDefaultAsync();
+    await this.nodes.Find(node => node.Id.ToString() == id).FirstOrDefaultAsync();
 
   [HttpPost]
   public async Task<ActionResult> CreateNode(Node node)
@@ -42,7 +45,7 @@ public class NodeController : ControllerBase
   public async Task<ActionResult> UpdateNode(string id, Node node)
   {
     logger.LogInformation($"Updating node with id {id}");
-    var result = await this.nodes.ReplaceOneAsync(node => node.Id == id, node);
+    var result = await this.nodes.ReplaceOneAsync(node => node.Id.ToString() == id, node);
     return result.MatchedCount == 0 ? NotFound() : Ok();
   }
 
@@ -50,7 +53,7 @@ public class NodeController : ControllerBase
   public async Task<ActionResult> DeleteNode(string id)
   {
     logger.LogInformation($"Deleting node with id {id}");
-    var result = await this.nodes.DeleteOneAsync(node => node.Id == id);
+    var result = await this.nodes.DeleteOneAsync(node => node.Id.ToString() == id);
     return result.DeletedCount == 0 ? NotFound() : Ok();
   }
 }

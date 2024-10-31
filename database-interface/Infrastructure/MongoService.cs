@@ -7,7 +7,7 @@ namespace database_interface.Infrastructure;
 
 public class MongoService
 {
-  private readonly IMongoDatabase nodesDatabase;
+  private readonly IMongoDatabase websiteDesignDatabase;
   private readonly ILogger<MongoService> logger;
 
   public MongoService(ILogger<MongoService> logger)
@@ -17,10 +17,10 @@ public class MongoService
     var connectionString = GetConnectionString();
     var client = new MongoClient(connectionString);
 
-    this.nodesDatabase = client.GetDatabase("website-design");
+    this.websiteDesignDatabase = client.GetDatabase("website-design");
   }
 
-  public IMongoDatabase NodesDatabase => this.nodesDatabase;
+  public IMongoDatabase WebsiteDesignDatabase => this.websiteDesignDatabase;
 
   private static string GetConnectionString()
   {
