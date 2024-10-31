@@ -129,17 +129,15 @@ public class IntegrityService
         NodeType = Enum.Parse<NodeType>(nodes["nodeType"].ToString()),
       };
 
-      // If node exists in existingNodes, update it; if not, create it
       var existingNode = existingNodes.FirstOrDefault(n => n.Name == node.Name);
       if (existingNode is not null)
       {
-        this.logger.LogInformation($"Updating node {node.Name}");
-        // await this.nodeController.UpdateNode(existingNode.Id.ToString(), node);
+        node.Id = existingNode.Id;
+        await this.nodeController.UpdateNode(existingNode.Id.ToString(), node);
       }
       else
       {
-        this.logger.LogInformation($"Creating node {node.Name}");
-        // await this.nodeController.CreateNode(node);
+        await this.nodeController.CreateNode(node);
       }
     }
 
@@ -148,8 +146,7 @@ public class IntegrityService
     {
       if (data.Cast<Dictionary<object, object>>().All(n => n["name"].ToString() != existingNode.Name))
       {
-        this.logger.LogInformation($"Deleting node {existingNode.Name}");
-        // await this.nodeController.DeleteNode(existingNode.Id.ToString());
+        await this.nodeController.DeleteNode(existingNode.Id.ToString());
       }
     }
   }
