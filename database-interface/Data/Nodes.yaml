@@ -1,0 +1,22 @@
+version: 0.1.1
+
+type: "Node"
+
+data:
+  - name: "Home"
+    icon: "Cottage"
+    parent: null
+    position: [0, 0]
+    nodeType: 0
+    showNodes:
+      - "Resume"
+      - "Projects"
+      - "Contact"
+
+  - name: "Resume"
+    icon: "Bussiness Center"
+    parent: "Home"
+    position: [300, 300]
+    nodeType: "NodeOnly"
+    showNodes: []
+    
