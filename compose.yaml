@@ -33,6 +33,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.aspnet
+    develop:
+      watch:
+        - action: sync
+          path: ./database-interface/data/
+          target: /data
+        - action: rebuild
+          path: ./database-interface/
     ports:
       - "25052:25052"
     networks:
@@ -40,6 +47,8 @@ services:
     secrets:
       - mongodb_username
       - mongodb_password
+    volumes:
+      - ./database-interface/Data:/data
 
   mongodb:
     image: mongo
