@@ -153,8 +153,9 @@ public class IntegrityService
 
   private async Task UpdateIntegrityRecord(string name, string version)
   {
-    var integrityRecord = await this.integrityController.GetById(name);
+    var integrityRecord = await this.integrityController.GetByName(name);
     integrityRecord.Version = version;
+    logger.LogInformation($"Updating integrity record {name} to version {version}");
     await this.integrityController.UpdateIntegrity(integrityRecord.Id.ToString(), integrityRecord);
   }
 }

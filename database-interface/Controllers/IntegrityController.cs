@@ -26,16 +26,16 @@ public class IntegrityController : ControllerBase
   public async Task<IEnumerable<Integrity>> GetIntegrity() =>
     await this.integrity.Find(integrity => true).ToListAsync();
 
-  [HttpGet("{id}")]
-  public async Task<Integrity> GetById(string id) =>
-    await this.integrity.Find(integrity => integrity.Id.ToString() == id).FirstOrDefaultAsync();
+  [HttpGet("{name}")]
+  public async Task<Integrity> GetByName(string name) =>
+    await this.integrity.Find(integrity => integrity.Name == name).FirstOrDefaultAsync();
 
   [HttpPost]
   public async Task<ActionResult> CreateIntegrity(Integrity integrity)
   {
     logger.LogInformation($"Creating {integrity.Name} integrity record at version {integrity.Version}");
     await this.integrity.InsertOneAsync(integrity);
-    return CreatedAtAction(nameof(GetById), new { id = integrity.Id }, integrity);
+    return CreatedAtAction(nameof(GetByName), new { id = integrity.Id }, integrity);
   }
 
   [HttpPut("{id}")]
