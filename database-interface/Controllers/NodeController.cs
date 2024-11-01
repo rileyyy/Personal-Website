@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
-using database_interface.DatabaseTypes;
-using database_interface.Infrastructure;
+using DatabaseInterface.DatabaseTypes;
+using DatabaseInterface.Infrastructure;
 
-namespace database_interface.Controllers;
+namespace DatabaseInterface.Controllers;
 
 [Route("/nodes")]
 [ApiController]

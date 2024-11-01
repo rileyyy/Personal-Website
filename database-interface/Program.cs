@@ -2,8 +2,8 @@ using System.Threading;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-using database_interface.Controllers;
-using database_interface.Infrastructure;
+using DatabaseInterface.Controllers;
+using DatabaseInterface.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();

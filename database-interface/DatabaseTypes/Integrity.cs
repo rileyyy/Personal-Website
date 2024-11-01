@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace database_interface.DatabaseTypes;
+namespace DatabaseInterface.DatabaseTypes;
 
 public struct Integrity
 {
