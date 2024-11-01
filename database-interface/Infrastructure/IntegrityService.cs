@@ -53,63 +53,51 @@ public class IntegrityService
 
   public async void CheckIntegrity()
   {
+
     var integrityRecords = (await this.integrityController.GetIntegrity()).ToList();
-
-    foreach (var integrityRecord in integrityRecords)
+    foreach (var file in Directory.GetFiles("/data", "*.yaml"))
     {
-      var yamlPath = Path.Combine("/data", $"{integrityRecord.Name}.yaml");
-      if (!File.Exists(yamlPath))
+      var fileName = Path.GetFileNameWithoutExtension(file);
+      var fileText = File.ReadAllText(file);
+      var yaml = this.ParseYaml(fileText);
+
+      if (!yaml.TryGetValue("version", out var version))
       {
-        this.logger.LogWarning($"YAML file for {integrityRecord.Name} does not exist.");
+        this.logger.LogError($"Version not found in YAML file for {file}");
         continue;
       }
 
-      var yamlContent = File.ReadAllText(yamlPath);
-      var deserializer = new DeserializerBuilder()
-        .WithNamingConvention(CamelCaseNamingConvention.Instance)
-        .Build();
+      var fileVersion = version.ToString();
 
-      var yamlData = deserializer.Deserialize<Dictionary<string, object>>(yamlContent);
-      if (!yamlData.TryGetValue("version", out var version))
+      var integrityVersion = integrityRecords.FirstOrDefault(r => r.Name == fileName).Version;
+      if (fileVersion == integrityVersion)
       {
-        this.logger.LogInformation($"Version not found in YAML file for {integrityRecord.Name}");
         continue;
       }
 
-      if (version.ToString() != integrityRecord.Version)
+      this.logger.LogInformation($"Version mismatch for {fileName}:"
+                                + $"\n\tDatabase version {integrityVersion},"
+                                + $"\n\tYAML version {fileVersion}");
+
+      if (!yaml.TryGetValue("data", out var data))
       {
-        this.logger.LogInformation($"Version mismatch for {integrityRecord.Name}:"
-                                  + $"\n\tDatabase version {integrityRecord.Version},"
-                                  + $"\n\tYAML version {version}");
-        await this.UpdateMongoDatabaseToLatest(yamlData, version.ToString());
+        this.logger.LogError($"Data not found in YAML file for {file}");
+        continue;
       }
-    }
-  }
+      var fileData = (List<object>)data;
 
-  public async Task UpdateMongoDatabaseToLatest(Dictionary<string, object> data, string version)
-  {
-    if (!data.TryGetValue("type", out var type))
-    {
-      this.logger.LogWarning("Type definition not found in YAML file");
-      return;
-    }
+      switch (fileName)
+      {
+        case "Nodes":
+          await this.UpdateNodesCollection(fileData);
+          break;
 
-    if (!data.TryGetValue("data", out var dataObject))
-    {
-      this.logger.LogWarning("Data definition not found in YAML file");
-      return;
-    }
+        default:
+          this.logger.LogWarning($"Unknown type {fileName}");
+          return;
+      }
 
-    switch (type.ToString())
-    {
-      case "Node":
-        await this.UpdateNodesCollection((List<object>)dataObject);
-        await this.UpdateIntegrityRecord("Nodes", version);
-        break;
-
-      default:
-        this.logger.LogWarning($"Unknown type {type}");
-        break;
+      await this.UpdateIntegrityRecord(fileName, fileVersion!);
     }
   }
 
@@ -117,30 +105,29 @@ public class IntegrityService
   {
     var existingNodes = await this.nodeController.GetNodes();
 
-    foreach (var key in data)
+    foreach (var entry in data)
     {
-      var nodes = (Dictionary<object, object>)key;
+      var node = (Dictionary<object, object>)entry;
 
-      var node = new Node
+      var newNode = new Node
       {
-        Name = nodes["name"].ToString(),
-        Icon = nodes["icon"].ToString(),
-        Position = ((List<object>)nodes["position"]).Select(x => Convert.ToInt32(x)).ToArray(),
-        ParentNode = nodes.TryGetValue("parentNode", out var parentNodeId) ? parentNodeId.ToString() : null,
-        ShowNodes = ((List<object>)nodes["showNodes"]).Select(x => x.ToString()).ToList(),
-        NodeType = Enum.Parse<NodeType>(nodes["nodeType"].ToString()),
+        Name = node["name"].ToString(),
+        Icon = node["icon"].ToString(),
+        Position = ((List<object>)node["position"]).Select(x => Convert.ToInt32(x)).ToArray(),
+        ParentNode = node.TryGetValue("parentNode", out var parentNode) ? parentNode?.ToString() : null,
+        ShowNodes = ((List<object>)node["showNodes"]).Select(x => x.ToString()).ToList(),
+        NodeType = Enum.Parse<NodeType>(node["nodeType"].ToString()),
       };
 
-      var existingNode = existingNodes.FirstOrDefault(n => n.Name == node.Name);
-      if (existingNode is not null)
+      var existingNode = existingNodes.FirstOrDefault(n => n.Name == newNode.Name);
+      if (existingNode is null)
       {
-        node.Id = existingNode.Id;
-        await this.nodeController.UpdateNode(existingNode.Id.ToString(), node);
+        await this.nodeController.CreateNode(newNode);
+        continue;
       }
-      else
-      {
-        await this.nodeController.CreateNode(node);
-      }
+
+      newNode.Id = existingNode.Id;
+      await this.nodeController.UpdateNode(existingNode.Id.ToString(), newNode);
     }
 
     // Delete nodes that are not in the YAML file
@@ -156,8 +143,22 @@ public class IntegrityService
   private async Task UpdateIntegrityRecord(string name, string version)
   {
     var integrityRecord = await this.integrityController.GetByName(name);
-    integrityRecord.Version = version;
+    if (integrityRecord is null)
+    {
+      this.logger.LogInformation($"Creating integrity record {name} at version {version}");
+      await this.integrityController.CreateIntegrity(new Integrity { Name = name, Version = version });
+      return;
+    }
+
+    var record = integrityRecord.Value;
+    record.Version = version;
     logger.LogInformation($"Updating integrity record {name} to version {version}");
-    await this.integrityController.UpdateIntegrity(integrityRecord.Id.ToString(), integrityRecord);
+    await this.integrityController.UpdateIntegrity(record.Id.ToString(), record);
   }
+
+  private Dictionary<string, object> ParseYaml(string yaml) =>
+    new DeserializerBuilder()
+      .WithNamingConvention(CamelCaseNamingConvention.Instance)
+      .Build()
+      .Deserialize<Dictionary<string, object>>(yaml);
 }
