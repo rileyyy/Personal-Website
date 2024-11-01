@@ -25,6 +25,10 @@ public class IntegrityService
     EnableRaisingEvents = true,
   };
 
+  private bool isCheckingIntegrity = false;
+  private DateTime lastEventTime = DateTime.MinValue;
+  private readonly TimeSpan debounceTime = TimeSpan.FromSeconds(5);
+
   public IntegrityService(
     IntegrityController integrityController,
     NodeController nodeController,
@@ -47,12 +51,19 @@ public class IntegrityService
 
   private void OnChanged(object sender, FileSystemEventArgs e)
   {
+    var currentTime = DateTime.Now;
+    if (currentTime - this.lastEventTime > this.debounceTime)
+    {
+      this.lastEventTime = currentTime;
       this.logger.LogInformation("Data change detected: {0}", e.FullPath);
       this.CheckIntegrity();
+    }
   }
 
   public async void CheckIntegrity()
   {
+    if (this.isCheckingIntegrity) return;
+    this.isCheckingIntegrity = true;
 
     var integrityRecords = (await this.integrityController.GetIntegrity()).ToList();
     foreach (var file in Directory.GetFiles("/data", "*.yaml"))
@@ -99,6 +110,8 @@ public class IntegrityService
 
       await this.UpdateIntegrityRecord(fileName, fileVersion!);
     }
+
+    this.isCheckingIntegrity = false;
   }
 
   private async Task UpdateNodesCollection(List<object> data)
