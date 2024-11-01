@@ -27,7 +27,7 @@ public class IntegrityController : ControllerBase
     await this.integrity.Find(integrity => true).ToListAsync();
 
   [HttpGet("{name}")]
-  public async Task<Integrity> GetByName(string name) =>
+  public async Task<Integrity?> GetByName(string name) =>
     await this.integrity.Find(integrity => integrity.Name == name).FirstOrDefaultAsync();
 
   [HttpPost]
@@ -41,7 +41,6 @@ public class IntegrityController : ControllerBase
   [HttpPut("{id}")]
   public async Task<ActionResult> UpdateIntegrity(string id, Integrity integrity)
   {
-    logger.LogInformation($"Updating integrity record with id {id} to version {integrity.Version}");
     var result = await this.integrity.ReplaceOneAsync(integrity => integrity.Id.ToString() == id, integrity);
     return result.MatchedCount == 0 ? NotFound() : Ok();
   }
