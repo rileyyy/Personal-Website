@@ -36,7 +36,7 @@ services:
     develop:
       watch:
         - action: sync
-          path: ./database-interface/data/
+          path: ./data/
           target: /data
         - action: rebuild
           path: ./database-interface/
@@ -48,7 +48,7 @@ services:
       - mongodb_username
       - mongodb_password
     volumes:
-      - ./database-interface/Data:/data
+      - ./data:/data
 
   mongodb:
     image: mongo
