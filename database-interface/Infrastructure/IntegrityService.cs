@@ -33,20 +33,22 @@ public class IntegrityService
     this.integrityController = integrityController;
     this.nodeController = nodeController;
     this.logger = logger;
-
-    this.logger.LogInformation("Integrity service started");
   }
 
   public void StartDataMonitor()
   {
-    this.logger.LogInformation("Starting data monitor");
-    this.watcher.Changed += (_, _) => this.CheckIntegrity();
+    this.logger.LogInformation("Integrity service started");
+    this.watcher.Changed += OnChanged;
     this.CheckIntegrity();
   }
 
-  public void StopDataMonitor()
+  public void StopDataMonitor() =>
+    this.watcher.Changed -= OnChanged;
+
+  private void OnChanged(object sender, FileSystemEventArgs e)
   {
-    this.watcher.Changed -= (_, _) => this.CheckIntegrity();
+      this.logger.LogInformation("Data change detected: {0}", e.FullPath);
+      this.CheckIntegrity();
   }
 
   public async void CheckIntegrity()
