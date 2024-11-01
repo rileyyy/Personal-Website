@@ -7,10 +7,10 @@ using Microsoft.Extensions.Logging;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-using database_interface.DatabaseTypes;
-using database_interface.Controllers;
+using DatabaseInterface.DatabaseTypes;
+using DatabaseInterface.Controllers;
 
-namespace database_interface.Infrastructure;
+namespace DatabaseInterface.Infrastructure;
 
 public class IntegrityService
 {

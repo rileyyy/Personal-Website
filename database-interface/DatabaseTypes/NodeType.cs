@@ -1,4 +1,4 @@
-namespace database_interface.DatabaseTypes;
+namespace DatabaseInterface.DatabaseTypes;
 
 public enum NodeType
 {

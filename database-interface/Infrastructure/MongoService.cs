@@ -3,7 +3,7 @@ using System.Linq;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
-namespace database_interface.Infrastructure;
+namespace DatabaseInterface.Infrastructure;
 
 public class MongoService
 {
