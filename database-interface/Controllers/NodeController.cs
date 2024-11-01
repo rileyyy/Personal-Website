@@ -23,11 +23,8 @@ public class NodeController : ControllerBase
   }
 
   [HttpGet]
-  public async Task<IEnumerable<Node>> GetNodes()
-  {
-    this.logger.LogInformation("Getting all nodes");
-    return await this.nodes.Find(node => true).ToListAsync();
-  }
+  public async Task<IEnumerable<Node>> GetNodes() =>
+    await this.nodes.Find(node => true).ToListAsync();
 
   [HttpGet("{id}")]
   public async Task<Node> GetById(string id) =>
