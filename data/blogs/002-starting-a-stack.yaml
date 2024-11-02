@@ -1,0 +1,13 @@
+id: 002
+tags: ['JavaScript', 'Vue', 'MongoDB', 'Docker', 'ASP.NET']
+title: Starting a Stack
+content:
+  I never got to pick my own stack before. It is overwhelming, to say the least. I knew .NET development since that's been 10 years of my life now, and there was some of the ol' MySQL in there. But MySQL is for the birds and Mongo sounds kind of like Mango, so that's where we start, MongoDB.
+
+  Next step is a frontend. React and Angular are pretty popular, but those sound pretty mainstream. I did hear that one presentation at CodeMash last year about Vue, and how easy it is for new JavaScript developers. It looked pretty straitforward at the time, so I'm going to give that a shot.
+
+  Then, that job I was hoping for mentioned docker, so why not throw that on the stack too? Do I know how it will help the process? Not a clue. But I did work with VirtualBox for 5 years, so at least I should be decent at it. Since I tend to hop between the Mac and Windows computers too, so neat, I can work on both without having different work flows. About 10 minutes into a tutorial on Docker, I realize it is almost a requirement to throw Docker Compose in the mix too. So that's in there now.
+
+  It took doing some actual development to realize that if I am going to keep all of my design in a database I would need to put credentials in the Vue app and that's a definite no-go. So I need a backend. I scowered to figure this out since there are more frameworks for JavaScript than bones in the human body. But at this point I am pretty burnt out on the research phase, and that job mentioned ASP.NET. Well, I know .NET, so that's what I'm going with.
+
+  So there we are, a tech-stack that is probably going to make better developers weep.
