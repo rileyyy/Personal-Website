@@ -1,0 +1,9 @@
+id: 001
+tags: []
+title: Frontend as a Backend Developer
+content:
+  It took 10 years of occasionally pestering myself with the "you're a developer, why don'y you have a website" dialog before I broke down and decided to learn. Part of the reason it is finally happening is in hopes to get a specific job that really sounds like a dream. The other part is because unemployment leaves a lot of time to get things done, but all the outdoor summer chores are done for the year, and there's not enough snow yet to start the winter chores.
+
+  I figured heck, I've been writing UIs for a while in XAML for .NET and a really miserable Java framework that bears no further mention. How hard can HTML and a little JavaScript be? So here it is, a long series of rambles, in an even longer journey of a backend developer learning frontend development. The brightside for you, dear reader, is that I have no intention of this being a real blog. Which means I feel no obligation to hit word counts, or perform SEO, or even make sense. I'm just going to blather away about whatever I'm doing and try to keep github copilot from driving me mental with its suggestions.
+
+  If you only care about parts of this journey that may be relevant to you, I've started tagging posts with their related languages. And if for some reason you're hiring for a company and I gave out this website to you, just remember, all good devs are just a bit crazy. I'm just a bit more honest about it.
