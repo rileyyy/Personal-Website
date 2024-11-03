@@ -1,10 +1,10 @@
 <script setup>
-import { onBeforeMount, provide, ref } from 'vue'
-import { Position, VueFlow, useVueFlow } from '@vue-flow/core'
-import TransitionEdge from './TransitionEdge.vue'
+import { onBeforeMount, ref } from 'vue'
+import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { fetchNodesAsync } from '../infrastructure/DatabaseService.ts'
+import TransitionEdge from './TransitionEdge.vue'
 
-const { onInit } = useVueFlow()
+const { fitView } = useVueFlow()
 
 const nodes = ref([])
 const edges = ref([])
@@ -14,23 +14,28 @@ function parseNodes(data) {
     nodes.value.push({
       id: node.name,
       position: { x: node.position[0], y: node.position[1] },
+      parent: node.parentNode,
       data: {
         label: node.name,
-        showNodes: node.showNodes,
+        showNodes: Array.isArray(node.showNodes) ? node.showNodes : JSON.parse(node.showNodes),
         nodeType: node.nodeType,
       },
     });
   });
 }
 
-onBeforeMount(async () => {
-  fetchNodesAsync().then((response) => {
-    parseNodes(response);
-  });
-});
+function renderStartingNodes() {
+  setTimeout(() => {
+    fitView({
+      nodes: nodes.value.find((node) => node.id === 'Home').data.showNodes,
+    });
+  }, 25);
+}
 
-onInit(({ fitView }) => {
-  fitView({ nodes: ['1', '2', '3'] })
+onBeforeMount(async () => {
+  fetchNodesAsync()
+    .then((response) => parseNodes(response))
+    .then(() => renderStartingNodes());
 });
 </script>
 
@@ -42,5 +47,4 @@ onInit(({ fitView }) => {
   </VueFlow>
 </template>
 
-<style>
-</style>
+<style></style>
