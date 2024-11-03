@@ -2,7 +2,7 @@
 import { onBeforeMount, provide, ref } from 'vue'
 import { Position, VueFlow, useVueFlow } from '@vue-flow/core'
 import TransitionEdge from './TransitionEdge.vue'
-import { pingAspHost } from '../infrastructure/DatabaseService.ts'
+import { fetchNodesAsync } from '../infrastructure/DatabaseService.ts'
 
 const { onInit } = useVueFlow()
 
@@ -16,11 +16,7 @@ onInit(({ fitView }) => {
 })
 
 onBeforeMount(async () => {
-  try {
-    data.value = await pingAspHost();
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
+  data.value = await fetchNodesAsync();
 });
 </script>
 
