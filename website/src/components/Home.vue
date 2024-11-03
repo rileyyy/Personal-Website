@@ -9,14 +9,28 @@ const { onInit } = useVueFlow()
 const nodes = ref([])
 const edges = ref([])
 
-const data = ref(null);
+function parseNodes(data) {
+  data.forEach((node) => {
+    nodes.value.push({
+      id: node.name,
+      position: { x: node.position[0], y: node.position[1] },
+      data: {
+        label: node.name,
+        showNodes: node.showNodes,
+        nodeType: node.nodeType,
+      },
+    });
+  });
+}
+
+onBeforeMount(async () => {
+  fetchNodesAsync().then((response) => {
+    parseNodes(response);
+  });
+});
 
 onInit(({ fitView }) => {
   fitView({ nodes: ['1', '2', '3'] })
-})
-
-onBeforeMount(async () => {
-  data.value = await fetchNodesAsync();
 });
 </script>
 
@@ -25,10 +39,6 @@ onBeforeMount(async () => {
     <template #edge-custom="props">
       <TransitionEdge v-bind="props" />
     </template>
-    <div v-if="data">
-      <h1>Data from ASP.NET Server</h1>
-      <pre>{{ data }}</pre>
-    </div>
   </VueFlow>
 </template>
 
