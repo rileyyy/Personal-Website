@@ -15,6 +15,7 @@ function parseNodes(data) {
       id: node.name,
       position: { x: node.position[0], y: node.position[1] },
       parent: node.parentNode,
+      hidden: node.name !== 'Home',
       data: {
         label: node.name,
         showNodes: Array.isArray(node.showNodes) ? node.showNodes : JSON.parse(node.showNodes),
@@ -25,11 +26,6 @@ function parseNodes(data) {
 }
 
 function renderStartingNodes() {
-  setTimeout(() => {
-    fitView({
-      nodes: nodes.value.find((node) => node.id === 'Home').data.showNodes,
-    });
-  }, 25);
 }
 
 onBeforeMount(async () => {
@@ -40,7 +36,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <VueFlow :nodes="nodes" :edges="edges" class="transition-flow">
+  <VueFlow :nodes="nodes" :edges="edges" class="transition-flow" :fit-view-on-init="true">
     <template #edge-custom="props">
       <TransitionEdge v-bind="props" />
     </template>
