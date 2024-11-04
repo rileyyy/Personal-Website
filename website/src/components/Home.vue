@@ -46,11 +46,20 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <VueFlow v-model:nodes="nodes" :edges="edges" class="transition-flow" :fit-view-on-init="true">
+  <VueFlow
+    v-model:nodes="nodes"
+    :edges="edges"
+    class="transition-flow"
+    :fit-view-on-init="true">
+
     <template #edge-custom="props">
       <TransitionEdge v-bind="props" />
     </template>
   </VueFlow>
 </template>
 
-<style></style>
+<style>
+.transition-flow {
+  background-color: #1a192b;
+}
+</style>

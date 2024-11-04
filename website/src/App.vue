@@ -7,7 +7,4 @@ import Home from './components/Home.vue'
 </template>
 
 <style>
-.transition-flow {
-  background-color: #1a192b;
-}
 </style>
