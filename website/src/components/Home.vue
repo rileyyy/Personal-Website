@@ -26,17 +26,27 @@ function parseNodes(data) {
 }
 
 function renderStartingNodes() {
+  let homeNode = nodes.value.find((node) => node.id === 'Home');
+
+  setTimeout(() => fitView({
+    nodes: homeNode.data.showNodes,
+    duration: 1000,
+  }));
+
+  homeNode.data.showNodes.forEach((node) => {
+    nodes.value.find((n) => n.id === node).hidden = false;
+  });
 }
 
 onBeforeMount(async () => {
   fetchNodesAsync()
     .then((response) => parseNodes(response))
-    .then(() => renderStartingNodes());
+    .then(() => setTimeout( renderStartingNodes, 1000));
 });
 </script>
 
 <template>
-  <VueFlow :nodes="nodes" :edges="edges" class="transition-flow" :fit-view-on-init="true">
+  <VueFlow v-model:nodes="nodes" :edges="edges" class="transition-flow" :fit-view-on-init="true">
     <template #edge-custom="props">
       <TransitionEdge v-bind="props" />
     </template>
