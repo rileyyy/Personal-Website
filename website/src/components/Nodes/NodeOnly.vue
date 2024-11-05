@@ -7,9 +7,14 @@
       {{ id }}
     </span>
   </div>
+
+  <Handle class="handle" :position="Position.Top" type="source" />
+  <Handle class="handle" :position="Position.Top" type="target" />
 </template>
 
 <script setup>
+import { Handle, Position } from '@vue-flow/core'
+
 const props = defineProps({
   id: {
     type: String,
@@ -63,5 +68,14 @@ const props = defineProps({
 
 .node-only:hover .node-name {
   opacity: 1;
+}
+
+.handle {
+  background: transparent;
+  border: none;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%,-50%);
 }
 </style>
