@@ -6,7 +6,6 @@ import TransitionEdge from './TransitionEdge.vue'
 
 const { fitView } = useVueFlow()
 
-const nodes = ref([])
 const edges = ref([])
 
 function parseNodes(data) {
@@ -38,17 +37,55 @@ function renderStartingNodes() {
   });
 }
 
+function calculateEdges() {
+  nodes.value.forEach((node) => {
+    if (Array.isArray(node.data.showNodes)) {
+      node.data.showNodes.forEach((showNode) => {
+        edges.value.push({
+          source: node.id,
+          target: showNode,
+          type: 'custom',
+          style: {
+            stroke: '#fff',
+            strokeWidth: 2,
+          },
+        });
+      });
+    }
+  });
+}
+
 onBeforeMount(async () => {
   fetchNodesAsync()
     .then((response) => parseNodes(response))
-    .then(() => setTimeout( renderStartingNodes, 1000));
+    .then(() => setTimeout(renderStartingNodes, 1000))
+    .then(() => setTimeout(calculateEdges, 1750))
 });
+</script>
+
+<script>
+export const nodes = ref([]);
+
+export function setNodesVisible(showNodes) {
+  let nodesArr = Array.isArray(showNodes)
+                  ? showNodes
+                  : JSON.parse(showNodes);
+
+  nodesArr.forEach((node) => {
+    if (node === null)
+      return;
+
+    let n = nodes.value.find((n) => n.id === node);
+    if (n.hidden)
+      n.hidden = false;
+  });
+}
 </script>
 
 <template>
   <VueFlow
     v-model:nodes="nodes"
-    :edges="edges"
+    v-model:edges="edges"
     class="transition-flow"
     :fit-view-on-init="true">
 
