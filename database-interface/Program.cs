@@ -10,6 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddLogging();
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowLocalhostDebugging", builder =>
+    builder
+      .WithOrigins("http://localhost:5173")
+      .AllowAnyMethod()
+      .AllowAnyHeader()
+      .AllowCredentials());
+});
 
 builder.Services.AddSingleton<IntegrityController>();
 builder.Services.AddSingleton<NodeController>();
@@ -30,6 +39,7 @@ dataIntegrityThread.Start();
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseCors("AllowLocalhostDebugging");
 app.UseAuthorization();
 app.MapControllers();
 app.Run("http://*:25052/");

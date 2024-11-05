@@ -1,4 +1,4 @@
-version: 0.2.2
+version: 0.2.4
 
 data:
   - name: "Home"
@@ -24,34 +24,34 @@ data:
   - name: "Education"
     icon: "School"
     parentNode: "Resume"
-    position: [450, 450]
+    position: [550, 550]
     nodeType: "NodeOnly"
     showNodes: []
 
   - name: "Employment"
     icon: "Business Center"
     parentNode: "Resume"
-    position: [300, 450]
+    position: [300, 550]
     nodeType: "NodeOnly"
     showNodes: []
 
   - name: "Skills"
     icon: "Construction"
     parentNode: "Resume"
-    position: [450, 300]
+    position: [550, 300]
     nodeType: "NodeOnly"
     showNodes: []
 
   - name: "Projects"
     icon: "Code"
     parentNode: "Home"
-    position: [300, 0]
+    position: [300, -300]
     nodeType: "NodeOnly"
     showNodes: []
 
   - name: "Contact"
     icon: "Contact Page"
     parentNode: "Home"
-    position: [0, 300]
+    position: [-300, 300]
     nodeType: "NodeOnly"
     showNodes: []

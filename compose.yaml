@@ -22,7 +22,7 @@ services:
     ports:
       - "5173:5173"
     depends_on:
-      - mongodb
+      - asp-net
     environment:
       - NODE_ENV=${ENVIRONMENT}
     volumes:
@@ -42,6 +42,8 @@ services:
           path: ./database-interface/
     ports:
       - "25052:25052"
+    depends_on:
+      - mongodb
     networks:
       - asp-mongodb
     secrets:

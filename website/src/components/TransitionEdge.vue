@@ -58,19 +58,19 @@ const showDot = ref(false)
 const { onNodeClick, fitView } = useVueFlow()
 
 const path = computed(() =>
-getStraightPath({
-  sourceX: props.sourceX,
-  sourceY: props.sourceY,
-  targetX: props.targetX,
-  targetY: props.targetY,
-})
+  getStraightPath({
+    sourceX: props.sourceX,
+    sourceY: props.sourceY,
+    targetX: props.targetX,
+    targetY: props.targetY,
+  })
 )
 
 onNodeClick(({ node }) => {
-   fitView({
-          nodes: node.data.showNodes,
-          duration: 500,
-        })
+  fitView({
+    nodes: node.data.showNodes,
+    duration: 500,
+  })
 })
 </script>
 
