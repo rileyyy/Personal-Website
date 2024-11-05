@@ -44,7 +44,7 @@ const props = defineProps({
 .material-symbols-outlined {
   padding: 0;
   margin: 0;
-  font-size: 56px !important;
+  font-size: 100px !important;
   opacity: 1;
 }
 
