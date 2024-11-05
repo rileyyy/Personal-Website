@@ -3,6 +3,7 @@ import { onBeforeMount, ref } from 'vue'
 import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { fetchNodesAsync } from '../infrastructure/DatabaseService.ts'
 import TransitionEdge from './TransitionEdge.vue'
+import NodeOnly from './Nodes/NodeOnly.vue'
 
 const { fitView } = useVueFlow()
 
@@ -15,10 +16,11 @@ function parseNodes(data) {
       position: { x: node.position[0], y: node.position[1] },
       parent: node.parentNode,
       hidden: node.name !== 'Home',
+      type: node.nodeType,
       data: {
+        icon: node.icon,
         label: node.name,
         showNodes: Array.isArray(node.showNodes) ? node.showNodes : JSON.parse(node.showNodes),
-        nodeType: node.nodeType,
       },
     });
   });
@@ -87,16 +89,21 @@ export function setNodesVisible(showNodes) {
     v-model:nodes="nodes"
     v-model:edges="edges"
     class="transition-flow"
-    :fit-view-on-init="true">
+    :fit-view-on-init="true"
+    :node-types="{NodeOnly: NodeOnly}">
 
     <template #edge-custom="props">
       <TransitionEdge v-bind="props" />
+    </template>
+
+    <template #nodeOnly="props">
+      <NodeOnly :id="props.id" :data="props.data"/>
     </template>
   </VueFlow>
 </template>
 
 <style>
 .transition-flow {
-  background-color: #1a192b;
+  background-color: var(--eerie-black);
 }
 </style>
