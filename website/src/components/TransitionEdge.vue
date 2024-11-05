@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref, inject } from 'vue'
 import { getBezierPath, getStraightPath, useVueFlow } from '@vue-flow/core'
+import { setNodesVisible } from './Home.vue'
 
 const props = defineProps({
   id: {
@@ -67,10 +68,29 @@ const path = computed(() =>
 )
 
 onNodeClick(({ node }) => {
-  fitView({
-    nodes: node.data.showNodes,
-    duration: 500,
-  })
+  // TODO: Not sure if this needs to be debounced or if I am doing something wrong
+  // but it seems to be called 3 (or 6) times presently for each node click.
+  // That doesn't seem to cause any issues, but it seems like it could be optimized/fixed.
+  // It also seems to be causing showNodes to have node.parent and node.id be duplicated 3x.
+
+  let showNodes = Array.isArray(node.data.showNodes)
+                    ? node.data.showNodes
+                    : JSON.parse(node.data.showNodes);
+
+  showNodes.push(node.id);
+  showNodes.push(node.parent);
+
+  setNodesVisible(showNodes);
+
+  // Delay briefly to allow nodes to be shown before fitting view
+  // since it seems that includeHiddenNodes doesn't work as expected
+  setTimeout(() => {
+    fitView({
+      nodes: showNodes,
+      duration: 500,
+      includeHiddenNodes: true,
+    })
+  }, 50)
 })
 </script>
 
@@ -91,7 +111,6 @@ export default {
       cy="0"
       cx="0"
       :transform="`translate(${transform.x}, ${transform.y})`"
-      style="fill: #fdd023"
-    />
+      style="fill: #fdd023" />
   </Transition>
 </template>
