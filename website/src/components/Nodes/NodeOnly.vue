@@ -1,10 +1,10 @@
 <template>
   <div class="node-only">
     <span class="material-symbols-outlined">
-      {{ props.data.icon }}
+      {{ data.icon }}
     </span>
     <span class="node-name">
-      {{ props.id }}
+      {{ id }}
     </span>
   </div>
 </template>
