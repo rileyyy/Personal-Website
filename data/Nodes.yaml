@@ -1,11 +1,11 @@
-version: 0.2.4
+version: 0.2.5
 
 data:
   - name: "Home"
     icon: "Cottage"
     parentNode: null
     position: [0, 0]
-    nodeType: 0
+    nodeType: "NodeOnly"
     showNodes:
       - "Resume"
       - "Projects"
