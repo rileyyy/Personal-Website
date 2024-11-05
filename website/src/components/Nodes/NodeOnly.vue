@@ -10,7 +10,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
   id: {
     type: String,
@@ -34,6 +33,7 @@ const props = defineProps({
   border-radius: 75px;
   color: var(--cadet-gray);
   position: relative;
+  transition: box-shadow 1s ease;
 }
 
 .material-symbols-outlined, .node-name {
@@ -51,6 +51,10 @@ const props = defineProps({
 .node-name {
   opacity: 0;
   font-size: 24px;
+}
+
+.node-only:hover {
+  box-shadow: 0 0 25px 10px rgba(255, 255, 255, 0.5);
 }
 
 .node-only:hover .material-symbols-outlined {
