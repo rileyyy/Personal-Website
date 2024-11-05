@@ -6,7 +6,6 @@ import TransitionEdge from './TransitionEdge.vue'
 
 const { fitView } = useVueFlow()
 
-const nodes = ref([])
 const edges = ref([])
 
 function parseNodes(data) {
@@ -62,6 +61,25 @@ onBeforeMount(async () => {
     .then(() => setTimeout(renderStartingNodes, 1000))
     .then(() => setTimeout(calculateEdges, 1750))
 });
+</script>
+
+<script>
+export const nodes = ref([]);
+
+export function setNodesVisible(showNodes) {
+  let nodesArr = Array.isArray(showNodes)
+                  ? showNodes
+                  : JSON.parse(showNodes);
+
+  nodesArr.forEach((node) => {
+    if (node === null)
+      return;
+
+    let n = nodes.value.find((n) => n.id === node);
+    if (n.hidden)
+      n.hidden = false;
+  });
+}
 </script>
 
 <template>
