@@ -101,16 +101,11 @@ export default {
 </script>
 
 <template>
-  <path :id="id" ref="curve" :style="style" class="vue-flow__edge-path" :d="path[0]" :marker-end="markerEnd" />
-
-  <Transition name="fade">
-    <circle
-      v-if="showDot"
-      ref="dot"
-      r="5"
-      cy="0"
-      cx="0"
-      :transform="`translate(${transform.x}, ${transform.y})`"
-      style="fill: #fdd023" />
-  </Transition>
+  <path
+    :id="id"
+    ref="curve"
+    :style="style"
+    class="vue-flow__edge-path"
+    :d="path[0]"
+    :marker-end="markerEnd" />
 </template>

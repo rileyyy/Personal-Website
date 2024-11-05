@@ -1,11 +1,11 @@
-version: 0.2.4
+version: 0.2.7
 
 data:
   - name: "Home"
     icon: "Cottage"
     parentNode: null
     position: [0, 0]
-    nodeType: 0
+    nodeType: "NodeOnly"
     showNodes:
       - "Resume"
       - "Projects"
@@ -29,7 +29,7 @@ data:
     showNodes: []
 
   - name: "Employment"
-    icon: "Business Center"
+    icon: "Business_Center"
     parentNode: "Resume"
     position: [300, 550]
     nodeType: "NodeOnly"
@@ -50,7 +50,7 @@ data:
     showNodes: []
 
   - name: "Contact"
-    icon: "Contact Page"
+    icon: "Contact_Page"
     parentNode: "Home"
     position: [-300, 300]
     nodeType: "NodeOnly"

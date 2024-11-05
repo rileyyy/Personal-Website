@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace DatabaseInterface.DatabaseTypes;
 
@@ -27,6 +29,8 @@ public class Node
   public required List<string> ShowNodes { get; set; }
 
   [BsonElement("nodeType")]
+  [BsonRepresentation(BsonType.String)]
+  [JsonConverter(typeof(StringEnumConverter))]
   public NodeType NodeType { get; set; }
 
   public override bool Equals(object? obj)
