@@ -1,4 +1,4 @@
-version: 0.2.7
+version: 0.3.1
 
 data:
   - name: "Home"
@@ -10,7 +10,9 @@ data:
       - "Resume"
       - "Projects"
       - "Contact"
+      - "Rambles"
 
+  # Layer 2 Nodes - Home
   - name: "Resume"
     icon: "Docs"
     parentNode: "Home"
@@ -21,6 +23,34 @@ data:
       - "Employment"
       - "Skills"
 
+  - name: "Projects"
+    icon: "Code"
+    parentNode: "Home"
+    position: [300, -300]
+    nodeType: "NodeOnly"
+    showNodes:
+      - "Website"
+      - "WakePy"
+      - "Home Assistant"
+
+  - name: "Contact"
+    icon: "Contact_Page"
+    parentNode: "Home"
+    position: [-300, 300]
+    nodeType: "NodeOnly"
+    showNodes:
+      - "Email"
+      - "Phone"
+      - "Smoke Signals"
+
+  - name: "Rambles"
+    icon: "Two_Pager"
+    parentNode: "Home"
+    position: [-300, -300]
+    nodeType: "NodeOnly"
+    showNodes: []
+
+  # Layer 3 Nodes - Resume
   - name: "Education"
     icon: "School"
     parentNode: "Resume"
@@ -42,16 +72,46 @@ data:
     nodeType: "NodeOnly"
     showNodes: []
 
-  - name: "Projects"
-    icon: "Code"
-    parentNode: "Home"
-    position: [300, -300]
+  # Layer 3 Nodes - Projects
+  - name: "Website"
+    icon: "Public"
+    parentNode: "Projects"
+    position: [550, -550]
     nodeType: "NodeOnly"
     showNodes: []
 
-  - name: "Contact"
-    icon: "Contact_Page"
-    parentNode: "Home"
-    position: [-300, 300]
+  - name: "WakePy"
+    icon: "Timer"
+    parentNode: "Projects"
+    position: [300, -550]
+    nodeType: "NodeOnly"
+    showNodes: []
+
+  - name: "Home Assistant"
+    icon: "Scene"
+    parentNode: "Projects"
+    position: [550, -800]
+    nodeType: "NodeOnly"
+    showNodes: []
+
+  # Layer 3 Nodes - Contact
+  - name: "Email"
+    icon: "Alternate_Email"
+    parentNode: "Contact"
+    position: [-550, 550]
+    nodeType: "NodeOnly"
+    showNodes: []
+
+  - name: "Phone"
+    icon: "Call"
+    parentNode: "Contact"
+    position: [-300, 550]
+    nodeType: "NodeOnly"
+    showNodes: []
+
+  - name: "Smoke Signals"
+    icon: "Local_Fire_Department"
+    parentNode: "Contact"
+    position: [-550, 300]
     nodeType: "NodeOnly"
     showNodes: []
