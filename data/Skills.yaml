@@ -1,0 +1,14 @@
+version: 0.0.1
+
+data:
+  - language: Java
+  - language: C++
+  - language: C#
+    - framework: Xamarin.Forms
+    - framework: Xamarin.MAUI
+    - framework: ASP.NET
+  - language: Python
+  - language: HTML/CSS
+  - language: JavaScript
+    - framework: Vue
+    - package: VueFlow
