@@ -1,4 +1,4 @@
-version: 0.0.1
+version: 0.0.2
 
 data:
   - name: "Personal Website"
@@ -20,7 +20,7 @@ data:
       - Python
     images: []
   - name: "freeCodeCamp Projects"
-    link: ""
+    link: "https://github.com/rileyyy/freeCodeCamp"
     description: "We all start learning somewhere. This is where I started learning frontend webdev. These are the collection of simple projects that were the 'exams' for each section on freeVodeCamp.org. Fair warning, they are not the precipice of my work."
     technologies:
       - HTML/CSS
