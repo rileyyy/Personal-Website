@@ -1,0 +1,28 @@
+version: 0.0.1
+
+data:
+  - name: "Personal Website"
+    link: "https://github.com/rileyyy/Personal-Website"
+    description: "Here you are! Take a look around as this is the fruits of many hours learning frontend development. I have written pretty much all the code here with a bit of help from our new AI overlords."
+    technologies:
+      - HTML/CSS
+      - Javascript
+      - Vue
+      - ASP.NET
+      - MongoDB
+      - Docker
+    images: []
+
+ - name: "WakePy"
+    link: "https://github.com/fohrloop/wakepy"
+    description: "I provided some early contributions to add Apple and Linux support. then added it for use in the Lake Shore python driver to facilitate long running communications to our instruments."
+    technologies:
+      - Python
+    images: []
+  - name: "freeCodeCamp Projects"
+    link: ""
+    description: "We all start learning somewhere. This is where I started learning frontend webdev. These are the collection of simple projects that were the 'exams' for each section on freeVodeCamp.org. Fair warning, they are not the precipice of my work."
+    technologies:
+      - HTML/CSS
+      - JavaScript
+    images: []
