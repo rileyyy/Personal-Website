@@ -1,14 +1,29 @@
-version: 0.0.1
+version: 0.0.2
 
 data:
-  - language: Java
-  - language: C++
-  - language: C#
-    - framework: Xamarin.Forms
-    - framework: Xamarin.MAUI
-    - framework: ASP.NET
-  - language: Python
-  - language: HTML/CSS
-  - language: JavaScript
-    - framework: Vue
-    - package: VueFlow
+  - language: "Java"
+  - language: "C++"
+  - language: "C#"
+    - framework: "Xamarin.Forms"
+    - framework: "Xamarin.MAUI"
+    - framework: "ASP.NET"
+    - framework: "XAML"
+  - language: "Python"
+  - language: "HTML/CSS"
+  - language: "JavaScript"
+    - framework: "Vue"
+    - package: "VueFlow"
+  - language: "MySQL"
+  - language: "NoSQL"
+  - language: "Lua"
+  - toolset: "Docker"
+    - package: "Compose"
+  - toolset: "VirtualBox"
+  - toolset: "ChatGPT"
+  - toolset: "Azure DevOps"
+  - toolset: "Git"
+  - other: "Agile"
+    - with: "Scrum"
+    - with: "Kanban"
+  - other: "English"
+  - other: "Swedish"
