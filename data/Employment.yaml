@@ -1,0 +1,81 @@
+version: 0.0.3
+
+data:
+  - name: "Lake Shore Cryotronics, Inc"
+    image: ""
+    links:
+      - website: "https://www.lakeshore.com/"
+      - twitter: "https://x.com/LakeShoreCryo"
+      - linkedin: "https://www.linkedin.com/company/lake-shore-cryotronics/"
+      - youtube: "https://www.youtube.com/user/LakeShoreCryo"
+    location: "575 McCorkle Blvd, Westerville, OH 43082, United States"
+    blurb: ""
+    dates: ["2019-04", "2024-05"]
+    position: "Software Development Engineer II"
+    techStack:
+      - C#/.NET
+      - Xamarin.Forms/MAUI
+      - Python
+      - Embedded C++
+      - Azure DevOps
+      - Git
+      - Agile Scrum and Kanban
+    responsibilitiesHR:
+      - "Designed and implemented user interface for Android application-based products."
+      - "Interfaced with physicists, engineers, and customers to improve user experience in software."
+      - "Lead teams of engineers and interns in the design and implementation of features using Agile methodologies."
+      - "Authored technical documentation for use in both internal and user-facing documents."
+      - "Troubleshot issues in embedded systems, Android OS, Python API, C#/.NET applications, and Azure DevOps CI/CD pipelines."
+      - "Investigated issues and contributed to fixes in external frameworks and libraries."
+    responsibilitiesEng: []
+
+  - name: "Taurus TeleSys, Inc"
+    image: ""
+    links:
+      - linkedin: "https://www.linkedin.com/in/arvind-patel-2167436"
+    location: "2401 West Ave, Newport News, VA 23607, United States"
+    blurb: ""
+    dates: ["2015-10", "2019-04"]
+    position: "Systems Software Engineer"
+    techStack:
+      - C#/.NET
+      - C++
+      - Java SE
+      - MySQL
+      - MongoDB/NoSQL
+      - Microsoft Access DB
+      - VirtualBox
+      - Git
+      - Jenkins
+    responsibilitiesHR:
+      - "Developed bug tracking software for use in installation of configuration management."
+      - "Analyzed legacy applications in resolution of existing bugs while applying modern coding standards."
+      - "Improved existing simulation software by adding features such as multithreading, database management, and configurable UI elements."
+      - "Designed network layouts to facilitate the strict timing requirements of real-time simulation software resulting in up tp 75% less network traffic."
+      - "Designed and modified databases used in configuraion of data driven software, resulting in a 60% size reduction."
+      - "Interfaced simulations with multiple models and physical hardware for hardware-in-the-loop testing."
+    responsibilitiesEng: []
+
+  - name: "Swisslog Logistics, Inc"
+    image: ""
+    links:
+      - website: "https://www.swisslog.com/"
+      - linkedin: "https://www.linkedin.com/company/swisslog/"
+      - facebook: "https://www.facebook.com/swisslog.logistics.automation"
+      - youtube: "https://www.youtube.com/c/SwisslogLogisticsAutomation"
+      - instagram: "https://www.instagram.com/swisslog.logistics.automation/"
+    location: "161 Enterprise Dr, Newport News, VA 23603, United States"
+    blurb: ""
+    dates: ["2014-06", "2015-10"]
+    position: "Incident Response Engineer"
+    techStack:
+      - C#/.NET
+      - Java
+      - MySQL
+      - Batch Scripting
+    responsibilitiesHR:
+      - "Contributed to the development of ticket tracking and customer notification software utilizing SOAP requests and existing APIs."
+      - "Developed a package tracking application for automatic email of status utilizing multiple external APIs."
+      - "Interfaced with clients to resolve issues they faced with over 80% effectiveness within the first 6 months of employment."
+      - "Resolved issues in MySQL databases, Programmable Logic Controllers (PLCs), and conveyor systems hardware issues."
+    responsibilitiesEng: []
