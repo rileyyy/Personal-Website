@@ -1,7 +1,7 @@
-version: 0.0.3
+version: 0.0.4
 
 data:
-  - name: "Lake Shore Cryotronics, Inc"
+  - company: "Lake Shore Cryotronics, Inc"
     image: ""
     links:
       - website: "https://www.lakeshore.com/"
@@ -29,7 +29,7 @@ data:
       - "Investigated issues and contributed to fixes in external frameworks and libraries."
     responsibilitiesEng: []
 
-  - name: "Taurus TeleSys, Inc"
+  - company: "Taurus TeleSys, Inc"
     image: ""
     links:
       - linkedin: "https://www.linkedin.com/in/arvind-patel-2167436"
@@ -56,7 +56,7 @@ data:
       - "Interfaced simulations with multiple models and physical hardware for hardware-in-the-loop testing."
     responsibilitiesEng: []
 
-  - name: "Swisslog Logistics, Inc"
+  - company: "Swisslog Logistics, Inc"
     image: ""
     links:
       - website: "https://www.swisslog.com/"
