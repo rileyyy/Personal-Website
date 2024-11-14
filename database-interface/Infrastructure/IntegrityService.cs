@@ -16,6 +16,7 @@ public class IntegrityService
 {
   private readonly IntegrityController integrityController;
   private readonly NodeController nodeController;
+  private readonly EmploymentController employmentController;
   private readonly ILogger<IntegrityService> logger;
   private readonly FileSystemWatcher watcher = new FileSystemWatcher
   {
@@ -32,10 +33,12 @@ public class IntegrityService
   public IntegrityService(
     IntegrityController integrityController,
     NodeController nodeController,
+    EmploymentController employmentController,
     ILogger<IntegrityService> logger)
   {
     this.integrityController = integrityController;
     this.nodeController = nodeController;
+    this.employmentController = employmentController;
     this.logger = logger;
   }
 
@@ -103,6 +106,10 @@ public class IntegrityService
           await this.UpdateNodesCollection(fileData);
           break;
 
+        case "Employment":
+          await this.UpdateEmploymentCollection(fileData);
+          break;
+
         default:
           this.logger.LogWarning($"Unknown type {fileName}");
           return;
@@ -149,6 +156,49 @@ public class IntegrityService
       if (data.Cast<Dictionary<object, object>>().All(n => n["name"].ToString() != existingNode.Name))
       {
         await this.nodeController.DeleteNode(existingNode.Id.ToString());
+      }
+    }
+  }
+
+  private async Task UpdateEmploymentCollection(List<object> data)
+  {
+    var existing = await this.employmentController.GetEmployments();
+
+    foreach (var emp in data)
+    {
+      var employment = (Dictionary<object, object>)emp;
+
+      var newEmployment = new Employment
+      {
+        Company = employment["company"].ToString(),
+        Image = employment.TryGetValue("image", out var image) ? image?.ToString() : null,
+        Links = employment.TryGetValue("links", out var links) ? ((List<object>)links).Select(x => x.ToString()).ToList() : null,
+        Location = employment.TryGetValue("location", out var location) ? location?.ToString() : null,
+        Blurb = employment.TryGetValue("blurb", out var blurb) ? blurb?.ToString() : null,
+        Dates = employment.TryGetValue("dates", out var dates) ? ((List<object>)dates).Select(x => x.ToString()).ToList() : null,
+        Position = employment["position"].ToString(),
+        TechStack = employment.TryGetValue("techStack", out var techStack) ? ((List<object>)techStack).Select(x => x.ToString()).ToList() : null,
+        ResponsibilitiesHR = employment.TryGetValue("responsibilitiesHR", out var responsibilitiesHR) ? ((List<object>)responsibilitiesHR).Select(x => x.ToString()).ToList() : null,
+        ResponsibilitiesEng = employment.TryGetValue("responsibilitiesEng", out var responsibilitiesEng) ? ((List<object>)responsibilitiesEng).Select(x => x.ToString()).ToList() : null,
+      };
+
+      var existingEmployment = existing.FirstOrDefault(e => e.Company == newEmployment.Company);
+      if (existingEmployment is null)
+      {
+        await this.employmentController.CreateEmployment(newEmployment);
+        continue;
+      }
+
+      newEmployment.Id = existingEmployment.Id;
+      await this.employmentController.UpdateEmployment(existingEmployment.Id.ToString(), newEmployment);
+    }
+
+    // Delete employments that are not in the YAML file
+    foreach (var existingEmployment in existing)
+    {
+      if (data.Cast<Dictionary<object, object>>().All(e => e["company"].ToString() != existingEmployment.Company))
+      {
+        await this.employmentController.DeleteEmployment(existingEmployment.Id.ToString());
       }
     }
   }
