@@ -17,6 +17,7 @@ public class IntegrityService
   private readonly IntegrityController integrityController;
   private readonly NodeController nodeController;
   private readonly EmploymentController employmentController;
+  private readonly ProjectController projectController;
   private readonly ILogger<IntegrityService> logger;
   private readonly FileSystemWatcher watcher = new FileSystemWatcher
   {
@@ -34,11 +35,13 @@ public class IntegrityService
     IntegrityController integrityController,
     NodeController nodeController,
     EmploymentController employmentController,
+    ProjectController projectController,
     ILogger<IntegrityService> logger)
   {
     this.integrityController = integrityController;
     this.nodeController = nodeController;
     this.employmentController = employmentController;
+    this.projectController = projectController;
     this.logger = logger;
   }
 
@@ -108,6 +111,10 @@ public class IntegrityService
 
         case "Employment":
           await this.UpdateEmploymentCollection(fileData);
+          break;
+
+        case "Projects":
+          await this.UpdateProjectsCollection(fileData);
           break;
 
         default:
@@ -199,6 +206,44 @@ public class IntegrityService
       if (data.Cast<Dictionary<object, object>>().All(e => e["company"].ToString() != existingEmployment.Company))
       {
         await this.employmentController.DeleteEmployment(existingEmployment.Id.ToString());
+      }
+    }
+  }
+
+  private async Task UpdateProjectCollection(List<object> data)
+  {
+    var existing = await this.projectController.GetProjects();
+
+    foreach (var proj in data)
+    {
+      var project = (Dictionary<object, object>)proj;
+
+      var newProject = new Project
+      {
+        Name = project["name"].ToString(),
+        Link = project.TryGetValue("link", out var link) ? link?.ToString() : null,
+        Description = project.TryGetValue("description", out var description) ? description?.ToString() : null,
+        Technologies = ((List<object>)project["technologies"]).Select(x => x.ToString()).ToArray(),
+        Images = project.TryGetValue("images", out var images) ? ((List<object>)images).Select(x => x.ToString()).ToArray() : null,
+      };
+
+      var existingProject = existing.FirstOrDefault(p => p.Name == newProject.Name);
+      if (existingProject is null)
+      {
+        await this.projectController.CreateProject(newProject);
+        continue;
+      }
+
+      newProject.Id = existingProject.Id;
+      await this.projectController.UpdateProject(existingProject.Id.ToString(), newProject);
+    }
+
+    // Delete projects that are not in the YAML file
+    foreach (var existingProject in existing)
+    {
+      if (data.Cast<Dictionary<object, object>>().All(p => p["name"].ToString() != existingProject.Name))
+      {
+        await this.projectController.DeleteProject(existingProject.Id.ToString());
       }
     }
   }
