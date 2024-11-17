@@ -23,7 +23,7 @@ public class Skill
   [BsonElement("explanation")]
   public required string Explanation { get; set; }
 
-  [BsonElement("subSkills")]
+  [BsonElement("subskills")]
   public List<Skill>? SubSkills { get; set; }
 }
 
@@ -33,5 +33,6 @@ public enum SkillType
   Framework,
   Package,
   Tool,
+  Method,
   Other,
 }
