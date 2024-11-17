@@ -114,7 +114,7 @@ public class IntegrityService
           break;
 
         case "Projects":
-          await this.UpdateProjectsCollection(fileData);
+          await this.UpdateProjectCollection(fileData);
           break;
 
         default:
