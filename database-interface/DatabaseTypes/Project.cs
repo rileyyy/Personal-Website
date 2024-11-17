@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -20,10 +21,10 @@ public class Project
   public string? Description { get; set; }
 
   [BsonElement("technologies")]
-  public required string[] Technologies { get; set; }
+  public required List<string> Technologies { get; set; }
 
   [BsonElement("images")]
-  public string[]? Images { get; set; }
+  public List<string>? Images { get; set; }
 
   public override bool Equals(object? obj)
   {

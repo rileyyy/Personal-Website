@@ -16,7 +16,7 @@ public class Employment
 
   public string? Image { get; set; }
 
-  public List<string>? Links { get; set; }
+  public Dictionary<string, string>? Links { get; set; }
 
   public string? Location { get; set; }
 
@@ -39,7 +39,7 @@ public class Employment
       return Id == otherEmployment.Id &&
              this.Company == otherEmployment.Company &&
              this.Image == otherEmployment.Image &&
-             (this.Links ?? new List<string>()).SequenceEqual(otherEmployment.Links ?? new List<string>()) &&
+             (this.Links ?? new Dictionary<string, string>()).SequenceEqual(otherEmployment.Links ?? new Dictionary<string, string>()) &&
              this.Location == otherEmployment.Location &&
              this.Blurb == otherEmployment.Blurb &&
              (this.Dates ?? new List<string>()).SequenceEqual(otherEmployment.Dates ?? new List<string>()) &&
@@ -54,7 +54,7 @@ public class Employment
   public override int GetHashCode()
   {
     int hash = 17;
-    hash = hash * 23 + (Id?.GetHashCode() ?? 0);
+    hash = hash * 23 + Id.GetHashCode();
     hash = hash * 23 + (Company?.GetHashCode() ?? 0);
     hash = hash * 23 + (Image?.GetHashCode() ?? 0);
     hash = hash * 23 + (Links?.GetHashCode() ?? 0);

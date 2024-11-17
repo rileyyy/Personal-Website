@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DatabaseInterface.DatabaseTypes;
 
-public struct Integrity
+public class Integrity
 {
   [BsonId]
   [BsonElement("_id")]
