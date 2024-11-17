@@ -18,6 +18,7 @@ public class IntegrityService
   private readonly NodeController nodeController;
   private readonly EmploymentController employmentController;
   private readonly ProjectController projectController;
+  private readonly SkillController skillController;
   private readonly ILogger<IntegrityService> logger;
   private readonly FileSystemWatcher watcher = new FileSystemWatcher
   {
@@ -36,12 +37,14 @@ public class IntegrityService
     NodeController nodeController,
     EmploymentController employmentController,
     ProjectController projectController,
+    SkillController skillController,
     ILogger<IntegrityService> logger)
   {
     this.integrityController = integrityController;
     this.nodeController = nodeController;
     this.employmentController = employmentController;
     this.projectController = projectController;
+    this.skillController = skillController;
     this.logger = logger;
   }
 
@@ -115,6 +118,10 @@ public class IntegrityService
 
         case "Projects":
           await this.UpdateProjectCollection(fileData);
+          break;
+
+        case "Skills":
+          await this.UpdateSkillCollection(fileData);
           break;
 
         default:
@@ -245,6 +252,60 @@ public class IntegrityService
       {
         await this.projectController.DeleteProject(existingProject.Id.ToString());
       }
+    }
+  }
+
+  public async Task UpdateSkillCollection(List<object> data)
+  {
+    var existing = await this.skillController.GetSkills();
+
+    foreach (var skill in data)
+    {
+      var newSkill = ParseSkill((Dictionary<string, object>)skill);
+
+      var existingSkill = existing.FirstOrDefault(s => s.Name == newSkill.Name);
+      if (existingSkill is null)
+      {
+        await this.skillController.CreateSkill(newSkill);
+        continue;
+      }
+
+      newSkill.Id = existingSkill.Id;
+      await this.skillController.UpdateSkill(existingSkill.Id.ToString(), newSkill);
+    }
+
+    // Delete skills that are not in the YAML file
+    foreach (var existingSkill in existing)
+    {
+      if (data.All(s => s.ToString() != existingSkill.Name))
+      {
+        await this.skillController.DeleteSkill(existingSkill.Id.ToString());
+      }
+    }
+
+    Skill ParseSkill(Dictionary<string, object> skill)
+    {
+      var newSkill = new Skill
+      {
+        Name = skill["skill"].ToString(),
+        Type = Enum.Parse<SkillType>(skill["type"].ToString()),
+        Explanation = skill.TryGetValue("explanation", out var explanation)
+                        ? explanation?.ToString()
+                        : null,
+      };
+
+      if (skill.TryGetValue("subskills", out var subs))
+      {
+        newSkill.SubSkills = new List<Skill>();
+
+        var subskills = (List<object>)subs;
+        foreach (var subskill in subskills)
+        {
+          newSkill.SubSkills.Add(ParseSkill((Dictionary<string, object>)subskill));
+        }
+      }
+
+      return newSkill;
     }
   }
 
