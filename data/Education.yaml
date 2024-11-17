@@ -1,0 +1,36 @@
+version: 0.0.1
+
+data:
+  - education:
+    institution:
+      name: "Christopher Newport University"
+      location: "1 Avenue of the Arts, Newport News, VA 23606, United States"
+      image: "https://cnu.edu/_assets/img/cam/greatlawn/night_pano/christopher-newport-university-campus-1270x564.jpg"
+      links:
+        website: "https://cnu.edu/"
+        facebook: "https://www.facebook.com/christophernewportuniversity"
+        twitter: "https://x.com/CNUcaptains"
+        instagram: "http://instagram.com/christophernewportu"
+        threads: "https://www.threads.net/@christophernewportu"
+        linkedin: "https://www.linkedin.com/edu/christopher-newport-university-19570"
+        youtube: "http://www.youtube.com/christophernewportu"
+        phone: "+1 757-594-7000"
+    degrees:
+      - name: "Bachelor of Science"
+        major: "Computer Engineering"
+        dates: ["2010", "2014"]
+      - name: "Bachelor of Science"
+        major: "Computer Science"
+        dates: ["2010", "2014"]
+
+  - education:
+    institution:
+      name: "freeCodeCamp"
+      image: "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg"
+      links:
+        website: "https://www.freecodecamp.org/"
+    degrees:
+      - name: "Responsive Web Design Certification"
+        dates: ["2024"]
+      - name: "JavaScript Algorithms and Data Structures Certification"
+        dates: ["2024"]
