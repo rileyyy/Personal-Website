@@ -1,4 +1,4 @@
-version: 0.2.0
+version: 0.2.1
 
 data:
   - skill: "Java"
@@ -90,15 +90,17 @@ data:
 
   - skill: "Azure DevOps"
     type: "tool"
-    explanation: "At Taurus I was the first person to push to start automated testing and CI/CD pipelines. Due to everything being self-hosted and no internet connections, we started with Jenkins.
+    explanation: >
+      "At Taurus I was the first person to push to start automated testing and CI/CD pipelines. Due to everything being self-hosted and no internet connections, we started with Jenkins.
 
-    However, at Lake Shore we used Azure DevOps for all of our CI/CD pipelines. I was responsible for a lot of management of the pipelines, including connections to external services such as GitHub and ReadTheDocs for automating our Python Driver pushes."
+      However, at Lake Shore we used Azure DevOps for all of our CI/CD pipelines. I was responsible for a lot of management of the pipelines, including connections to external services such as GitHub and ReadTheDocs for automating our Python Driver pushes."
 
   - skill: "Git"
     type: "tool"
-    explanation: "At Taurus we had a rusty old SVN server in the corner of the room with a maximum run time of 24 hours. Due to high security concerns, only one person knew the password to the BIOS, thus meaning our server would be down for days, up to weeks, at a time. During my final year, I pushed the migration to git upon everyone by singlehandedly moving the entire repository while maintaining the history.
+    explanation: >
+      "At Taurus we had a rusty old SVN server in the corner of the room with a maximum run time of 24 hours. Due to high security concerns, only one person knew the password to the BIOS, thus meaning our server would be down for days, up to weeks, at a time. During my final year, I pushed the migration to git upon everyone by singlehandedly moving the entire repository while maintaining the history.
 
-    At Lake Shore we used git for all of our repositories. I definitely learned a lot when I first started, but I think I have a pretty good understanding of it now; and I use it for pretty much everything. I was responsible at Lake Shore for combining several instrument of repositories that were split by embedded and .NET code into a single repository."
+      At Lake Shore we used git for all of our repositories. I definitely learned a lot when I first started, but I think I have a pretty good understanding of it now; and I use it for pretty much everything. I was responsible at Lake Shore for combining several instrument of repositories that were split by embedded and .NET code into a single repository."
 
   - skill: "Agile"
     type: "method"

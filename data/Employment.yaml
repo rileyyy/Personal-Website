@@ -1,13 +1,13 @@
-version: 0.0.4
+version: 0.0.5
 
 data:
   - company: "Lake Shore Cryotronics, Inc"
     image: ""
     links:
-      - website: "https://www.lakeshore.com/"
-      - twitter: "https://x.com/LakeShoreCryo"
-      - linkedin: "https://www.linkedin.com/company/lake-shore-cryotronics/"
-      - youtube: "https://www.youtube.com/user/LakeShoreCryo"
+      website: "https://www.lakeshore.com/"
+      twitter: "https://x.com/LakeShoreCryo"
+      linkedin: "https://www.linkedin.com/company/lake-shore-cryotronics/"
+      youtube: "https://www.youtube.com/user/LakeShoreCryo"
     location: "575 McCorkle Blvd, Westerville, OH 43082, United States"
     blurb: ""
     dates: ["2019-04", "2024-05"]
@@ -32,7 +32,7 @@ data:
   - company: "Taurus TeleSys, Inc"
     image: ""
     links:
-      - linkedin: "https://www.linkedin.com/in/arvind-patel-2167436"
+      linkedin: "https://www.linkedin.com/in/arvind-patel-2167436"
     location: "2401 West Ave, Newport News, VA 23607, United States"
     blurb: ""
     dates: ["2015-10", "2019-04"]
@@ -59,11 +59,11 @@ data:
   - company: "Swisslog Logistics, Inc"
     image: ""
     links:
-      - website: "https://www.swisslog.com/"
-      - linkedin: "https://www.linkedin.com/company/swisslog/"
-      - facebook: "https://www.facebook.com/swisslog.logistics.automation"
-      - youtube: "https://www.youtube.com/c/SwisslogLogisticsAutomation"
-      - instagram: "https://www.instagram.com/swisslog.logistics.automation/"
+      website: "https://www.swisslog.com/"
+      linkedin: "https://www.linkedin.com/company/swisslog/"
+      facebook: "https://www.facebook.com/swisslog.logistics.automation"
+      youtube: "https://www.youtube.com/c/SwisslogLogisticsAutomation"
+      instagram: "https://www.instagram.com/swisslog.logistics.automation/"
     location: "161 Enterprise Dr, Newport News, VA 23603, United States"
     blurb: ""
     dates: ["2014-06", "2015-10"]
