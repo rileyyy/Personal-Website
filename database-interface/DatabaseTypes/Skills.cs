@@ -21,7 +21,7 @@ public class Skill
   public required SkillType Type { get; set; }
 
   [BsonElement("explanation")]
-  public required string Explanation { get; set; }
+  public string? Explanation { get; set; }
 
   [BsonElement("subskills")]
   public List<Skill>? SubSkills { get; set; }
