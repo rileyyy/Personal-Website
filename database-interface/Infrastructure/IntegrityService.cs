@@ -80,18 +80,18 @@ public class IntegrityService
       var fileName = Path.GetFileNameWithoutExtension(file);
       var fileText = File.ReadAllText(file);
       var yaml = this.ParseYaml(fileText);
+      var fileVersion = yaml["version"];
 
-      if (!yaml.TryGetValue("version", out var version))
+      if (fileVersion is null)
       {
         this.logger.LogError($"Version not found in YAML file for {file}");
         continue;
       }
 
-      var fileVersion = version.ToString();
-
-      var integrityVersion = integrityRecords.FirstOrDefault(r => r.Name == fileName).Version;
-      if (fileVersion == integrityVersion)
+      var integrityVersion = integrityRecords.FirstOrDefault(r => r.Name == fileName)?.Version;
+      if ((string)fileVersion == integrityVersion)
       {
+        this.logger.LogInformation($"No changes detected for {fileName}");
         continue;
       }
 
@@ -129,7 +129,7 @@ public class IntegrityService
           return;
       }
 
-      await this.UpdateIntegrityRecord(fileName, fileVersion!);
+      await this.UpdateIntegrityRecord(fileName, (string)fileVersion!);
     }
 
     this.isCheckingIntegrity = false;
@@ -138,19 +138,18 @@ public class IntegrityService
   private async Task UpdateNodesCollection(List<object> data)
   {
     var existingNodes = await this.nodeController.GetNodes();
+    var dictionary = data.Cast<Dictionary<object, object>>();
 
-    foreach (var entry in data)
+    foreach (var node in dictionary)
     {
-      var node = (Dictionary<object, object>)entry;
-
       var newNode = new Node
       {
-        Name = node["name"].ToString(),
-        Icon = node["icon"].ToString(),
+        Name = node["name"].ToString()!,
+        Icon = node["icon"].ToString()!,
         Position = ((List<object>)node["position"]).Select(x => Convert.ToInt32(x)).ToArray(),
-        ParentNode = node.TryGetValue("parentNode", out var parentNode) ? parentNode?.ToString() : null,
-        ShowNodes = ((List<object>)node["showNodes"]).Select(x => x.ToString()).ToList(),
-        NodeType = Enum.Parse<NodeType>(node["nodeType"].ToString()),
+        ParentNode = node["parentNode"]?.ToString(),
+        ShowNodes = ((List<object>)node["showNodes"]).Select(x => x.ToString()!).ToList(),
+        NodeType = Enum.Parse<NodeType>(node["nodeType"].ToString()!),
       };
 
       var existingNode = existingNodes.FirstOrDefault(n => n.Name == newNode.Name);
@@ -167,7 +166,7 @@ public class IntegrityService
     // Delete nodes that are not in the YAML file
     foreach (var existingNode in existingNodes)
     {
-      if (data.Cast<Dictionary<object, object>>().All(n => n["name"].ToString() != existingNode.Name))
+      if (dictionary.All(n => n["name"].ToString() != existingNode.Name))
       {
         await this.nodeController.DeleteNode(existingNode.Id.ToString());
       }
@@ -177,23 +176,22 @@ public class IntegrityService
   private async Task UpdateEmploymentCollection(List<object> data)
   {
     var existing = await this.employmentController.GetEmployments();
+    var dictionary = data.Cast<Dictionary<object, object>>();
 
-    foreach (var emp in data)
+    foreach (var employment in dictionary)
     {
-      var employment = (Dictionary<object, object>)emp;
-
       var newEmployment = new Employment
       {
-        Company = employment["company"].ToString(),
-        Image = employment.TryGetValue("image", out var image) ? image?.ToString() : null,
-        Links = employment.TryGetValue("links", out var links) ? ((List<object>)links).Select(x => x.ToString()).ToList() : null,
-        Location = employment.TryGetValue("location", out var location) ? location?.ToString() : null,
-        Blurb = employment.TryGetValue("blurb", out var blurb) ? blurb?.ToString() : null,
-        Dates = employment.TryGetValue("dates", out var dates) ? ((List<object>)dates).Select(x => x.ToString()).ToList() : null,
-        Position = employment["position"].ToString(),
-        TechStack = employment.TryGetValue("techStack", out var techStack) ? ((List<object>)techStack).Select(x => x.ToString()).ToList() : null,
-        ResponsibilitiesHR = employment.TryGetValue("responsibilitiesHR", out var responsibilitiesHR) ? ((List<object>)responsibilitiesHR).Select(x => x.ToString()).ToList() : null,
-        ResponsibilitiesEng = employment.TryGetValue("responsibilitiesEng", out var responsibilitiesEng) ? ((List<object>)responsibilitiesEng).Select(x => x.ToString()).ToList() : null,
+        Company = employment["company"].ToString()!,
+        Image = employment["image"].ToString(),
+        Links = ((Dictionary<object, object>)employment["links"]).ToDictionary(k => k.Key.ToString()!, v => v.Value.ToString()!),
+        Location = employment["location"].ToString(),
+        Blurb = employment["blurb"].ToString(),
+        Dates = ((List<object>)employment["dates"]).Cast<string>().ToList(),
+        Position = employment["position"].ToString()!,
+        TechStack = ((List<object>)employment["techStack"]).Cast<string>().ToList(),
+        ResponsibilitiesHR = ((List<object>)employment["responsibilitiesHR"]).Cast<string>().ToList(),
+        ResponsibilitiesEng = ((List<object>)employment["responsibilitiesEng"]).Cast<string>().ToList(),
       };
 
       var existingEmployment = existing.FirstOrDefault(e => e.Company == newEmployment.Company);
@@ -210,7 +208,7 @@ public class IntegrityService
     // Delete employments that are not in the YAML file
     foreach (var existingEmployment in existing)
     {
-      if (data.Cast<Dictionary<object, object>>().All(e => e["company"].ToString() != existingEmployment.Company))
+      if (dictionary.All(e => e["company"].ToString() != existingEmployment.Company))
       {
         await this.employmentController.DeleteEmployment(existingEmployment.Id.ToString());
       }
@@ -220,18 +218,17 @@ public class IntegrityService
   private async Task UpdateProjectCollection(List<object> data)
   {
     var existing = await this.projectController.GetProjects();
+    var dictionary = data.Cast<Dictionary<object, object>>();
 
-    foreach (var proj in data)
+    foreach (var project in dictionary)
     {
-      var project = (Dictionary<object, object>)proj;
-
       var newProject = new Project
       {
-        Name = project["name"].ToString(),
-        Link = project.TryGetValue("link", out var link) ? link?.ToString() : null,
-        Description = project.TryGetValue("description", out var description) ? description?.ToString() : null,
-        Technologies = ((List<object>)project["technologies"]).Select(x => x.ToString()).ToArray(),
-        Images = project.TryGetValue("images", out var images) ? ((List<object>)images).Select(x => x.ToString()).ToArray() : null,
+        Name = project["name"].ToString()!,
+        Link = project["link"].ToString(),
+        Description = project["description"].ToString(),
+        Technologies = ((List<object>)project["technologies"]).Cast<string>().ToList(),
+        Images = ((List<object>)project["images"]).Cast<string>().ToList(),
       };
 
       var existingProject = existing.FirstOrDefault(p => p.Name == newProject.Name);
@@ -248,7 +245,7 @@ public class IntegrityService
     // Delete projects that are not in the YAML file
     foreach (var existingProject in existing)
     {
-      if (data.Cast<Dictionary<object, object>>().All(p => p["name"].ToString() != existingProject.Name))
+      if (dictionary.All(p => p["name"].ToString() != existingProject.Name))
       {
         await this.projectController.DeleteProject(existingProject.Id.ToString());
       }
@@ -258,10 +255,11 @@ public class IntegrityService
   public async Task UpdateSkillCollection(List<object> data)
   {
     var existing = await this.skillController.GetSkills();
+    var dictionary = data.Cast<Dictionary<object, object>>();
 
-    foreach (var skill in data)
+    foreach (var skill in dictionary)
     {
-      var newSkill = ParseSkill((Dictionary<string, object>)skill);
+      var newSkill = ParseSkill(skill);
 
       var existingSkill = existing.FirstOrDefault(s => s.Name == newSkill.Name);
       if (existingSkill is null)
@@ -277,21 +275,19 @@ public class IntegrityService
     // Delete skills that are not in the YAML file
     foreach (var existingSkill in existing)
     {
-      if (data.All(s => s.ToString() != existingSkill.Name))
+      if (dictionary.All(s => s.ToString() != existingSkill.Name))
       {
         await this.skillController.DeleteSkill(existingSkill.Id.ToString());
       }
     }
 
-    Skill ParseSkill(Dictionary<string, object> skill)
+    Skill ParseSkill(Dictionary<object, object> skill)
     {
       var newSkill = new Skill
       {
-        Name = skill["skill"].ToString(),
-        Type = Enum.Parse<SkillType>(skill["type"].ToString()),
-        Explanation = skill.TryGetValue("explanation", out var explanation)
-                        ? explanation?.ToString()
-                        : null,
+        Name = skill["skill"].ToString()!,
+        Type = Enum.Parse<SkillType>(skill["type"].ToString() ?? "Other", true),
+        Explanation = skill.TryGetValue("explanation", out var explanation) ? explanation.ToString() : null,
       };
 
       if (skill.TryGetValue("subskills", out var subs))
@@ -301,7 +297,7 @@ public class IntegrityService
         var subskills = (List<object>)subs;
         foreach (var subskill in subskills)
         {
-          newSkill.SubSkills.Add(ParseSkill((Dictionary<string, object>)subskill));
+          newSkill.SubSkills.Add(ParseSkill((Dictionary<object, object>)subskill));
         }
       }
 
@@ -311,15 +307,14 @@ public class IntegrityService
 
   private async Task UpdateIntegrityRecord(string name, string version)
   {
-    var integrityRecord = await this.integrityController.GetByName(name);
-    if (integrityRecord is null)
+    var record = await this.integrityController.GetByName(name);
+    if (record is null)
     {
       this.logger.LogInformation($"Creating integrity record {name} at version {version}");
       await this.integrityController.CreateIntegrity(new Integrity { Name = name, Version = version });
       return;
     }
 
-    var record = integrityRecord.Value;
     record.Version = version;
     logger.LogInformation($"Updating integrity record {name} to version {version}");
     await this.integrityController.UpdateIntegrity(record.Id.ToString(), record);
