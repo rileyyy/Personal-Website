@@ -28,6 +28,7 @@ builder.Services.AddSingleton<NodeController>();
 builder.Services.AddSingleton<EmploymentController>();
 builder.Services.AddSingleton<ProjectController>();
 builder.Services.AddSingleton<SkillController>();
+builder.Services.AddSingleton<EducationController>();
 
 builder.Services.AddSingleton<IntegrityService>();
 builder.Services.AddSingleton<MongoService>();

@@ -19,6 +19,7 @@ public class IntegrityService
   private readonly EmploymentController employmentController;
   private readonly ProjectController projectController;
   private readonly SkillController skillController;
+  private readonly EducationController educationController;
   private readonly ILogger<IntegrityService> logger;
   private readonly FileSystemWatcher watcher = new FileSystemWatcher
   {
@@ -38,6 +39,7 @@ public class IntegrityService
     EmploymentController employmentController,
     ProjectController projectController,
     SkillController skillController,
+    EducationController educationController,
     ILogger<IntegrityService> logger)
   {
     this.integrityController = integrityController;
@@ -45,6 +47,7 @@ public class IntegrityService
     this.employmentController = employmentController;
     this.projectController = projectController;
     this.skillController = skillController;
+    this.educationController = educationController;
     this.logger = logger;
   }
 
@@ -122,6 +125,10 @@ public class IntegrityService
 
         case "Skills":
           await this.UpdateSkillCollection(fileData);
+          break;
+
+        case "Education":
+          await this.UpdateEducationCollection(fileData);
           break;
 
         default:
@@ -302,6 +309,60 @@ public class IntegrityService
       }
 
       return newSkill;
+    }
+  }
+
+  public async Task UpdateEducationCollection(List<object> data)
+  {
+    var existing = await this.educationController.GetEducation();
+    var dictionary = data.Cast<Dictionary<object, object>>();
+
+    foreach (var education in dictionary)
+    {
+      var institution = (Dictionary<object, object>)education["institution"];
+      var degrees = (List<object>)education["degrees"];
+
+      var newEducation = new Education
+      {
+        Institution = new Institution
+        {
+          Name = institution["name"].ToString()!,
+          Location = institution.TryGetValue("location", out var location) ? location.ToString() : null,
+          Image = institution.TryGetValue("image", out var image) ? image.ToString() : null,
+          Links = institution.TryGetValue("links", out var links)
+                    ? ((Dictionary<object, object>)links).ToDictionary(k => k.Key.ToString()!, v => v.Value.ToString()!)
+                    : null,
+        },
+        Degrees = degrees.Select(d =>
+        {
+          var degree = (Dictionary<object, object>)d;
+          return new Degree
+          {
+            Name = degree["name"].ToString()!,
+            Major = degree.TryGetValue("major", out var major) ? major.ToString() : null,
+            Dates = degree.TryGetValue("dates", out var dates) ? ((List<object>)dates).Cast<string>().ToList() : null,
+          };
+        }).ToList(),
+      };
+
+      var existingEducation = existing.FirstOrDefault(e => e.Institution.Name == newEducation.Institution.Name);
+      if (existingEducation is null)
+      {
+        await this.educationController.CreateEducation(newEducation);
+        continue;
+      }
+
+      newEducation.Id = existingEducation.Id;
+      await this.educationController.UpdateEducation(existingEducation.Id.ToString(), newEducation);
+    }
+
+    // Delete education records that are not in the YAML file
+    foreach (var existingEducation in existing)
+    {
+      if (dictionary.All(e => ((Dictionary<object, object>)e["institution"])["name"].ToString() != existingEducation.Institution.Name))
+      {
+        await this.educationController.DeleteEducation(existingEducation.Id.ToString());
+      }
     }
   }
 
