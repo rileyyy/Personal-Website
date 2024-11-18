@@ -35,7 +35,7 @@ public class IntegrityController : ControllerBase
   {
     logger.LogInformation($"Creating {integrity.Name} integrity record at version {integrity.Version}");
     await this.integrity.InsertOneAsync(integrity);
-    return CreatedAtAction(nameof(GetByName), new { id = integrity.Id }, integrity);
+    return CreatedAtAction(nameof(GetByName), new { name = integrity.Name }, integrity);
   }
 
   [HttpPut("{id}")]

@@ -1,4 +1,4 @@
-version: 0.0.2
+version: 0.0.3
 
 data:
   - name: "Personal Website"
@@ -13,12 +13,13 @@ data:
       - Docker
     images: []
 
- - name: "WakePy"
+  - name: "WakePy"
     link: "https://github.com/fohrloop/wakepy"
     description: "I provided some early contributions to add Apple and Linux support. then added it for use in the Lake Shore python driver to facilitate long running communications to our instruments."
     technologies:
       - Python
     images: []
+
   - name: "freeCodeCamp Projects"
     link: "https://github.com/rileyyy/freeCodeCamp"
     description: "We all start learning somewhere. This is where I started learning frontend webdev. These are the collection of simple projects that were the 'exams' for each section on freeVodeCamp.org. Fair warning, they are not the precipice of my work."

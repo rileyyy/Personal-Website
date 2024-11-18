@@ -1,75 +1,122 @@
-version: 0.1.0
+version: 0.2.1
 
 data:
-  - language: "Java"
-    - explanation: "The second language I ever learned, after C++ a long time ago in high school. I'm old enough that university level classes were almost all in Java, so there's some early experience there. I have not used Java professionally, but have done some work with it for plugins for RuneLite (the open-source Old School RuneScape client) as well as Minecraft mods long ago. I'm pretty sure a lot of millenial devs have touched modding Minecraft at some point."
+  - skill: "Java"
+    type: "language"
+    explanation: "The second language I ever learned, after C++ a long time ago in high school. I'm old enough that university level classes were almost all in Java, so there's some early experience there. I have not used Java professionally, but have done some work with it for plugins for RuneLite (the open-source Old School RuneScape client) as well as Minecraft mods long ago. I'm pretty sure a lot of millenial devs have touched modding Minecraft at some point."
 
-  - language: "C++"
-    - explanation: "The first language I ever learned, way back in high school. After that I used it for a few courses in university. Since then I found myself using it occasionally for both Taurus and Lake Shore. At Taurus we used it primarily for communications protocol servers as well as shared memory databases. At Lake Shore we used it for embedded systems, and I would occasionally assist the embedded developers with changes and reviews."
+  - skill: "C++"
+    type: "language"
+    explanation: "The first language I ever learned, way back in high school. After that I used it for a few courses in university. Since then I found myself using it occasionally for both Taurus and Lake Shore. At Taurus we used it primarily for communications protocol servers as well as shared memory databases. At Lake Shore we used it for embedded systems, and I would occasionally assist the embedded developers with changes and reviews."
 
-  - language: "C#/.NET"
-    - explanation: "While working at Swisslog I had plenty of time free and decided to teach myself C#. Since then it has been the primary language I have used in my career."
-    - framework: "Xamarin.Forms"
-      - explanation: "At Lake Shore we used Xamarin.Forms for our Android applications. We definitely pushed the limits of what Xamarin.Forms could do, and several times needed to fix libraries or submit bugs for the framework. I worked for countless hours profiling our application, finding memory leaks, and optimizing our code."
-    - framework: "Xamarin.MAUI"
-      - explanation: "Microsoft shifted to Xamarin.MAUI in 2021, and we worked to migrate our latest applications to the new framework. For the most part, it was a drop in replacement, but there were certainly some hiccups along the way."
-    - framework: "ASP.NET"
-      - explanation: "As a C# developer, I started picking up ASP.NET for my backend development on this website as well as some other projects that are still in early conception."
-    - framework: "XAML"
-      - explanation: "I'm not sure if this really counts as a framework, but I've spent a lot of time working with XAML in Xamarin.Forms to design the UI/UX for Lake Shore. While it is also possible to design the UI in C#, I found that XAML was much more readable and maintainable."
+  - skill: "C#/.NET"
+    type: "language"
+    explanation: "While working at Swisslog I had plenty of time free and decided to teach myself C#. Since then it has been the primary language I have used in my career."
+    subskills:
+    - skill: "Xamarin.Forms"
+      type: "framework"
+      explanation: "At Lake Shore we used Xamarin.Forms for our Android applications. We definitely pushed the limits of what Xamarin.Forms could do, and several times needed to fix libraries or submit bugs for the framework. I worked for countless hours profiling our application, finding memory leaks, and optimizing our code."
+    - skill: "Xamarin.MAUI"
+      type: "framework"
+      explanation: "Microsoft shifted to Xamarin.MAUI in 2021, and we worked to migrate our latest applications to the new framework. For the most part, it was a drop in replacement, but there were certainly some hiccups along the way."
+    - skill: "ASP.NET"
+      type: "framework"
+      explanation: "As a C# developer, I started picking up ASP.NET for my backend development on this website as well as some other projects that are still in early conception."
+    - skill: "XAML"
+      type: "framework"
+      explanation: "I'm not sure if this really counts as a framework, but I've spent a lot of time working with XAML in Xamarin.Forms to design the UI/UX for Lake Shore. While it is also possible to design the UI in C#, I found that XAML was much more readable and maintainable."
 
-  - language: "Python"
-    - explanation: "At Lake Shore we used Python for both our public driver as well as test automations in our CI/CD pipelines. I use it occasionally for silly things like parsing documents or automating tasks on my computer. However, I think it has a lot of flaws as a language that runs for more than single use scenarios."
+  - skill: "Python"
+    type: "language"
+    explanation: "At Lake Shore we used Python for both our public driver as well as test automations in our CI/CD pipelines. I use it occasionally for silly things like parsing documents or automating tasks on my computer. However, I think it has a lot of flaws as a language that runs for more than single use scenarios."
 
-  - language: "HTML/CSS"
-    - explanation: "A recent acquisition, I started learning HTML/CSS in October of 2024 to build this website. While I don't care much for frontend development, it seems that there is definitely a wide market for it. Luckily it is a bit similar to XAML, though I think XAML definitely does things quite a bit better."
+  - skill: "HTML/CSS"
+    type: "language"
+    explanation: "A recent acquisition, I started learning HTML/CSS in October of 2024 to build this website. While I don't care much for frontend development, it seems that there is definitely a wide market for it. Luckily it is a bit similar to XAML, though I think XAML definitely does things quite a bit better."
 
-  - language: "JavaScript"
-    - explanation: "Another recent acquisition, I started learning JavaScript in October of 2024 to build this website. I'm not sure how I feel about it yet as after completing some courses, I dove strait into Vue.js. There's definitely a reason it gets so much flak for all of the frameworks. When you don't inherit a framework from the start, it's one hell of a decision to chosing your own."
-    - framework: "Vue"
-      - explanation: "Am I a hipster for choosing Vue over React or Angular? Probably not. But I did like how easy it seemed to learn and the support for TypeScript. So far I have only used it for this website."
-    - package: "VueFlow"
-      - explanation: "Most of this website is actually thanks to VueFlow. I knew in my initial designs that I wanted a mind map style website. VueFlow has provided some nice features that I didn't want to spend time developing myself."
+  - skill: "JavaScript"
+    type: "language"
+    explanation: "Another recent acquisition, I started learning JavaScript in October of 2024 to build this website. I'm not sure how I feel about it yet as after completing some courses, I dove strait into Vue.js. There's definitely a reason it gets so much flak for all of the frameworks. When you don't inherit a framework from the start, it's one hell of a decision to chosing your own."
+    subskills:
+    - skill: "Vue"
+      type: "framework"
+      explanation: "Am I a hipster for choosing Vue over React or Angular? Probably not. But I did like how easy it seemed to learn and the support for TypeScript. So far I have only used it for this website."
+    - skill: "VueFlow"
+      type: "package"
+      explanation: "Most of this website is actually thanks to VueFlow. I knew in my initial designs that I wanted a mind map style website. VueFlow has provided some nice features that I didn't want to spend time developing myself."
 
-  - language: "MySQL"
-    - explanation: "Maybe we used this in university? I don't remember. At Taurus we used MySQL for our databases and I was responsible for designing some of our more complex queries used to generate network diagrams and configuration files. I'll also throw Microsoft Access in here, as we used it for some of our configurations at Taurus, even though it is not exactly the same."
+  - skill: "SQL"
+    type: "language"
+    explanation: "Maybe we used this in university? I don't remember. At Taurus we used MySQL for our databases and I was responsible for designing some of our more complex queries used to generate network diagrams and configuration files. I'll also throw Microsoft Access in here, as we used it for some of our configurations at Taurus, even though it is not exactly the same."
+    subskills:
+    - skill: "MySQL"
+      type: "tool"
+    - skill: "Microsoft Access"
+      type: "tool"
 
-  - language: "NoSQL"
-    - explanation: "The last of my recent acquisitions, I used it for some small projects at Taurus. I think its a pretty interesting concept and I am using it on this website for my first real development via MongoDB."
+  - skill: "NoSQL"
+    type: "language"
+    explanation: "The last of my recent acquisitions, I used it for some small projects at Taurus. I think its a pretty interesting concept and I am using it on this website for my first real development via MongoDB."
+    subskills:
+    - skill: "MongoDB"
+      type: "tool"
 
-  - language: "Lua"
-    - explanation: "In combination with WikiText for MediaWiki, worked on several projects, including https://wiki.walkscape.app/"
+  - skill: "Lua"
+    type: "language"
+    explanation: "In combination with WikiText for MediaWiki, worked on several projects, including https://wiki.walkscape.app/"
 
-  - toolset: "Docker"
-    - explanation: "At some point this started to be more command than virtual machines. While I do not dislike it, I have not had a chance to use it in a professional setting. For now, I use it for hosting this website accross a few containers as it allows me to develop on any of my machines, even without network access."
-    - package: "Compose"
-      - explanation: "Its basically just part of Docker, but I appreciate how much it simplifies the process of setting up multiple containers. I use it for this website as well."
+  - skill: "Docker"
+    type: "tool"
+    explanation: "At some point this started to be more command than virtual machines. While I do not dislike it, I have not had a chance to use it in a professional setting. For now, I use it for hosting this website accross a few containers as it allows me to develop on any of my machines, even without network access."
+    subskills:
+    - skill: "Compose"
+      type: "tool"
+      explanation: "Its basically just part of Docker, but I appreciate how much it simplifies the process of setting up multiple containers. I use it for this website as well."
 
-  - toolset: "VirtualBox"
-    - explanation: "While most companies use Docker now, at Taurus we used VirtualBox for a hefty amount of network emulation. I also worked to modify and control the virtual machines with custom scripts."
+  - skill: "VirtualBox"
+    type: "tool"
+    explanation: "While most companies use Docker now, at Taurus we used VirtualBox for a hefty amount of network emulation. I also worked to modify and control the virtual machines with custom scripts."
 
-  - toolset: "ChatGPT"
-    - explanation: ""
+  - skill: "Artificial Intelligence"
+    type: "tool"
+    explanation: "I have used AI quite a bit for both personal and professional projects, as well as the mundane uses people have for it. I could ramble on about the over abundance of AI in marketing and how I think it is just the next 'dotcom' bubble. But I won't. I do think it is a pretty valuable tool; but like all tools, knowing how to use it correctly is far more complicated than most people think."
+    subskills:
+    - skill: "ChatGPT"
+      type: "tool"
+      explanation: "To quote Copilot: 'I think it is a pretty cool tool, but I am not sure how much I trust it. I have seen some pretty wild responses from it.' I think that is hilarious as its one AI talking shit on another AI. It was the first one I played with, until the IT lead decided it was a threat to our code. It is valuable to fix problems that neither Copilot nor I understand."
+    - skill: "Copilot"
+      type: "tool"
+      explanation: "It is baked into Visual Studio Code, where I do a decent amount of my development. While its just a throttled version of ChatGPT, it does a pretty decent job of handling context."
 
-  - toolset: "Azure DevOps"
-    - explanation: "At Taurus I was the first person to push to start automated testing and CI/CD pipelines. Due to everything being self-hosted and no internet connections, we started with Jenkins.
+  - skill: "Azure DevOps"
+    type: "tool"
+    explanation: >
+      "At Taurus I was the first person to push to start automated testing and CI/CD pipelines. Due to everything being self-hosted and no internet connections, we started with Jenkins.
 
-    However, at Lake Shore we used Azure DevOps for all of our CI/CD pipelines. I was responsible for a lot of management of the pipelines, including connections to external services such as GitHub and ReadTheDocs for automating our Python Driver pushes."
+      However, at Lake Shore we used Azure DevOps for all of our CI/CD pipelines. I was responsible for a lot of management of the pipelines, including connections to external services such as GitHub and ReadTheDocs for automating our Python Driver pushes."
 
-  - toolset: "Git"
-    - explanation: "At Taurus we had a rusty old SVN server in the corner of the room with a maximum run time of 24 hours. Due to high security concerns, only one person knew the password to the BIOS, thus meaning our server would be down for days, up to weeks, at a time. During my final year, I pushed the migration to git upon everyone by singlehandedly moving the entire repository while maintaining the history.
+  - skill: "Git"
+    type: "tool"
+    explanation: >
+      "At Taurus we had a rusty old SVN server in the corner of the room with a maximum run time of 24 hours. Due to high security concerns, only one person knew the password to the BIOS, thus meaning our server would be down for days, up to weeks, at a time. During my final year, I pushed the migration to git upon everyone by singlehandedly moving the entire repository while maintaining the history.
 
-    At Lake Shore we used git for all of our repositories. I definitely learned a lot when I first started, but I think I have a pretty good understanding of it now; and I use it for pretty much everything. I was responsible at Lake Shore for combining several instrument of repositories that were split by embedded and .NET code into a single repository."
+      At Lake Shore we used git for all of our repositories. I definitely learned a lot when I first started, but I think I have a pretty good understanding of it now; and I use it for pretty much everything. I was responsible at Lake Shore for combining several instrument of repositories that were split by embedded and .NET code into a single repository."
 
-  - other: "Agile"
-    - explanation: "After starting with Lake Shore, I became very familiar with agile methodologies. We used a combination of Scrum and Kanban, with a heavy emphasis on the former. We even attended agile conventions as well as lectures at other conventions."
-    - with: "Scrum"
-      - explanation: "Primarily used at Lake Shore, we had a daily standup, sprint planning, sprint review, and sprint retrospective. We also had a product backlog, sprint backlog, and burndown chart. This was the more common methodology used for the first two years before our development team was split into several smaller teams."
-    - with: "Kanban"
-      - explanation: "After the first two years at Lake Shore, we switched to a more Kanban style of development. We still had a daily standup and sprints, but we focused more on a continuous flow of work due to small team sizes and large, complex issues."
+  - skill: "Agile"
+    type: "method"
+    explanation: "After starting with Lake Shore, I became very familiar with agile methodologies. We used a combination of Scrum and Kanban, with a heavy emphasis on the former. We even attended agile conventions as well as lectures at other conventions."
+    subskills:
+    - skill: "Scrum"
+      type: "method"
+      explanation: "Primarily used at Lake Shore, we had a daily standup, sprint planning, sprint review, and sprint retrospective. We also had a product backlog, sprint backlog, and burndown chart. This was the more common methodology used for the first two years before our development team was split into several smaller teams."
+    - skill: "Kanban"
+      type: "method"
+      explanation: "After the first two years at Lake Shore, we switched to a more Kanban style of development. We still had a daily standup and sprints, but we focused more on a continuous flow of work due to small team sizes and large, complex issues."
 
-  - other: "English"
-    - explanation: "As a native speaker of English, I think I am decently proficient with it. While I may speak in a more general vocabulary, I possess a broad understanding of the language and have used it at both Taurus and Lake Shore for technical documentation and communication."
+  - skill: "English"
+    type: "language"
+    explanation: "As a native speaker of English, I think I am decently proficient with it. While I may speak in a more general vocabulary, I possess a broad understanding of the language and have used it at both Taurus and Lake Shore for technical documentation and communication."
 
-  - other: "Swedish"
-    - explanation: "Starting in May of 2024, I began learning Swedish. While I am definitely not proficient with it, I can understand general concepts. My reading and writing are much better than speaking and listening due to still needing time to process audible cues."
+  - skill: "Swedish"
+    type: "language"
+    explanation: "Starting in May of 2024, I began learning Swedish. While I am definitely not proficient with it, I can understand general concepts. My reading and writing are much better than speaking and listening due to still needing time to process audible cues."

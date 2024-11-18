@@ -1,0 +1,40 @@
+id: 003
+tags: ['Documentation', 'ASP.NET', 'C#/.NET']
+title: I hate when documentation lies
+content:
+  "Do we all make mistakes? Of course. But today I got to find a bug that I didn't write. At Lake Shore I became rather accustomed to this problem. Not to say I am perfect; but the developer I worked with and I would jump for joy when a bug was with our own code. So what was today's bug? The documentation was wrong, probably because it was copy-pasted as we all tend to do.
+
+  While working on some ugly type conversion code in the ASP.NET backend, I wiped my database to ensure everything was being imported with the Integrity Service as expected. The IntegrityService is responsible for updating the database collection whenever I update the version number of a file in my data/ directory. This makes it easier for me to make dynamic changes to the data without manually editing the database, and also allows me to keep the data in version control. After wiping the database and fixing my own bugs, I was getting an error in the backend's console:
+
+  <pre><code class=\"language-plaintext\">
+    Unhandled exception. (Line: 16, Col: 2, Idx: 447) - (Line: 16, Col: 2, Idx: 447): While parsing a block mapping, did not find expected key.
+  </code></pre>
+
+  I was confused, of course it didn't find a matching key because there are no keys? Doing some debugging in what I thought was a simple method:
+
+  <pre><code class=\"language-csharp\">
+    public async Task<Integrity?> GetByName(string name) =>
+    await this.integrityCollection.Find(i => i.Name == name).FirstOrDefaultAsync();
+  </code></pre>
+
+  Traditionally FirstOrDefault() returns null if an IEnumerable does not contain the specified element. E.g.
+
+  <pre><code class=\"language-csharp\">
+    new List<string>().FirstOrDefault(); // returns null
+  </code></pre>
+
+  However, IFluentFindExtensions does not have the return type listed as nullable.
+
+  <pre><code class=\"language-csharp\">
+    public static TProjection FirstOrDefault<TDocument, TProjection>(this IFindFluent<TDocument, TProjection> find, CancellationToken cancellationToken = default(CancellationToken))
+  </code></pre>
+
+  Which may be because Find() does not list the returns as nullable either.
+
+  <pre><code class=\"language-csharp\">
+    public static IFindFluent<TDocument, TDocument> Find<TDocument>(this IMongoCollection<TDocument> collection, Expression<Func<TDocument, bool>> filter, FindOptions options = null)
+  </code></pre>
+
+  Instead FirstOrDefault() returns a new Integrity object with all fields set to default values. Which, while "technically" correct, is not the expected behavior as the documentation clearly states "A task whose result is the first result or null".
+
+  As it turns out, the error message was not actually related to the bug in documentation. It was due to yaml being a princess about its formatting. I had been writing some of the yaml files while having a drink with Erika's family on GitHub's mobile application, which does not have any syntactical help. So I had inadvertantly indented incorrectly.
