@@ -10,8 +10,6 @@ public class Education
   [BsonElement("_id")]
   public ObjectId Id { get; set; }
 
-  public required string Icon { get; set; }
-
   public required Institution Institution { get; set; }
 
   public required List<Degree> Degrees { get; set; }
