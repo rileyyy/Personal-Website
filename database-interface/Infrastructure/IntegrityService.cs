@@ -20,7 +20,9 @@ public class IntegrityService
   private readonly ProjectController projectController;
   private readonly SkillController skillController;
   private readonly EducationController educationController;
+  private readonly BlogController blogController;
   private readonly ILogger<IntegrityService> logger;
+
   private readonly FileSystemWatcher watcher = new FileSystemWatcher
   {
     Path = "/data",
@@ -28,8 +30,16 @@ public class IntegrityService
     Filter = "*.yaml",
     EnableRaisingEvents = true,
   };
+  private readonly FileSystemWatcher blogWatcher = new FileSystemWatcher
+  {
+    Path = "/data/blogs",
+    NotifyFilter = NotifyFilters.LastWrite,
+    Filter = "*.yaml",
+    EnableRaisingEvents = true,
+  };
 
   private bool isCheckingIntegrity = false;
+  private bool isCheckingBlogIntegrity = false;
   private DateTime lastEventTime = DateTime.MinValue;
   private readonly TimeSpan debounceTime = TimeSpan.FromSeconds(5);
 
@@ -40,6 +50,7 @@ public class IntegrityService
     ProjectController projectController,
     SkillController skillController,
     EducationController educationController,
+    BlogController blogController,
     ILogger<IntegrityService> logger)
   {
     this.integrityController = integrityController;
@@ -48,6 +59,7 @@ public class IntegrityService
     this.projectController = projectController;
     this.skillController = skillController;
     this.educationController = educationController;
+    this.blogController = blogController;
     this.logger = logger;
   }
 
@@ -55,11 +67,16 @@ public class IntegrityService
   {
     this.logger.LogInformation("Integrity service started");
     this.watcher.Changed += OnChanged;
+    this.blogWatcher.Changed += OnChanged;
     this.CheckIntegrity();
+    this.CheckBlogIntegrity();
   }
 
-  public void StopDataMonitor() =>
+  public void StopDataMonitor()
+  {
     this.watcher.Changed -= OnChanged;
+    this.blogWatcher.Changed -= OnChanged;
+  }
 
   private void OnChanged(object sender, FileSystemEventArgs e)
   {
@@ -69,6 +86,7 @@ public class IntegrityService
       this.lastEventTime = currentTime;
       this.logger.LogInformation("Data change detected: {0}", e.FullPath);
       this.CheckIntegrity();
+      this.CheckBlogIntegrity();
     }
   }
 
@@ -140,6 +158,59 @@ public class IntegrityService
     }
 
     this.isCheckingIntegrity = false;
+  }
+
+  public async void CheckBlogIntegrity()
+  {
+    if (this.isCheckingBlogIntegrity) return;
+    this.isCheckingBlogIntegrity = true;
+
+    var integrityRecords = (await this.integrityController.GetIntegrity()).ToList();
+    foreach (var file in Directory.GetFiles("/data/blogs", "*.yaml"))
+    {
+      // Each file should be checked if it has changed by hashing the file and comparing that to the version field in the Integrity
+      // collection. If the hash is different, the file should be parsed and the data should be updated in the database.
+      var fileName = Path.GetFileNameWithoutExtension(file);
+      var fileText = File.ReadAllText(file);
+      var hash = fileText.GetHashCode().ToString();
+
+      var integrityVersion = integrityRecords.FirstOrDefault(r => r.Name == $"Blog-{fileName}")?.Version;
+      if (hash == integrityVersion)
+      {
+        continue;
+      }
+
+      var yaml = this.ParseYaml(fileText);
+      var blog = new Blog
+      {
+        FileId = Convert.ToInt32(yaml["id"]),
+        Tags = ((List<object>)yaml["tags"]).Cast<string>().ToList(),
+        Title = yaml["title"].ToString()!,
+        Content = yaml["content"].ToString()!,
+      };
+
+      var existingBlog = await this.blogController.GetByFileId(blog.FileId);
+      if (existingBlog is null)
+      {
+        this.logger.LogInformation($"Creating blog {fileName}");
+        await this.blogController.CreateBlog(blog);
+      }
+      else if (existingBlog.Equals(blog))
+      {
+        this.logger.LogInformation($"No changes detected for {fileName}");
+        continue;
+      }
+      else
+      {
+        blog.Id = existingBlog.Id;
+        this.logger.LogInformation($"Updating blog {fileName}");
+        await this.blogController.UpdateBlog(existingBlog.Id.ToString(), blog);
+      }
+
+      await this.UpdateIntegrityRecord($"Blog-{fileName}", hash);
+    }
+
+    this.isCheckingBlogIntegrity = false;
   }
 
   private async Task UpdateNodesCollection(List<object> data)
