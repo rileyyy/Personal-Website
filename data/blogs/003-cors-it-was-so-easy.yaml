@@ -1,7 +1,8 @@
 id: 003
 tags: ['JavaScript', 'Docker', 'ASP.NET']
 title: Of cors it was something simple
-content:
+listDate: 2024-11-05
+content: >
   According to the git history of this project it has been exactly one week since it began, and the first 'doh' moment finally hit.  As someone new to JavaScript I tend to think of things as an application developer, and it has finally gotten me in trouble. In the world of applications software, code runs where code is for the most part.  If I deploy a C++ server on computers A and B, I expect that the code needs some way of knowing that it is talking to the other server. Now that logic does not extend the same to web development I learn.
 
   Now my understanding wasn't exactly wrong as the MongoDB instance is its own container, and the ASP.NET backend obviously is going to run on the container I tell it to run on. This means that setting up the communication between the two is as simple as getting the Mongo connection string right and making sure there is a network they can communicate on. However, the frontend doesn't work quite the same.  In my own naive world, I expect to setup a network between the node container and the .NET container and have them talk to each other.
