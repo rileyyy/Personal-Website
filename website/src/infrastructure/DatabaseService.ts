@@ -1,9 +1,12 @@
-async function fetchNodesAsync() {
-  return await fetch('http://localhost:25052/nodes')
+const dbAddress = 'http://localhost:25052/';
+
+async function fetchDataAsync(slug: string) {
+  console.log('fetching data:', dbAddress + slug);
+  return await fetch(dbAddress + slug)
   .then(response => response.json())
-  .catch(error => console.error('Error fetching nodes:', error));
+  .catch(error => console.error('Error fetching data:', dbAddress + slug, error));
 }
 
 export {
-  fetchNodesAsync
+  fetchDataAsync
 };
