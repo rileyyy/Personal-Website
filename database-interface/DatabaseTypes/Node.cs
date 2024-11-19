@@ -16,6 +16,9 @@ public class Node
   [BsonElement("name")]
   public required string Name { get; set; }
 
+  [BsonElement("slug")]
+  public string? Slug { get; set; }
+
   [BsonElement("icon")]
   public required string Icon { get; set; }
 

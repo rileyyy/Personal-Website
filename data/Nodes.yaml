@@ -1,4 +1,4 @@
-version: 0.3.1
+version: 0.4.0
 
 data:
   - name: "Home"
@@ -25,6 +25,7 @@ data:
 
   - name: "Projects"
     icon: "Code"
+    slug: "projects"
     parentNode: "Home"
     position: [300, -300]
     nodeType: "NodeOnly"
@@ -45,6 +46,7 @@ data:
 
   - name: "Rambles"
     icon: "Two_Pager"
+    slug: "blogs/listed"
     parentNode: "Home"
     position: [-300, -300]
     nodeType: "NodeOnly"
@@ -53,6 +55,7 @@ data:
   # Layer 3 Nodes - Resume
   - name: "Education"
     icon: "School"
+    slug: "education"
     parentNode: "Resume"
     position: [550, 550]
     nodeType: "NodeOnly"
@@ -60,6 +63,7 @@ data:
 
   - name: "Employment"
     icon: "Business_Center"
+    slug: "employments"
     parentNode: "Resume"
     position: [300, 550]
     nodeType: "NodeOnly"
@@ -67,6 +71,7 @@ data:
 
   - name: "Skills"
     icon: "Construction"
+    slug: "skills"
     parentNode: "Resume"
     position: [550, 300]
     nodeType: "NodeOnly"

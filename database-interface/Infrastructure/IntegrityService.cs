@@ -168,8 +168,6 @@ public class IntegrityService
     var integrityRecords = (await this.integrityController.GetIntegrity()).ToList();
     foreach (var file in Directory.GetFiles("/data/blogs", "*.yaml"))
     {
-      // Each file should be checked if it has changed by hashing the file and comparing that to the version field in the Integrity
-      // collection. If the hash is different, the file should be parsed and the data should be updated in the database.
       var fileName = Path.GetFileNameWithoutExtension(file);
       var fileText = File.ReadAllText(file);
       var hash = fileText.GetHashCode().ToString();
@@ -227,6 +225,7 @@ public class IntegrityService
       {
         Name = node["name"].ToString()!,
         Icon = node["icon"].ToString()!,
+        Slug = node.TryGetValue("slug", out var slug) ? slug.ToString() : null,
         Position = ((List<object>)node["position"]).Select(x => Convert.ToInt32(x)).ToArray(),
         ParentNode = node["parentNode"]?.ToString(),
         ShowNodes = ((List<object>)node["showNodes"]).Select(x => x.ToString()!).ToList(),
