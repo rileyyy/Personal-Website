@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DatabaseInterface.DatabaseTypes;
@@ -22,6 +23,14 @@ public class BlogController : ControllerBase
   [HttpGet]
   public async Task<IEnumerable<Blog>> GetBlogs() =>
     await this.mongoService.WebsiteDesignDatabase.GetCollection<Blog>("blogs").Find(blog => true).ToListAsync();
+
+  [HttpGet("listed")]
+  public async Task<IEnumerable<Blog>> GetListedBlogs() =>
+    await this.mongoService.WebsiteDesignDatabase
+            .GetCollection<Blog>("blogs")
+            // null ListDate means the blog is to remain unlisted
+            .Find(blog => blog.ListDate != null && blog.ListDate <= DateTime.Now)
+            .ToListAsync();
 
   [HttpGet("{title}")]
   public async Task<Blog?> GetByFileId(int fileId) =>

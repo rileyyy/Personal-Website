@@ -24,6 +24,9 @@ public class Blog
   [BsonElement("content")]
   public required string Content { get; set; }
 
+  [BsonElement("listDate")]
+  public DateTime? ListDate { get; set; }
+
   public override bool Equals(object? obj)
   {
     if (obj == null || GetType() != obj.GetType())
@@ -35,9 +38,10 @@ public class Blog
     return FileId == blog.FileId &&
            Title == blog.Title &&
            Content == blog.Content &&
-           Tags.SequenceEqual(blog.Tags);
+           Tags.SequenceEqual(blog.Tags) &&
+           ListDate == blog.ListDate;
   }
 
   public override int GetHashCode() =>
-    HashCode.Combine(FileId, Title, Content, Tags);
+    HashCode.Combine(FileId, Title, Content, Tags, ListDate);
 }

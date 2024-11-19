@@ -1,7 +1,8 @@
 id: 003
 tags: ['Documentation', 'ASP.NET', 'C#/.NET']
 title: I hate when documentation lies
-content:
+listDate: 2024-11-17
+content: >
   "Do we all make mistakes? Of course. But today I got to find a bug that I didn't write. At Lake Shore I became rather accustomed to this problem. Not to say I am perfect; but the developer I worked with and I would jump for joy when a bug was with our own code. So what was today's bug? The documentation was wrong, probably because it was copy-pasted as we all tend to do.
 
   While working on some ugly type conversion code in the ASP.NET backend, I wiped my database to ensure everything was being imported with the Integrity Service as expected. The IntegrityService is responsible for updating the database collection whenever I update the version number of a file in my data/ directory. This makes it easier for me to make dynamic changes to the data without manually editing the database, and also allows me to keep the data in version control. After wiping the database and fixing my own bugs, I was getting an error in the backend's console:

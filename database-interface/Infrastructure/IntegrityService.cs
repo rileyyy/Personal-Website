@@ -187,6 +187,9 @@ public class IntegrityService
         Tags = ((List<object>)yaml["tags"]).Cast<string>().ToList(),
         Title = yaml["title"].ToString()!,
         Content = yaml["content"].ToString()!,
+        ListDate = yaml.TryGetValue("listDate", out var listDate)
+                    ? DateTime.Parse(listDate.ToString()!)
+                    : null,
       };
 
       var existingBlog = await this.blogController.GetByFileId(blog.FileId);
