@@ -9,6 +9,8 @@ using MongoDB.Driver;
 
 namespace DatabaseInterface.Controllers;
 
+[Route("/blogs")]
+[ApiController]
 public class BlogController : ControllerBase
 {
   private readonly MongoService mongoService;
@@ -32,7 +34,7 @@ public class BlogController : ControllerBase
             .Find(blog => blog.ListDate != null && blog.ListDate <= DateTime.Now)
             .ToListAsync();
 
-  [HttpGet("{title}")]
+  [HttpGet("{fileId}")]
   public async Task<Blog?> GetByFileId(int fileId) =>
     await this.mongoService.WebsiteDesignDatabase.GetCollection<Blog>("blogs").Find(blog => blog.FileId == fileId).FirstOrDefaultAsync();
 
