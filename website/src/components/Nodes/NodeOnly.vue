@@ -1,5 +1,5 @@
 <template>
-  <div class="node-only">
+  <div class="node-only" @mouseenter.once="queryData">
     <span class="material-symbols-outlined">
       {{ data.icon }}
     </span>
@@ -14,6 +14,7 @@
 
 <script setup>
 import { Handle, Position } from '@vue-flow/core'
+import { fetchDataAsync } from '../../infrastructure/DatabaseService.ts'
 
 const props = defineProps({
   id: {
@@ -25,6 +26,14 @@ const props = defineProps({
     required: true,
   },
 })
+
+function queryData ()
+{
+  if (props.data.slug) {
+    console.log('Querying data for slug:', props.data.slug)
+    fetchDataAsync(props.data.slug)
+  }
+}
 </script>
 
 <style>

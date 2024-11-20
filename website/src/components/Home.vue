@@ -1,7 +1,7 @@
 <script setup>
 import { onBeforeMount, ref } from 'vue'
 import { VueFlow, useVueFlow } from '@vue-flow/core'
-import { fetchNodesAsync } from '../infrastructure/DatabaseService.ts'
+import { fetchDataAsync } from '../infrastructure/DatabaseService.ts'
 import TransitionEdge from './TransitionEdge.vue'
 import NodeOnly from './Nodes/NodeOnly.vue'
 import Header from './Header.vue'
@@ -21,6 +21,7 @@ function parseNodes(data) {
       data: {
         icon: node.icon,
         label: node.name,
+        slug: node.slug,
         showNodes: Array.isArray(node.showNodes) ? node.showNodes : JSON.parse(node.showNodes),
       },
     });
@@ -59,7 +60,7 @@ function calculateEdges() {
 }
 
 onBeforeMount(async () => {
-  fetchNodesAsync()
+  fetchDataAsync('nodes')
     .then((response) => parseNodes(response))
     .then(() => setTimeout(renderStartingNodes, 1000))
     .then(() => setTimeout(calculateEdges, 1750))
