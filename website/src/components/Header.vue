@@ -29,7 +29,25 @@ const linkedNodes = computed(() => {
 })
 
 function navigateToNode(id) {
-  console.log('navigateToNode', id)
+  const node = nodes.value.find(node => node.id === id)
+  if (!node) return
+
+  let showNodes = Array.isArray(node.data.showNodes)
+                    ? node.data.showNodes
+                    : JSON.parse(node.data.showNodes);
+
+  showNodes.push(node.id);
+  showNodes.push(node.parent);
+
+  setNodesVisible(showNodes);
+
+  setTimeout(() => {
+    fitView({
+      nodes: showNodes,
+      duration: 500,
+      includeHiddenNodes: true,
+    })
+  }, 50)
 }
 </script>
 
