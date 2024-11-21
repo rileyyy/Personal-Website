@@ -4,6 +4,7 @@ import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { fetchNodesAsync } from '../infrastructure/DatabaseService.ts'
 import TransitionEdge from './TransitionEdge.vue'
 import NodeOnly from './Nodes/NodeOnly.vue'
+import Header from './Header.vue'
 
 const { fitView } = useVueFlow()
 
@@ -85,6 +86,7 @@ export function setNodesVisible(showNodes) {
 </script>
 
 <template>
+  <Header />
   <VueFlow
     v-model:nodes="nodes"
     v-model:edges="edges"
