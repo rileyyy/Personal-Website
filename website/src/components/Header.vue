@@ -13,20 +13,24 @@
 <script setup>
 import { computed } from 'vue'
 import { useVueFlow } from '@vue-flow/core'
-import { setNodesVisible } from './Home.vue'
+import { nodes, setNodesVisible } from './Home.vue'
 
-const { fitView, nodes } = useVueFlow()
+const { fitView } = useVueFlow()
 
 const homeNode = computed(() => nodes.value.find(node => node.id === 'Home'))
 const linkedNodes = computed(() => {
-  if (!homeNode.value || !homeNode.value.data.showNodes)
-   return []
+  if (!homeNode.value || !homeNode.value.data.showNodes) return [];
 
-   return [homeNode.value,
-    ...homeNode.value.data.showNodes
-        .map(id => nodes.value.find(node => node && node.id === id))
-        .filter(node => node)]
-})
+  const uniqueNodes = new Set();
+  uniqueNodes.add(homeNode.value);
+
+  homeNode.value.data.showNodes
+    .map(id => nodes.value.find(node => node && node.id === id))
+    .filter(node => node)
+    .forEach(node => uniqueNodes.add(node));
+
+  return Array.from(uniqueNodes);
+});
 
 function navigateToNode(id) {
   const node = nodes.value.find(node => node.id === id)
