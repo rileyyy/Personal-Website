@@ -13,8 +13,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useVueFlow } from '@vue-flow/core'
-import { nodes, setNodesVisible } from './Home.vue'
-import { fetchDataAsync } from '../infrastructure/DatabaseService.ts'
+import { nodes, setNodesVisible, updateNodeCollection } from './Home.vue'
 
 const { fitView } = useVueFlow()
 
@@ -58,7 +57,7 @@ function navigateToNode(id) {
 function queryData (node)
 {
   if (node.data.slug) {
-    fetchDataAsync(node.data.slug)
+    updateNodeCollection(props.data.slug)
   }
 }
 </script>

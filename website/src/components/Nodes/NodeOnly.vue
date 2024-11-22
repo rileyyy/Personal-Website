@@ -14,7 +14,7 @@
 
 <script setup>
 import { Handle, Position } from '@vue-flow/core'
-import { fetchDataAsync } from '../../infrastructure/DatabaseService.ts'
+import { updateNodeCollection } from '../Home.vue'
 
 const props = defineProps({
   id: {
@@ -30,7 +30,7 @@ const props = defineProps({
 function queryData ()
 {
   if (props.data.slug) {
-    fetchDataAsync(props.data.slug)
+    updateNodeCollection(props.data.slug)
   }
 }
 </script>
