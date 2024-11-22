@@ -30,7 +30,6 @@ const props = defineProps({
 function queryData ()
 {
   if (props.data.slug) {
-    console.log('Querying data for slug:', props.data.slug)
     fetchDataAsync(props.data.slug)
   }
 }

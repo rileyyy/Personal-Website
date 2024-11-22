@@ -3,7 +3,7 @@
     <nav>
       <ul class="nodes">
         <li class="nodeElements" v-for="node in linkedNodes" :key="node.id">
-          <a class="nodeLink" @click="navigateToNode(node.id)">// {{ node.id }}</a>
+          <a class="nodeLink" @mouseenter.once="queryData(node)" @click="navigateToNode(node.id)">// {{ node.id }}</a>
         </li>
       </ul>
     </nav>
@@ -14,6 +14,7 @@
 import { computed } from 'vue'
 import { useVueFlow } from '@vue-flow/core'
 import { nodes, setNodesVisible } from './Home.vue'
+import { fetchDataAsync } from '../infrastructure/DatabaseService.ts'
 
 const { fitView } = useVueFlow()
 
@@ -52,6 +53,13 @@ function navigateToNode(id) {
       includeHiddenNodes: true,
     })
   }, 50)
+}
+
+function queryData (node)
+{
+  if (node.data.slug) {
+    fetchDataAsync(node.data.slug)
+  }
 }
 </script>
 
