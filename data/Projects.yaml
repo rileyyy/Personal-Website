@@ -1,4 +1,4 @@
-version: 0.0.3
+version: 0.0.4
 
 data:
   - name: "Personal Website"
@@ -15,7 +15,7 @@ data:
 
   - name: "WakePy"
     link: "https://github.com/fohrloop/wakepy"
-    description: "I provided some early contributions to add Apple and Linux support. then added it for use in the Lake Shore python driver to facilitate long running communications to our instruments."
+    description: "I provided early contributions to add Apple and Linux device support, then added it for use in the Lake Shore python driver to facilitate long running communications to our instruments."
     technologies:
       - Python
     images: []
