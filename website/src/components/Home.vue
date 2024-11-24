@@ -84,6 +84,38 @@ export function setNodesVisible(showNodes) {
       n.hidden = false;
   });
 }
+export function updateNodeCollection(nodeId) {
+  let node = nodes.value.find((n) => n.id === nodeId);
+
+  if (!node || !node.data.slug) {
+    return;
+  }
+
+  fetchDataAsync(node.data.slug)
+  .then((response) => {
+    console.log(response);
+
+    response.forEach((entry) => {
+      let parentNode = nodes.value.find((n) => n.id === entry.parentNode);
+      parentNode.data.showNodes.push(entry.name);
+
+      let newNode = {
+        id: entry.name,
+        position: { x: entry.position[0], y: entry.position[1] },
+        parent: entry.parentNode,
+        type: getNodeTypeFromParent(parentNode),
+        data: {
+          icon: entry.icon,
+          showNodes: entry.showNodes ?
+          Array.isArray(entry.showNodes) ? entry.showNodes : JSON.parse(entry.showNodes) : null,
+        },
+      };
+      addNodeSpecificData(newNode, entry);
+      nodes.value.push(newNode);
+    });
+  });
+}
+
 </script>
 
 <template>

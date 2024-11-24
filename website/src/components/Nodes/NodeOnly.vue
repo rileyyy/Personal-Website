@@ -1,5 +1,5 @@
 <template>
-  <div class="node-only" @mouseenter.once="queryData">
+  <div class="node-only" @mouseenter.once="updateNodeCollection(id)">
     <span class="material-symbols-outlined">
       {{ data.icon }}
     </span>
@@ -26,13 +26,6 @@ const props = defineProps({
     required: true,
   },
 })
-
-function queryData ()
-{
-  if (props.data.slug) {
-    updateNodeCollection(props.data.slug)
-  }
-}
 </script>
 
 <style>

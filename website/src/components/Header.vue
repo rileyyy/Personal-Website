@@ -3,7 +3,7 @@
     <nav>
       <ul class="nodes">
         <li class="nodeElements" v-for="node in linkedNodes" :key="node.id">
-          <a class="nodeLink" @mouseenter.once="queryData(node)" @click="navigateToNode(node.id)">// {{ node.id }}</a>
+          <a class="nodeLink" @mouseenter.once="updateNodeCollection(node.id)" @click="navigateToNode(node)">// {{ node.id }}</a>
         </li>
       </ul>
     </nav>
@@ -52,13 +52,6 @@ function navigateToNode(id) {
       includeHiddenNodes: true,
     })
   }, 50)
-}
-
-function queryData (node)
-{
-  if (node.data.slug) {
-    updateNodeCollection(props.data.slug)
-  }
 }
 </script>
 
