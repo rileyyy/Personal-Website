@@ -305,6 +305,9 @@ public class IntegrityService
       var newProject = new Project
       {
         Name = project["name"].ToString()!,
+        Icon = project["icon"].ToString()!,
+        ParentNode = project["parentNode"].ToString()!,
+        Position = ((List<object>)project["position"]).Select(x => Convert.ToInt32(x)).ToArray(),
         Link = project["link"].ToString(),
         Description = project["description"].ToString(),
         Technologies = ((List<object>)project["technologies"]).Cast<string>().ToList(),

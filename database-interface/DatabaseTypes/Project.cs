@@ -14,6 +14,12 @@ public class Project
   [BsonElement("name")]
   public required string Name { get; set; }
 
+  public required string Icon { get; set; }
+
+  public required string ParentNode { get; set; }
+
+  public required int[] Position { get; set; }
+
   [BsonElement("link")]
   public string? Link { get; set; }
 
