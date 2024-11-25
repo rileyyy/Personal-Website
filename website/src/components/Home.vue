@@ -27,7 +27,11 @@ onBeforeMount(async () => {
   fetchDataAsync('nodes')
     .then((response) => parseNodes(response))
     .then(() => setTimeout(renderStartingNodes, 1000))
-    .then(() => setTimeout(calculateEdges, 1750))
+    .then(() => setTimeout(() => {
+      nodes.value.forEach((node) => {
+        updateChildEdges(node);
+      });
+    }, 1750))
 });
 </script>
 
@@ -68,24 +72,6 @@ export function parseNodes(data) {
   });
 }
 
-export function calculateEdges() {
-  nodes.value.forEach((node) => {
-    if (Array.isArray(node.data.showNodes)) {
-      node.data.showNodes.forEach((showNode) => {
-        edges.value.push({
-          source: node.id,
-          target: showNode,
-          type: 'custom',
-          style: {
-            stroke: '#fff',
-            strokeWidth: 2,
-          },
-        });
-      });
-    }
-  });
-}
-
 export function updateNodeCollection(nodeId) {
   let node = nodes.value.find((n) => n.id === nodeId);
 
@@ -114,10 +100,28 @@ export function updateNodeCollection(nodeId) {
       };
       addNodeSpecificData(newNode, entry);
       nodes.value.push(newNode);
+
+      updateChildEdges(parentNode);
     });
   });
 }
 
+function updateChildEdges(node) {
+  if (!Array.isArray(node.data.showNodes))
+    return;
+
+  node.data.showNodes.forEach((showNode) => {
+    edges.value.push({
+      source: node.id,
+      target: showNode,
+      type: 'custom',
+      style: {
+        stroke: '#fff',
+        strokeWidth: 2,
+      },
+    });
+  });
+}
 
 function getNodeTypeFromParent(parentNode) {
   switch(parentNode.id) {
