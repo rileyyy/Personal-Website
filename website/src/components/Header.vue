@@ -32,8 +32,7 @@ const linkedNodes = computed(() => {
   return Array.from(uniqueNodes);
 });
 
-function navigateToNode(id) {
-  const node = nodes.value.find(node => node.id === id)
+function navigateToNode(node) {
   if (!node) return
 
   let showNodes = Array.isArray(node.data.showNodes)
