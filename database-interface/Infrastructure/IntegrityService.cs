@@ -20,7 +20,7 @@ public class IntegrityService
   private readonly ProjectController projectController;
   private readonly SkillController skillController;
   private readonly EducationController educationController;
-  private readonly BlogController blogController;
+  private readonly JournalController journalController;
   private readonly ILogger<IntegrityService> logger;
 
   private readonly FileSystemWatcher watcher = new FileSystemWatcher
@@ -30,16 +30,16 @@ public class IntegrityService
     Filter = "*.yaml",
     EnableRaisingEvents = true,
   };
-  private readonly FileSystemWatcher blogWatcher = new FileSystemWatcher
+  private readonly FileSystemWatcher journalWatcher = new FileSystemWatcher
   {
-    Path = "/data/blogs",
+    Path = "/data/journals",
     NotifyFilter = NotifyFilters.LastWrite,
     Filter = "*.yaml",
     EnableRaisingEvents = true,
   };
 
   private bool isCheckingIntegrity = false;
-  private bool isCheckingBlogIntegrity = false;
+  private bool isCheckingJournalIntegrity = false;
   private DateTime lastEventTime = DateTime.MinValue;
   private readonly TimeSpan debounceTime = TimeSpan.FromSeconds(5);
 
@@ -50,7 +50,7 @@ public class IntegrityService
     ProjectController projectController,
     SkillController skillController,
     EducationController educationController,
-    BlogController blogController,
+    JournalController journalController,
     ILogger<IntegrityService> logger)
   {
     this.integrityController = integrityController;
@@ -59,7 +59,7 @@ public class IntegrityService
     this.projectController = projectController;
     this.skillController = skillController;
     this.educationController = educationController;
-    this.blogController = blogController;
+    this.journalController = journalController;
     this.logger = logger;
   }
 
@@ -67,15 +67,15 @@ public class IntegrityService
   {
     this.logger.LogInformation("Integrity service started");
     this.watcher.Changed += OnChanged;
-    this.blogWatcher.Changed += OnChanged;
+    this.journalWatcher.Changed += OnChanged;
     this.CheckIntegrity();
-    this.CheckBlogIntegrity();
+    this.CheckJournalIntegrity();
   }
 
   public void StopDataMonitor()
   {
     this.watcher.Changed -= OnChanged;
-    this.blogWatcher.Changed -= OnChanged;
+    this.journalWatcher.Changed -= OnChanged;
   }
 
   private void OnChanged(object sender, FileSystemEventArgs e)
@@ -86,7 +86,7 @@ public class IntegrityService
       this.lastEventTime = currentTime;
       this.logger.LogInformation("Data change detected: {0}", e.FullPath);
       this.CheckIntegrity();
-      this.CheckBlogIntegrity();
+      this.CheckJournalIntegrity();
     }
   }
 
@@ -160,26 +160,26 @@ public class IntegrityService
     this.isCheckingIntegrity = false;
   }
 
-  public async void CheckBlogIntegrity()
+  public async void CheckJournalIntegrity()
   {
-    if (this.isCheckingBlogIntegrity) return;
-    this.isCheckingBlogIntegrity = true;
+    if (this.isCheckingJournalIntegrity) return;
+    this.isCheckingJournalIntegrity = true;
 
     var integrityRecords = (await this.integrityController.GetIntegrity()).ToList();
-    foreach (var file in Directory.GetFiles("/data/blogs", "*.yaml"))
+    foreach (var file in Directory.GetFiles("/data/journals", "*.yaml"))
     {
       var fileName = Path.GetFileNameWithoutExtension(file);
       var fileText = File.ReadAllText(file);
       var hash = fileText.GetHashCode().ToString();
 
-      var integrityVersion = integrityRecords.FirstOrDefault(r => r.Name == $"Blog-{fileName}")?.Version;
+      var integrityVersion = integrityRecords.FirstOrDefault(r => r.Name == $"Journal-{fileName}")?.Version;
       if (hash == integrityVersion)
       {
         continue;
       }
 
       var yaml = this.ParseYaml(fileText);
-      var blog = new Blog
+      var journal = new Journal
       {
         FileId = Convert.ToInt32(yaml["id"]),
         Tags = ((List<object>)yaml["tags"]).Cast<string>().ToList(),
@@ -190,28 +190,28 @@ public class IntegrityService
                     : null,
       };
 
-      var existingBlog = await this.blogController.GetByFileId(blog.FileId);
-      if (existingBlog is null)
+      var existingJournal = await this.journalController.GetByFileId(journal.FileId);
+      if (existingJournal is null)
       {
-        this.logger.LogInformation($"Creating blog {fileName}");
-        await this.blogController.CreateBlog(blog);
+        this.logger.LogInformation($"Creating journal {fileName}");
+        await this.journalController.CreateJournal(journal);
       }
-      else if (existingBlog.Equals(blog))
+      else if (existingJournal.Equals(journal))
       {
         this.logger.LogInformation($"No changes detected for {fileName}");
         continue;
       }
       else
       {
-        blog.Id = existingBlog.Id;
-        this.logger.LogInformation($"Updating blog {fileName}");
-        await this.blogController.UpdateBlog(existingBlog.Id.ToString(), blog);
+        journal.Id = existingJournal.Id;
+        this.logger.LogInformation($"Updating journal {fileName}");
+        await this.journalController.UpdateJournal(existingJournal.Id.ToString(), journal);
       }
 
-      await this.UpdateIntegrityRecord($"Blog-{fileName}", hash);
+      await this.UpdateIntegrityRecord($"Journal-{fileName}", hash);
     }
 
-    this.isCheckingBlogIntegrity = false;
+    this.isCheckingJournalIntegrity = false;
   }
 
   private async Task UpdateNodesCollection(List<object> data)

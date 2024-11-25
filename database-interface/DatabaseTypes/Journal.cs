@@ -6,7 +6,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace DatabaseInterface.DatabaseTypes;
 
-public class Blog
+public class Journal
 {
   [BsonId]
   [BsonElement("_id")]
@@ -34,12 +34,12 @@ public class Blog
       return false;
     }
 
-    var blog = (Blog)obj;
-    return FileId == blog.FileId &&
-           Title == blog.Title &&
-           Content == blog.Content &&
-           Tags.SequenceEqual(blog.Tags) &&
-           ListDate == blog.ListDate;
+    var journal = (Journal)obj;
+    return FileId == journal.FileId &&
+           Title == journal.Title &&
+           Content == journal.Content &&
+           Tags.SequenceEqual(journal.Tags) &&
+           ListDate == journal.ListDate;
   }
 
   public override int GetHashCode() =>

@@ -1,4 +1,4 @@
-version: 0.5.1
+version: 0.5.2
 
 data:
   - name: "Home"
@@ -10,7 +10,7 @@ data:
       - "Resume"
       - "Projects"
       - "Contact"
-      - "Rambles"
+      - "Journals"
 
   # Layer 2 Nodes - Home
   - name: "Resume"
@@ -41,9 +41,9 @@ data:
       - "Phone"
       - "Smoke Signals"
 
-  - name: "Rambles"
+  - name: "Journals"
     icon: "Two_Pager"
-    slug: "blogs/listed"
+    slug: "journals/listed"
     parentNode: "Home"
     position: [-300, -300]
     nodeType: "NodeOnly"

@@ -29,7 +29,7 @@ builder.Services.AddSingleton<EmploymentController>();
 builder.Services.AddSingleton<ProjectController>();
 builder.Services.AddSingleton<SkillController>();
 builder.Services.AddSingleton<EducationController>();
-builder.Services.AddSingleton<BlogController>();
+builder.Services.AddSingleton<JournalController>();
 
 builder.Services.AddSingleton<IntegrityService>();
 builder.Services.AddSingleton<MongoService>();
