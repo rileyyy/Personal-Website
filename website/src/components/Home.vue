@@ -5,6 +5,7 @@ import { fetchDataAsync } from '../infrastructure/DatabaseService.ts'
 import TransitionEdge from './TransitionEdge.vue'
 import NodeOnly from './Nodes/NodeOnly.vue'
 import Header from './Header.vue'
+import JournalNode from './Nodes/JournalNode.vue'
 import ProjectNode from './Nodes/ProjectNode.vue'
 
 const { fitView } = useVueFlow()
@@ -73,24 +74,26 @@ export function parseNodes(data) {
 }
 
 export function updateNodeCollection(nodeId) {
-  let node = nodes.value.find((n) => n.id === nodeId);
+  let parentNode = nodes.value.find((n) => n.id === nodeId);
 
-  if (!node || !node.data.slug) {
+  if (!parentNode || !parentNode.data.slug) {
     return;
   }
 
-  fetchDataAsync(node.data.slug)
+  fetchDataAsync(parentNode.data.slug)
   .then((response) => {
-    console.log(response);
-
     response.forEach((entry) => {
-      let parentNode = nodes.value.find((n) => n.id === entry.parentNode);
+      if (!parentNode.data.showNodes) {
+        parentNode.data.showNodes = [];
+      }
       parentNode.data.showNodes.push(entry.name);
 
       let newNode = {
-        id: entry.name,
-        position: { x: entry.position[0], y: entry.position[1] },
-        parent: entry.parentNode,
+        id: entry.name ? entry.name : entry.title,
+        position: entry.position
+          ? { x: entry.position[0], y: entry.position[1] }
+          : CalculateSubPosition(parentNode),
+        parent: parentNode,
         type: getNodeTypeFromParent(parentNode),
         data: {
           icon: entry.icon,
@@ -123,9 +126,23 @@ function updateChildEdges(node) {
   });
 }
 
+function CalculateSubPosition(parentNode) {
+  let homeNode = nodes.value.find((n) => n.id === 'Home');
+  let parentPosition = parentNode.position;
+  let numberOfChildren = parentNode.data.showNodes.length;
+
+  // Calculate the position of the new node based on the parent node and number of children
+  return {
+    x: parentPosition.x < homeNode.position.x
+        ? parentPosition.x - 200
+        : parentPosition.x + 200,
+    y: parentPosition.y + (numberOfChildren * 200),
+  };
+}
+
 function getNodeTypeFromParent(parentNode) {
   switch(parentNode.id) {
-    case 'Journal':   return 'JournalNode';
+    case 'Journals':   return 'JournalNode';
     case 'Projects':  return 'ProjectNode';
     default:          return 'NodeOnly';
 
@@ -162,7 +179,7 @@ function addNodeSpecificData(newNode, entry) {
     v-model:edges="edges"
     class="transition-flow"
     :fit-view-on-init="true"
-    :node-types="{NodeOnly: NodeOnly, ProjectNode: ProjectNode}">
+    :node-types="{NodeOnly: NodeOnly, ProjectNode: ProjectNode, JournalNode: JournalNode}">
 
     <template #edge-custom="props">
       <TransitionEdge v-bind="props" />
@@ -170,6 +187,10 @@ function addNodeSpecificData(newNode, entry) {
 
     <template #nodeOnly="props">
       <NodeOnly :id="props.id" :data="props.data"/>
+    </template>
+
+    <template #journalNode="props">
+      <JournalNode :id="props.id" :data="props.data"/>
     </template>
 
     <template #projectNode="props">
