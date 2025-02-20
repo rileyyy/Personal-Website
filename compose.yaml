@@ -21,8 +21,8 @@ services:
           target: /app/website/package.json
     ports:
       - "5173:5173"
-    depends_on:
-      - asp-net
+    # depends_on:
+    #   - asp-net
     environment:
       - NODE_ENV=${ENVIRONMENT}
     volumes:
@@ -51,6 +51,8 @@ services:
       - mongodb_password
     volumes:
       - ./data:/data
+    profiles:
+      - backend
 
   mongodb:
     image: mongo
@@ -70,6 +72,8 @@ services:
       - mongodb_password
     volumes:
       - ./docker/mongodb_data:/data/db
+    profiles:
+      - database
 
 networks:
   asp-mongodb:
