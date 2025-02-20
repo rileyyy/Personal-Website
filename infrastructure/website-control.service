@@ -1,0 +1,14 @@
+[Unit]
+Description=Website Hosting Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+WorkingDirectory=/home/Personal-Website
+ExecStart=/usr/local/bin/docker-compose up
+ExecStop=/usr/local/bin/docker-compose down
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
