@@ -27,6 +27,7 @@ services:
       - NODE_ENV=${ENVIRONMENT}
     volumes:
       - ./:/app  # Volume mount for dev mode
+      - /app/website/node_modules # don't overwrite node_modules from local
     # command: tail -f /dev/null  # Keep container running
   
   asp-net:
