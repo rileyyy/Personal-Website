@@ -70,7 +70,6 @@ services:
       - mongodb_password
     volumes:
       - ./docker/mongodb_data:/data/db
-      # - ./docker/mongodb_init.js:/docker-entrypoint-initdb.d/mongodb_init.js
 
 networks:
   asp-mongodb:

@@ -1,11 +1,16 @@
-<script setup>
-import Home from './components/Home.vue'
-</script>
-
 <template>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <Home />
+  <h1>Coming Soon!</h1>
 </template>
 
+<script setup>
+</script>
+
 <style>
+h1 {
+  color: var(--accent-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 </style>

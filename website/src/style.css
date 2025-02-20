@@ -5,13 +5,11 @@
 @import 'https://cdn.jsdelivr.net/npm/@vue-flow/node-resizer@latest/dist/style.css';
 
 :root {
-  --sea-green: #048841ff;
-  --night: #101110ff;
-  --eerie-black: #121312;
-  --charcoal: #093c50ff;
-  --air-force-blue: #5783a2ff;
-  --cadet-gray: #97a3b0ff;
-  --gunmetal: #0d2730ff;
+--accent-primary: #007acc;
+--black-one: #3e3e42;
+--black-two: #2d2d30;
+--black-three: #252526;
+--slightly-darker-black: #1e1e1e;
 }
 
 html,
@@ -19,6 +17,7 @@ body,
 #app {
   margin: 0;
   height: 100%;
+  background-color: var(--slightly-darker-black);
 }
 
 #app {

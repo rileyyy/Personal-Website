@@ -134,9 +134,9 @@ function CalculateSubPosition(parentNode) {
   // Calculate the position of the new node based on the parent node and number of children
   return {
     x: parentPosition.x < homeNode.position.x
-        ? parentPosition.x - 200
-        : parentPosition.x + 200,
-    y: parentPosition.y + (numberOfChildren * 200),
+        ? parentPosition.x - 400
+        : parentPosition.x + 400,
+    y: parentPosition.y + (numberOfChildren * 80),
   };
 }
 
