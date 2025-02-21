@@ -1,16 +1,29 @@
 <template>
-  <h1>Coming Soon!</h1>
+  <div class="app-container">
+    <Sidebar />
+    <div class="main-content">
+      <RouterView />
+    </div>
+    <StatusBar />
+  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+import Sidebar from './components/Sidebar.vue';
+import StatusBar from './components/StatusBar.vue';
 </script>
 
-<style>
-h1 {
-  color: var(--accent-primary);
+<style scoped>
+.app-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
+  background-color: var(--black-three);
+  color: #D4D4D4;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 16px;
 }
 </style>

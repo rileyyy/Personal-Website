@@ -6,23 +6,27 @@
 
 :root {
 --accent-primary: #007acc;
+
+--line-break: #3c3c3c;
+
 --black-one: #3e3e42;
 --black-two: #2d2d30;
---black-three: #252526;
---slightly-darker-black: #1e1e1e;
+--black-three: #1f1f1f;
+--slightly-darker-black: #181818;
 }
 
 html,
 body,
 #app {
   margin: 0;
+  padding: 0;
   height: 100%;
+  width: 100vw;
   background-color: var(--slightly-darker-black);
 }
 
 #app {
-  text-transform: uppercase;
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'Menlo';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
