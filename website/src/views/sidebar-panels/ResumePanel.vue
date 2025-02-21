@@ -176,7 +176,7 @@ const toggleSection = (name: string) => {
 
 <style scoped>
 .resume-panel {
-  color: #D4D4D4;
+  color: var(--text-default);
   font-size: 14px;
   width: 100%;
   height: 95%;

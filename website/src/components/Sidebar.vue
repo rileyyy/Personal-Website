@@ -4,11 +4,10 @@
       <button
         v-for="item in sidebarItems"
         :key="item.view"
-        :class="{ active: activeView === item.view }"
         @click="toggleSidebar(item.view)">
 
         <div class="active-indicator" v-if="activeView === item.view"></div>
-        <component :is="item.icon" />
+        <component :is="item.icon" :class="{ active: activeView === item.view }"/>
       </button>
     </div>
 
@@ -33,7 +32,6 @@ interface SidebarItem {
   component: DefineComponent | null;
 }
 
-const route = useRoute();
 const activeView = ref<string | null>(null);
 
 const sidebarItems: SidebarItem[] = [
@@ -84,6 +82,10 @@ const activeComponent = computed(() => {
   cursor: pointer;
   transition: background 0.2s;
   color: #b3b3b3;
+}
+
+.active {
+  color: var(--text-default);
 }
 
 .icon-bar button:hover{

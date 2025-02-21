@@ -19,7 +19,7 @@ import StatusBar from './components/StatusBar.vue';
   display: flex;
   height: 100vh;
   background-color: var(--black-three);
-  color: #D4D4D4;
+  color: var(--text-default);
 }
 
 .main-content {

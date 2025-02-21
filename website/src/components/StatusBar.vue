@@ -20,7 +20,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  color: white;
+  color: var(--text-default);
   border-top: 1px solid var(--line-break);
 }
 
