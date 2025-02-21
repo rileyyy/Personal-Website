@@ -23,6 +23,7 @@ import { useRoute } from 'vue-router';
 import { BriefcaseBusiness, House, Folder, Braces, Contact } from 'lucide-vue-next';
 
 import ResumePanel from "../views/sidebar-panels/ResumePanel.vue";
+import ProjectsPanel from '../views/sidebar-panels/ProjectsPanel.vue';
 
 
 interface SidebarItem {
@@ -37,7 +38,7 @@ const activeView = ref<string | null>(null);
 const sidebarItems: SidebarItem[] = [
   { name: 'Home', icon: House, view: '', component: null },
   { name: 'Resume', icon: BriefcaseBusiness, view: 'resume', component: ResumePanel as DefineComponent },
-  { name: 'Projects', icon: Folder, view: 'projects', component: null },
+  { name: 'Projects', icon: Folder, view: 'projects', component: ProjectsPanel as DefineComponent },
   { name: 'Skills', icon: Braces, view: 'skills', component: null },
   { name: 'Contact', icon: Contact, view: 'contact', component: null },
 ];
