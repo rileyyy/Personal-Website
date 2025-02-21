@@ -142,6 +142,5 @@ const projects = ref([
   height: 14px;
   cursor: pointer;
   opacity: 0.8;
-  transition: opacity 0.2s ease-in-out;
 }
 </style>
