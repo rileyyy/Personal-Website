@@ -31,7 +31,7 @@ const resumeSections = ref([
     entries: [
       {
         icon: 'graphql',
-        slug: '/projects',
+        slug: '/education/cnu',
         info: 'B.S. Computer Science'
       },
       {

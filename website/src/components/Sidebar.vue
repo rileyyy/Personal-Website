@@ -1,17 +1,14 @@
 <template>
   <div class="sidebar-container">
     <div class="icon-bar">
-      <button
-        v-for="item in sidebarItems"
-        :key="item.view"
-        @click="toggleSidebar(item.view)">
+      <button v-for="item in sidebarItems" :key="item.view" @click="changeSidebarOrNavigate(item)">
 
         <div class="active-indicator" v-if="activeView === item.view"></div>
-        <component :is="item.icon" :class="{ active: activeView === item.view }"/>
+        <component :is="item.icon" :class="{ active: activeView === item.view }" />
       </button>
     </div>
 
-    <div class="details-panel" v-if="activeView">
+    <div class="details-panel" v-if="activeView && activeComponent">
       <component :is="activeComponent" />
     </div>
   </div>
@@ -19,32 +16,68 @@
 
 <script setup lang="ts">
 import { ref, computed, DefineComponent } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { BriefcaseBusiness, House, Folder, Braces, Contact } from 'lucide-vue-next';
 
 import ResumePanel from "../views/sidebar-panels/ResumePanel.vue";
 import ProjectsPanel from '../views/sidebar-panels/ProjectsPanel.vue';
-
 
 interface SidebarItem {
   name: string;
   icon: any;
   view: string;
   component: DefineComponent | null;
+  slug: string | null;
 }
 
+const router = useRouter();
 const activeView = ref<string | null>(null);
 
 const sidebarItems: SidebarItem[] = [
-  { name: 'Home', icon: House, view: '', component: null },
-  { name: 'Resume', icon: BriefcaseBusiness, view: 'resume', component: ResumePanel as DefineComponent },
-  { name: 'Projects', icon: Folder, view: 'projects', component: ProjectsPanel as DefineComponent },
-  { name: 'Skills', icon: Braces, view: 'skills', component: null },
-  { name: 'Contact', icon: Contact, view: 'contact', component: null },
+  {
+    name: 'Home',
+    icon: House,
+    view: '',
+    component: null,
+    slug: '/',
+  },
+  {
+    name: 'Resume',
+    icon: BriefcaseBusiness,
+    view: 'resume',
+    component: ResumePanel as DefineComponent,
+    slug: null,
+  },
+  {
+    name: 'Projects',
+    icon: Folder,
+    view: 'projects',
+    component: ProjectsPanel as DefineComponent,
+    slug: null,
+  },
+/*  {
+    name: 'Skills',
+    icon: Braces,
+    view: 'skills',
+    component: null,
+    slug: '/',b
+  }, */
+  {
+    name: 'Contact',
+    icon: Contact,
+    view: 'contact',
+    component: null,
+    slug: '/contact',
+  },
 ];
 
-const toggleSidebar = (view: string) => {
-  activeView.value = activeView.value === view ? null : view;
+const changeSidebarOrNavigate = (item: SidebarItem) => {
+  if (item.component) {
+    activeView.value = item.view;
+  }
+  else {
+    router.push(item.slug ?? '/');
+  }
 };
 
 const activeComponent = computed(() => {
@@ -89,7 +122,7 @@ const activeComponent = computed(() => {
   color: var(--text-default);
 }
 
-.icon-bar button:hover{
+.icon-bar button:hover {
   color: white;
 }
 
