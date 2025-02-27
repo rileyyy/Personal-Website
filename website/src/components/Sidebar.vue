@@ -55,13 +55,6 @@ const sidebarItems: SidebarItem[] = [
     component: ProjectsPanel as DefineComponent,
     slug: null,
   },
-/*  {
-    name: 'Skills',
-    icon: Braces,
-    view: 'skills',
-    component: null,
-    slug: '/',b
-  }, */
   {
     name: 'Contact',
     icon: Contact,
@@ -72,10 +65,8 @@ const sidebarItems: SidebarItem[] = [
 ];
 
 const changeSidebarOrNavigate = (item: SidebarItem) => {
-  if (item.component) {
-    activeView.value = item.view;
-  }
-  else {
+  activeView.value = item.view;
+  if (item.slug) {
     router.push(item.slug ?? '/');
   }
 };
