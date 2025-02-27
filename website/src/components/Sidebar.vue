@@ -1,10 +1,10 @@
 <template>
   <div class="sidebar-container">
     <div class="icon-bar">
-      <button v-for="item in sidebarItems" :key="item.view" @click="changeSidebarOrNavigate(item)">
+      <button v-for="item in sidebarItems" :key="item.name" @click="changeSidebarOrNavigate(item)">
 
-        <div class="active-indicator" v-if="activeView === item.view"></div>
-        <component :is="item.icon" :class="{ active: activeView === item.view }" />
+        <div class="active-indicator" v-if="activeView === item.name"></div>
+        <component :is="item.icon" :class="{ active: activeView === item.name }" />
       </button>
     </div>
 
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { ref, computed, DefineComponent } from 'vue';
 import { useRouter } from 'vue-router';
-import { BriefcaseBusiness, House, Folder, Braces, Contact } from 'lucide-vue-next';
+import { BriefcaseBusiness, House, Folder, Contact } from 'lucide-vue-next';
 
 import ResumePanel from "../views/sidebar-panels/ResumePanel.vue";
 import ProjectsPanel from '../views/sidebar-panels/ProjectsPanel.vue';
@@ -31,7 +31,7 @@ interface SidebarItem {
 }
 
 const router = useRouter();
-const activeView = ref<string | null>(null);
+const activeView = ref<string | null>('Home');
 
 const sidebarItems: SidebarItem[] = [
   {
@@ -65,7 +65,7 @@ const sidebarItems: SidebarItem[] = [
 ];
 
 const changeSidebarOrNavigate = (item: SidebarItem) => {
-  activeView.value = item.view;
+  activeView.value = item.name;
   if (item.slug) {
     router.push(item.slug ?? '/');
   }
@@ -75,7 +75,7 @@ const activeComponent = computed(() => {
   if (activeView.value === null) {
     return null;
   } else {
-    return sidebarItems.find(item => item.view === activeView.value)?.component;
+    return sidebarItems.find(item => item.name === activeView.value)?.component;
   }
 });
 </script>
