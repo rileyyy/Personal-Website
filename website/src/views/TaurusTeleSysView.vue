@@ -8,7 +8,7 @@
           <h1 class="name">Taurus TeleSys, Inc</h1>
           <div class="detail-info">
             <Frown class="icon icon-accent" />
-            <a class="school-url" href="">no website</a>
+            <a class="school-url">no website</a>
             <p>|</p>
             <User class="icon" />
             <p>9</p>
@@ -51,8 +51,22 @@
           <br>
 
           <h3>Designed and built network layouts</h3>
-          <p> to adhere to strict timing requirements and reduced network traffic.
+          <p>
+            When I first started, there was exactly one fully configured simulator that needed to be shared with the Navy for actual training on certain days.
+            As the team grew and started to include more testing and documentation I designed and built 5 more simulators utilizing different combinations of virtual machines and real hardware.
+            This meant that there were systems for testing, development, documentation, training, and network experiments simultaniously.
+          </p>
 
+          <p>
+            Included in the work of designing and building these systems was reconfiguration of network layouts.
+            This allowed me to compress many streams of network traffic on multiple endpoints into single physical connections while maintaining network security.
+          </p>
+          <br>
+
+          <h3>Applied modern coding standards</h3>
+          <p>
+            In a solution of over 80 projects, half a dozen databases, and racks of hardware things can get a bit sloppy.
+            When that is compounded by a team of under ten, its easy to understand exactly how far coding standards can fall. We worked to apply modern coding standards such as reduced nesting, appropriate formatting, and better naming conventions.
           </p>
           <br>
 
@@ -64,30 +78,47 @@
           </p>
           <br>
 
-          <h3>Interfaced simulator with models and hardware</h3>
-          <p></p>
-          <br>
-
-          <h3>Applied modern coding standards</h3>
-          <p>
-            In a solution of over 80 projects, half a dozen databases, and racks of hardware things can get a bit sloppy.
-            When that is compounded by a team of under ten, its easy to understand exactly how far coding standards can fall. We worked to apply modern coding standards such as reducing nesting, appropriate formatting, and better naming conventions.
-          </p>
-          <br>
-
           <h3>Implemented unit, integration, and end-to-end testing</h3>
           <p>
-
+            When I started at Taurus there were exactly zero automated tests.
+            In fact, all validation was done by examining certain known data points in a "plug it in, and hope it works" mindset.
+            While there was room for tens of thousands of tests, we were able to get a few hundred of both unit and integration tests created within my time.
           </p>
           <br>
 
           <h3>Updated version control systems and created CI/CD pipelines</h3>
           <p>
-
+            At this point, if you aren't using git you're probably doing something wrong; and well, we were doing something very wrong.
+            Our version control was a rusty host sitting in the corner under a stack of random papers, boxes, and computers.
+            It would only stay powered on for about 8 hours at a time, and was BIOS locked with only one person knowing the password for years.
+            So instead when I started the other developer and I would keep a "deliverable" folder on our computer and work in a "working" folder.
+            Then when the changes were finished, we were each responsible to diff those changes into the "deliverable" folder, and them sync that to the other person's "deliverable" folder.
+            Then once a month or so when the SVN server was working someone would sync all of those changes into it.
           </p>
+          <p>
+            This was clearly wrought with issues.
+            So I took on the hefty task of converting our SVN repositories into git repositories while preserving the history.
+            That was over a decade of commit history and some of the commands took over an hour to run.
+          </p>
+          <p>
+            Along with that upgrade and the implementation of testing layers, we started to add official CI/CD pipelines.
+            Initially our delivery process was to run a series of batch files and burn a single read-only disc to hand deliver.
+            Every time there was a change to be made, it was another disc to be burned; which means that we could be burning up to 20 discs each day.
+          </p>
+
+          <h3>Interfaced simulator with models and hardware</h3>
+          <p>
+            Similar to API integrations, a simulator needs to communicate to several other systems.
+            Hardware interfaces are important for giving end-users the same physical controls the will use in the real system.
+            Interfacing with models is even more important as the model is what drives the real world data such as storage levels, temperatures, or pressures.
+          </p>
+          <br>
+
         </div>
         <div v-if="activeTab === 'deliverables'">
-          <p></p>
+          <h3>
+            Unfortunately this work was classified and heavily secure so I cannot provide examples at this time.
+          </h3>
         </div>
         <div v-if="activeTab === 'company'">
           <p>
@@ -285,6 +316,10 @@ const activeTab = ref("responsibilities");
 
 .tab-content h3 {
   padding-top: 8px;
+}
+
+.tab-content p {
+  margin: 4px 0 0 16px;
 }
 
 /* Meta-Data Sidebar */
