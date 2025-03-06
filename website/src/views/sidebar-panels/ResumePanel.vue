@@ -57,7 +57,7 @@ const resumeSections = ref([
       },
       {
         icon: 'robot',
-        slug: '',
+        slug: '/work/swisslog',
         info: 'Swisslog Logistics'
       }]
   },
