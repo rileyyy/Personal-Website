@@ -80,7 +80,7 @@
           <tr>
             <td>
               <a class="reference-link"
-                href="https://www.linkedin.com/edu/christopher-newport-university-19570">LinkedIn</a>
+                 href="https://www.linkedin.com/edu/christopher-newport-university-19570">LinkedIn</a>
             </td>
           </tr>
           <tr>
@@ -119,7 +119,6 @@ const activeTab = ref("overview");
 <style scoped>
 .education-container {
   background-color: var(--black-three);
-  width: 100vw;
   display: flex;
   padding: 60px;
   color: #ccc;
