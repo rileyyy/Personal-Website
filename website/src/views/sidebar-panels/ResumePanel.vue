@@ -36,7 +36,7 @@ const resumeSections = ref([
       },
       {
         icon: 'graphql',
-        slug: '/skills',
+        slug: '/education/cnu',
         info: 'B.S. Computer Engineering'
       }]
   },
@@ -47,12 +47,12 @@ const resumeSections = ref([
     entries: [
       {
         icon: 'test-js',
-        slug: '',
+        slug: '/work/lake-shore',
         info: 'Lake Shore Cryotronics'
       },
       {
         icon: 'rocket',
-        slug: '',
+        slug: '/work/taurus',
         info: 'Taurus TeleSys',
       },
       {

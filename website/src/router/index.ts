@@ -5,14 +5,20 @@ import ProjectsView from '../views/ProjectsView.vue';
 import SkillsView from '../views/SkillsView.vue';
 import ContactView from '../views/ContactView.vue';
 import CNUView from '../views/CNUView.vue';
+import LakeShoreView from '../views/LakeShoreView.vue';
+import TaurusTeleSysView from '../views/TaurusTeleSysView.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', component: HomeView },
+
   { path: '/resume', component: ResumeView },
+  { path: '/education/cnu', component: CNUView },
+  { path: '/work/lake-shore', component: LakeShoreView },
+  { path: '/work/taurus', component: TaurusTeleSysView },
+
   { path: '/projects', component: ProjectsView },
   { path: '/skills', component: SkillsView },
   { path: '/contact', component: ContactView },
-  { path: '/education/cnu', component: CNUView },
 ];
 
 const router = createRouter({

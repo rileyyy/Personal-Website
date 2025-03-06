@@ -37,43 +37,73 @@
       <section class="tab-content">
         <div v-if="activeTab === 'overview'">
           <h2>Who We Are</h2>
-          <p>At Christopher Newport University we care about minds and hearts. Our primary purpose is to form good
-            citizens and leaders. We believe real success is a life well lived. We want our students to choose to live
-            lives of meaning and consequence and purpose. We call that a life of significance.</p>
+          <p>At Christopher Newport University we care about minds and hearts.
+            Our primary purpose is to form good citizens and leaders.
+            We believe real success is a life well lived.
+            We want our students to choose to live lives of meaning and consequence and purpose.
+            We call that a life of significance.</p>
 
-          <p>Because we care about minds, our curriculum is based on the liberal arts and sciences. We emphasize the
-            study of leadership and have developed a nationally respected President's Leadership Program. Our core
-            curriculum is rigorous, cited by the American Council of Trustees and Alumni as the strongest core
+          <p>Because we care about minds, our curriculum is based on the liberal arts and sciences.
+            We emphasize the study of leadership and have developed a nationally respected President's Leadership
+            Program.
+            Our core curriculum is rigorous, cited by the American Council of Trustees and Alumni as the strongest core
             curriculum of any public college or university in America.</p>
 
-          <p>Because we care about hearts, our students perform thousands of hours of community service. We built a
-            chapel and celebrate our speaking tradition and honor code.</p>
+          <p>Because we care about hearts, our students perform thousands of hours of community service.
+            We built a chapel and celebrate our speaking tradition and honor code.</p>
 
-          <p>We want our students to lead, serve, engage and set the world on fire. That’s what makes Christopher
-            Newport special.</p>
-        </div>
-        <div v-if="activeTab === 'courses'">
-          <p>{{ university.courses }}</p>
-        </div>
-        <div v-if="activeTab === 'achievements'">
-          <p>{{ university.achievements }}</p>
+          <p>We want our students to lead, serve, engage and set the world on fire.
+            That’s what makes Christopher Newport special.</p>
         </div>
       </section>
 
       <!-- Meta-Data Sidebar -->
       <aside class="meta-sidebar">
-        <div class="meta-item">
-          <p class="label">📅 Graduation</p>
-          <p>{{ university.graduation }}</p>
-        </div>
-        <div class="meta-item">
-          <p class="label">🌍 Portfolio</p>
-          <a :href="university.portfolio" target="_blank">View Portfolio</a>
-        </div>
-        <div class="meta-item">
-          <p class="label">⭐ Honors</p>
-          <p>{{ university.honors }}</p>
-        </div>
+        <table class="meta-item">
+          <th>Degree</th>
+          <tr>
+            <td>B.S. Computer Science</td>
+            <td>2014</td>
+          </tr>
+          <tr>
+            <td>B.S. Computer Engineering</td>
+            <td>2014</td>
+          </tr>
+        </table>
+        <table class="meta-item">
+          <th>Resources</th>
+          <tr>
+            <td>
+              <a class="reference-link" href="https://cnu.edu">Website</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a class="reference-link"
+                href="https://www.linkedin.com/edu/christopher-newport-university-19570">LinkedIn</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a class="reference-link" href="https://www.facebook.com/christophernewportuniversity">Facebook</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a class="reference-link" href="http://instagram.com/christophernewportu">Instagram</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a class="reference-link" href="https://www.threads.net/@christophernewportu">Threads</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a class="reference-link" href="http://www.youtube.com/christophernewportu">Youtube</a>
+            </td>
+          </tr>
+        </table>
       </aside>
     </div>
   </div>
@@ -84,15 +114,6 @@ import { BadgeCheck, Star, StarHalf, User } from "lucide-vue-next";
 import { ref } from "vue";
 
 const activeTab = ref("overview");
-
-const university = {
-  graduation: "2019",
-  description: "A brief description of your education and experience at this university.",
-  courses: "Advanced Algorithms, Database Systems, AI & Machine Learning, Software Engineering.",
-  achievements: "Graduated with honors, Dean’s List, Built an award-winning capstone project.",
-  portfolio: "https://example.com/university",
-  honors: "Summa Cum Laude",
-};
 </script>
 
 <style scoped>
@@ -200,9 +221,9 @@ const university = {
 .tab-content {
   font-size: 14px;
   padding: 0 16px;
-  width: 65%;
+  width: 75%;
   text-align: left;
-  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* Meta-Data Sidebar */
@@ -217,6 +238,7 @@ const university = {
 
 .meta-item {
   text-align: left;
+  border-bottom: 1px solid var(--line-break);
 }
 
 .label {
@@ -230,5 +252,20 @@ a {
   color: inherit;
   text-decoration: none;
   font-size: 14px;
+}
+
+th {
+  font-size: 14px;
+  padding-bottom: 8px;
+}
+
+td {
+  font-size: 12px;
+  padding: 2px;
+}
+
+.reference-link {
+  font-size: 12px;
+  color: var(--accent-primary);
 }
 </style>
