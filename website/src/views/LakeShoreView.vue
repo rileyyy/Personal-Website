@@ -35,17 +35,51 @@
       <!-- Tab Content -->
       <section class="tab-content">
         <div v-if="activeTab === 'responsibilities'">
-          <p>Designed and implemented UI/UX for Android application-based products.</p>
-          <p>Communicated with customers, developers, and stakeholders to gather and implement requirements.</p>
-          <p>Resolved issues in embedded systems, Android OS, Python APIs, .NET applications, and AzureDevOps CI/CD.</p>
-          <p>Led engineers and interns in the design and implementation of features using agile best practices.</p>
-          <p>Wrote technical documentation for engineers and customers.</p>
+          <h3>Designed and implemented UI/UX for Android application-based products</h3>
+          <p>
+            As my primary role I worked with a team of developers that designed and implemented the User Interface and User Experience (UI/UX) for several of our scientific instruments.
+            These instruments ran a secured version of Android on a specially developed board, effectively making this software an Android application.
+            The designs accounted for different criteria than that of AppStore applications due to the use case.
+            For example, a typical user is viewing the isntrument at arm's-length while it sits on a workbench, instead of holding a phone close to their phase.
+            We also sought to make sure our application complied with contrast requirements for the visually impaired and those using specialized eyeware.
+          </p>
+
+          <h3>Communicated with customers, developers, and stakeholders</h3>
+          <p>
+            Like most agile companies we gathered requirements and implemented them before presenting our changes, at the end of each sprint, to those who are vested in the process.
+            This meant being able to communicate changes on a high level to those who are not as technically savy as well as in detail to developers who are looking for optimizations and bugs.
+          </p>
+
+          <h3>Resolved issues in the various systems</h3>
+          <p>
+            Even though Lake Shore is a company of nearly two hundred, the development teams were small.
+            Therefore each engineer was responsible for a large part of the stack.
+            This meant making changes to our embedded systems, Android OS, Python APIs, .NET applications, and Azure DevOps CI/CD.
+          </p>
+
+          <h3>Led engineers and interns in the design and implementation of features.</h3>
+          <p>
+            Lake Shore had a strong and competitive intern program with applicants from across the country.
+            I led the design and implementation of numerous features among several instruments and projects.
+            Both interns as well as other engineers were led in the efficient completion of the goals we set out to achieve.
+          </p>
+
+          <h3>Wrote technical documentation for engineers and customers</h3>
+          <p>
+            For both the Python driver and MeasureReady M81-SSM our documentation was written largely in ReStructured text files and kept in version control.
+            Then during the Python Driver release process the class and method level comments are inlined before being uploaded to Read The Docs.
+            For the M81 the documentation inlined the XML comments and uploaded it to different locations depending on the build type.
+            By automating the process of building our manuals, we were able to vary which information was distributed to customers and testers based on the preparedness of the release.
+          </p>
         </div>
         <div v-if="activeTab === 'deliverables'">
-          <p></p>
+          <h3>Coming soon!</h3>
+          <p>For now I would recommend taking a look at the <a href="https://www.lakeshore.com/products/categories/overview/material-characterization-products/measureready-m81-synchronous-source-measure-system/measureready-m81-synchronous-source-measure-system">MeasureReady M81-SSM</a> and the <a href="https://www.lakeshore.com/products/categories/overview/magnetic-products/gaussmeters-teslameters/f71-and-f41-teslameters">F41 and F71 Teslameters</a> as these were the instruments I worked on most heavily.</p>
         </div>
         <div v-if="activeTab === 'company'">
-          <p></p>
+          <p>
+            Lake Shore Cryotronics, Inc. builds and supplies measurement and control systems for the discovery and development of new materials for next-level technologies. Since 1968 Lake Shore has been providing products that are used in physics labs and deep space alike.
+          </p>
         </div>
       </section>
 
@@ -239,6 +273,19 @@ const activeTab = ref("responsibilities");
   width: 75%;
   text-align: left;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.tab-content h3 {
+  width: 100%;
+  padding-top: 8px;
+}
+
+.tab-content p {
+  margin: 4px 0 0 16px;
+}
+
+.tab-content p a {
+  color: var(--accent-primary);
 }
 
 /* Meta-Data Sidebar */
