@@ -12,6 +12,12 @@
             <p>|</p>
             <User class="icon" />
             <p>9</p>
+            <p>|</p>
+            <Star class="icon icon-yellow" />
+            <Star class="icon icon-yellow" />
+            <Star class="icon icon-yellow" />
+            <Star class="icon icon-yellow" />
+            <p>(1)</p>
           </div>
           <div class="motto">Real-Time Simulation and Global Telecommunication Systems</div>
         </div>
@@ -148,6 +154,15 @@
       <!-- Meta-Data Sidebar -->
       <aside class="meta-sidebar">
         <table class="meta-item">
+          <th>Roles</th>
+          <tr>
+            <td>Applications Engineer</td>
+          </tr>
+          <tr>
+            <td>System Software Engineer</td>
+          </tr>
+        </table>
+        <table class="meta-item">
           <th>Dates</th>
           <tr>
             <td>April 2019 to May 2024</td>
@@ -205,7 +220,7 @@
 </template>
 
 <script setup lang="ts">
-import { Frown, User } from "lucide-vue-next";
+import { Frown, User, Star } from "lucide-vue-next";
 import { ref } from "vue";
 
 const activeTab = ref("responsibilities");

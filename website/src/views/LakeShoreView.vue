@@ -12,6 +12,12 @@
             <p>|</p>
             <User class="icon" />
             <p>193</p>
+            <p>|</p>
+            <Star class="icon icon-yellow" />
+            <Star class="icon icon-yellow" />
+            <Star class="icon icon-yellow" />
+            <Star class="icon icon-yellow" />
+            <p>(1)</p>
           </div>
           <div class="motto">Advancing Science</div>
         </div>
@@ -85,6 +91,15 @@
 
       <!-- Meta-Data Sidebar -->
       <aside class="meta-sidebar">
+        <table class="meta-item">
+          <th>Roles</th>
+          <tr>
+            <td>Software Development Engineer I</td>
+          </tr>
+          <tr>
+            <td>Software Development Engineer II</td>
+          </tr>
+        </table>
         <table class="meta-item">
           <th>Dates</th>
           <tr>
@@ -160,7 +175,7 @@
 </template>
 
 <script setup lang="ts">
-import { BadgeCheck, User } from "lucide-vue-next";
+import { BadgeCheck, User, Star } from "lucide-vue-next";
 import { ref } from "vue";
 
 const activeTab = ref("responsibilities");
