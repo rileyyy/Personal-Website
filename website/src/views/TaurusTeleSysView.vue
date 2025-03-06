@@ -3,7 +3,7 @@
     <!-- Main Content -->
     <div>
       <header class="details-header">
-        <img src="@/assets/lake-shore-logo.jpeg" class="university-logo" alt="University Logo" />
+        <img src="https://cdn.brandfetch.io/idw0gJQjK5/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" class="university-logo" alt="University Logo" />
         <div id="d0">
           <h1 class="name">Taurus TeleSys, Inc</h1>
           <div class="detail-info">
@@ -133,8 +133,14 @@
             The scope of effort consists of development, assembly and acceptance testing of all hardware and software, including training of customer engineers within 24 to 36 months, using the digital twin technology for I&C implementation.
           </p>
           <br>
-          <p><i>*Exert taken from <a
+          <p>
+            <i>* Exert taken from <a
                  href="https://www.microchip.com/en-us/products/high-speed-networking-and-video/network-processors/ecosystem">microchip.com</a></i>
+          </p>
+          <p>
+            <i>* Logo property of <a
+                 href="https://hii.com/">Huntington Ingalls Industries</a>
+              and used as tangentially relevant</i>
           </p>
         </div>
       </section>
@@ -234,7 +240,8 @@ const activeTab = ref("responsibilities");
 .university-logo {
   width: 100px;
   height: 100px;
-  padding-right: 20px;
+  margin-right: 20px;
+  border-radius: 20px;
 }
 
 .name {
@@ -320,6 +327,10 @@ const activeTab = ref("responsibilities");
 
 .tab-content p {
   margin: 4px 0 0 16px;
+}
+
+.tab-content a {
+  color: var(--accent-primary);
 }
 
 /* Meta-Data Sidebar */

@@ -3,7 +3,7 @@
     <!-- Main Content -->
     <div>
       <header class="details-header">
-        <img src="@/assets/lake-shore-logo.jpeg" class="university-logo" alt="University Logo" />
+        <img src="https://cdn.brandfetch.io/id36yd5Cr6/w/200/h/200/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" class="university-logo" alt="University Logo" />
         <div id="d0">
           <h1 class="name">Lake Shore Cryotronics, Inc</h1>
           <div class="detail-info">
@@ -195,7 +195,7 @@ const activeTab = ref("responsibilities");
 .university-logo {
   width: 100px;
   height: 100px;
-  padding-right: 20px;
+  margin-right: 20px;
 }
 
 .name {
