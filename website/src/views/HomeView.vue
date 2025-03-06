@@ -15,11 +15,6 @@ import { Construction } from 'lucide-vue-next';
 </script>
 
 <style>
-.main-content {
-  display: flex;
-  flex-direction: column;
-}
-
 .construction-icon {
   height: 40px;
   width: 40px;

@@ -135,7 +135,6 @@ const activeTab = ref("responsibilities");
 <style scoped>
 .education-container {
   background-color: var(--black-three);
-  width: 100vw;
   display: flex;
   padding: 60px;
   color: #ccc;

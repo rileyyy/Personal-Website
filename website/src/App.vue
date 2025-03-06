@@ -1,7 +1,9 @@
 <template>
   <div class="app-container">
-    <Sidebar />
-    <RouterView />
+    <Sidebar class="sidebar" />
+    <div class="main-content">
+      <RouterView />
+    </div>
     <StatusBar />
   </div>
 </template>
@@ -12,7 +14,7 @@ import Sidebar from './components/SideBar.vue';
 import StatusBar from './components/StatusBar.vue';
 </script>
 
-<style scoped>
+<style>
 .app-container {
   display: flex;
   height: 100vh;
@@ -20,10 +22,31 @@ import StatusBar from './components/StatusBar.vue';
   color: var(--text-default);
 }
 
+.sidebar {
+  flex: 0 0 auto;
+  overflow: auto;
+}
+
 .main-content {
-  width: 100%;
+  flex: 1 1 auto;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
+}
+
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: #2e2e2e;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar);
+  border-radius: 4px;
 }
 </style>

@@ -85,6 +85,21 @@ const activeComponent = computed(() => {
   display: flex;
   height: 100vh;
   background-color: var(--slightly-darker-black);
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
+}
+
+.sidebar-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sidebar-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-container::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar);
+  border-radius: 4px;
 }
 
 .icon-bar {
