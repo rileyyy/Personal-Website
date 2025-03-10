@@ -1,7 +1,7 @@
 <template>
   <div class="status-bar">
     <div class="left-section">
-    <span>Vue 3 Portfolio</span>
+      <span>Vue 3 Portfolio</span>
     </div>
     <div class="right-section">
       <span>Riley Schroeder 2025</span>
@@ -14,7 +14,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100vw;
+  width: 99vw;
   background-color: var(--slightly-darker-black);
   padding: 4px;
   display: flex;

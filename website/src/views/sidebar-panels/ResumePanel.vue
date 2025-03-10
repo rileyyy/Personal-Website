@@ -159,7 +159,7 @@ const resumeSections = ref([
       },
       {
         icon: 'python-misc',
-        slug: '',
+        slug: '/project/wakepy',
         info: 'WakePy'
       }]
   },
