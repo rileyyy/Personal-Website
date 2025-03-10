@@ -14,7 +14,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 99vw;
+  width: 100vw;
   background-color: var(--slightly-darker-black);
   padding: 4px;
   display: flex;
@@ -27,10 +27,12 @@
 .left-section {
   display: flex;
   gap: 8px;
+  margin-left: 4px;
 }
 
 .right-section {
   display: flex;
   gap: 8px;
+  margin-right: 8px;
 }
 </style>
