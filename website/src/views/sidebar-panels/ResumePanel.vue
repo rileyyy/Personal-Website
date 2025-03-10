@@ -143,24 +143,24 @@ const resumeSections = ref([
     icon: 'folder-yarn',
     entries: [
       {
-        icon: 'drone',
-        slug: '',
-        info: 'PokeCraft'
-      },
-      {
         icon: 'nodejs',
-        slug: '',
+        slug: 'project/this-site',
         info: 'This Website'
-      },
-      {
-        icon: 'arduino',
-        slug: '',
-        info: 'Home Assistant'
       },
       {
         icon: 'python-misc',
         slug: '/project/wakepy',
         info: 'WakePy'
+      },
+      {
+        icon: 'drone',
+        slug: '',
+        info: 'PokeCraft'
+      },
+      {
+        icon: 'arduino',
+        slug: '',
+        info: 'Home Assistant'
       }]
   },
 ]);
