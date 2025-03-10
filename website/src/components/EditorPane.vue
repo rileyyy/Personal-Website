@@ -112,12 +112,30 @@ onMounted(() => {
 
 /* Editor Background */
 .editor-container {
+  max-height: 100vh;
   font-size: 14px;
   line-height: 1.5;
   white-space: pre-wrap;
   overflow-y: auto;
   text-align: left;
   width: 100%;
+  flex: 1 1 auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
+}
+
+.main-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.main-content::-webkit-scrollbar-track {
+  background: #2e2e2e;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar);
+  border-radius: 4px;
 }
 
 /* Highlight.js theme overwrites */

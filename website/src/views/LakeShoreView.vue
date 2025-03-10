@@ -285,9 +285,14 @@ const activeTab = ref("responsibilities");
 .tab-content {
   font-size: 14px;
   padding: 0 16px;
-  width: 75%;
+  max-width: 75%;
   text-align: left;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  flex: 1 1 auto;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
 }
 
 .tab-content h3 {
@@ -311,6 +316,11 @@ const activeTab = ref("responsibilities");
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1 1 auto;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
 }
 
 .meta-item {

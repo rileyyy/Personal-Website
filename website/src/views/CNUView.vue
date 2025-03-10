@@ -223,6 +223,11 @@ const activeTab = ref("overview");
   width: 75%;
   text-align: left;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  flex: 1 1 auto;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
 }
 
 /* Meta-Data Sidebar */
@@ -233,6 +238,11 @@ const activeTab = ref("overview");
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1 1 auto;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
 }
 
 .meta-item {
