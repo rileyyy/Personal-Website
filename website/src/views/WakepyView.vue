@@ -1,13 +1,13 @@
 <template>
   <div class="editor-wrapper">
-    <EditorPane
+    <CodeEditor
                 class="editor-child"
                 :code="code"
                 icon="python"
                 filename="WakePy.py"
                 :language="python"
                 :main-pane="true" />
-    <EditorPane
+    <CodeEditor
                 class="editor-child"
                 :code="english"
                 icon="document"
@@ -17,10 +17,11 @@
 </template>
 
 <script setup lang="ts">
-import EditorPane from '../components/EditorPane.vue';
 import hljs from 'highlight.js/lib/core';
 import python from 'highlight.js/lib/languages/python'
 import asciidoc from 'highlight.js/lib/languages/asciidoc'
+
+import CodeEditor from '../components/CodeEditor.vue';
 
 hljs.registerLanguage('python', python)
 hljs.registerLanguage('asciidoc', asciidoc)
