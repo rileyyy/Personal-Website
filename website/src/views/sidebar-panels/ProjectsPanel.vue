@@ -1,7 +1,7 @@
 <template>
   <div class="projects-panel">
     <h2 class="panel-title">Projects</h2>
-    <RouterLink v-for="project in projects" :key="project.title" class="project-item" :to="project.title">
+    <RouterLink v-for="project in projects" :key="project.title" class="project-item" :to="project.slug">
       <img :src="project.icon" class="project-icon" />
       <div class="project-info">
         <h3 class="project-title">{{ project.title }}</h3>
@@ -29,25 +29,29 @@ const projects = ref([
     icon: "/node_modules/material-icon-theme/icons/vue.svg",
     title: "This Website",
     description: "The very website you're looking at right now.",
-    github: "https://github.com/rileyyy/Personal-Website/tree/sandbox/basic-vsc-design"
+    github: "https://github.com/rileyyy/Personal-Website/tree/sandbox/basic-vsc-design",
+    slug: "/project/this-site"
   },
   {
     icon: "/node_modules/material-icon-theme/icons/python.svg",
     title: "WakePy",
     description: "Cross-platform wakelock / keep-awake / stay-awake written in Python.",
-    github: "https://github.com/fohrloop/wakepy"
+    github: "https://github.com/fohrloop/wakepy",
+    slug: "/project/wakepy"
   },
   {
     icon: "/node_modules/material-icon-theme/icons/godot.svg",
     title: "PokéCraft",
     description: "Pokémon meets World of Warcraft in this fan made project.",
-    github: null
+    github: null,
+    slug: ""
   },
   {
     icon: homeAssistantIcon,
     title: "Home Assistant",
     description: "This house isn't going to run itself... or is it?",
-    github: null
+    github: null,
+    slug: ""
   }
 ]);
 </script>
