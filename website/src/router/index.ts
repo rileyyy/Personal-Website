@@ -9,6 +9,7 @@ import LakeShoreView from '../views/LakeShoreView.vue';
 import TaurusTeleSysView from '../views/TaurusTeleSysView.vue';
 import SwisslogView from '../views/SwisslogView.vue';
 import WakepyView from '../views/WakepyView.vue';
+import PersonalWebsiteView from '../views/PersonalWebsiteView.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', component: HomeView },
@@ -21,6 +22,7 @@ const routes: RouteRecordRaw[] = [
 
   { path: '/projects', component: ProjectsView },
   { path: '/project/wakepy', component: WakepyView },
+  { path: '/project/this-site', component: PersonalWebsiteView },
 
   { path: '/skills', component: SkillsView },
 
