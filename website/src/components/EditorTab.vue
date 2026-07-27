@@ -1,17 +1,8 @@
 <template>
-  <div class="editor-tab">
-    <div class="tab-left">
-      <img class="icon" :src="getIcon(icon)" />
-      <span class="file-name">{{ filename }}</span>
-      <X class="icon-small" />
-    </div>
-    <div class="tab-right">
-      <LucideGithub class="icon" v-if="mainPane" />
-      <LucideBug class="icon" v-if="mainPane" />
-      <LucidePlay class="icon" v-if="mainPane" />
-      <LucideColumns2 class="icon" v-if="mainPane" />
-      <Ellipsis class="icon" />
-    </div>
+  <div class="editor-tab" :class="{ selectedTab: selected }">
+    <img class="icon" :src="getIcon(icon)" />
+    <span class="file-name">{{ filename }}</span>
+    <X class="icon-small" />
   </div>
 </template>
 
@@ -21,7 +12,7 @@ import { X } from 'lucide-vue-next';
 defineProps<{
   icon: string,
   filename: string,
-  mainPane?: boolean,
+  selected: boolean,
 }>();
 
 const getIcon = (icon: string) =>
@@ -34,22 +25,16 @@ const getIcon = (icon: string) =>
   justify-content: space-between;
   align-items: center;
   background-color: var(--slightly-darker-black);
-  border-bottom: 1px solid var(--line-break);
   border-right: 1px solid var(--line-break);
   font-family: 'Segoe UI', sans-serif;
-  width: 100%;
-  height: 30px;
+  gap: 8px;
+  height: 100%;
+  padding: 0 8px;
   background-color: var(--black-three);
 }
 
-.tab-left {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.selected-tab {
   border-top: 2px solid var(--accent-primary);
-  border-right: 1px solid var(--line-break);
-  height: 100%;
-  padding: 0 8px;
 }
 
 .file-name {
