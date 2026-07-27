@@ -34,6 +34,7 @@ import StatusBar from './components/StatusBar.vue';
   align-items: center;
   scrollbar-width: thin;
   scrollbar-color: var(--scroll-bar) transparent;
+  flex: 1;
 }
 
 .main-content::-webkit-scrollbar {
