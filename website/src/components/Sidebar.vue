@@ -19,7 +19,7 @@ import { ref, computed, DefineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 import { BriefcaseBusiness, House, Folder, Contact } from 'lucide-vue-next';
 
-import ResumePanel from "../views/sidebar-panels/ResumePanel.vue";
+import ResumePanel from '../views/sidebar-panels/ResumePanel.vue';
 import ProjectsPanel from '../views/sidebar-panels/ProjectsPanel.vue';
 
 interface SidebarItem {

@@ -144,7 +144,7 @@ const resumeSections = ref([
     entries: [
       {
         icon: 'nodejs',
-        slug: 'project/this-site',
+        slug: '/project/this-site',
         info: 'This Website'
       },
       {
