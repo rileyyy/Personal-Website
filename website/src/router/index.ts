@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
-import ResumeView from '../views/ResumeView.vue';
-import ProjectsView from '../views/ProjectsView.vue';
-import SkillsView from '../views/SkillsView.vue';
+import ResumeView from '../views/resume/ResumeView.vue';
+import ProjectsView from '../views/projects/ProjectsView.vue';
+import SkillsView from '../views/resume/SkillsView.vue';
 import ContactView from '../views/ContactView.vue';
-import CNUView from '../views/CNUView.vue';
-import LakeShoreView from '../views/LakeShoreView.vue';
-import TaurusTeleSysView from '../views/TaurusTeleSysView.vue';
-import SwisslogView from '../views/SwisslogView.vue';
-import WakepyView from '../views/WakepyView.vue';
-import PersonalWebsiteView from '../views/PersonalWebsiteView.vue';
+import CNUView from '../views/resume/CNUView.vue';
+import LakeShoreView from '../views/resume/LakeShoreView.vue';
+import TaurusTeleSysView from '../views/resume/TaurusTeleSysView.vue';
+import SwisslogView from '../views/resume/SwisslogView.vue';
+import WakepyView from '../views/projects/WakepyView.vue';
+import PersonalWebsiteView from '../views/projects/PersonalWebsiteView.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', component: HomeView },
@@ -25,6 +25,8 @@ const routes: RouteRecordRaw[] = [
   { path: '/project/this-site', component: PersonalWebsiteView },
 
   { path: '/skills', component: SkillsView },
+
+  // { path: '/games', component: GamesView },
 
   { path: '/contact', component: ContactView },
 ];
