@@ -17,10 +17,11 @@
 <script setup lang="ts">
 import { ref, computed, DefineComponent } from 'vue';
 import { useRouter } from 'vue-router';
-import { BriefcaseBusiness, House, Folder, Contact } from 'lucide-vue-next';
+import { BriefcaseBusiness, House, Folder, Contact, Joystick } from 'lucide-vue-next';
 
 import ResumePanel from '../views/sidebar-panels/ResumePanel.vue';
 import ProjectsPanel from '../views/sidebar-panels/ProjectsPanel.vue';
+import GamesPanel from '../views/sidebar-panels/GamesPanel.vue';
 
 interface SidebarItem {
   name: string;
@@ -53,6 +54,13 @@ const sidebarItems: SidebarItem[] = [
     icon: Folder,
     view: 'projects',
     component: ProjectsPanel as DefineComponent,
+    slug: null,
+  },
+  {
+    name: 'Games',
+    icon: Joystick,
+    view: 'games',
+    component: GamesPanel as DefineComponent,
     slug: null,
   },
   {
