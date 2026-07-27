@@ -2,17 +2,12 @@
   <div class="editor-wrapper">
     <CodeEditor
                 class="editor-child"
-                :code="code"
-                icon="python"
-                filename="WakePy.py"
-                :language="python"
+                :tabs="pyTab"
                 :main-pane="true" />
     <CodeEditor
                 class="editor-child"
-                :code="english"
-                icon="document"
-                :language="asciidoc"
-                filename="WakePy.english" />
+                :tabs="englishTab"
+                :main-pane="false" />
   </div>
 </template>
 
@@ -21,12 +16,20 @@ import hljs from 'highlight.js/lib/core';
 import python from 'highlight.js/lib/languages/python'
 import asciidoc from 'highlight.js/lib/languages/asciidoc'
 
-import CodeEditor from '../components/CodeEditor.vue';
+import CodeEditor from '../../components/CodeEditor.vue';
+import { Tab } from '@/models/Tab.ts';
 
 hljs.registerLanguage('python', python)
 hljs.registerLanguage('asciidoc', asciidoc)
 
-const code = `class WakePy:
+
+const pyTab = [
+  <Tab>{
+    icon: 'python',
+    filename: 'WakePy.py',
+    language: python,
+    mainPane: true,
+    code: `class WakePy:
   def __description__(self):
     # WakePy is a cross-platform Python package and CLI tool designed to keep a system awake.
     with WakePy():
@@ -65,9 +68,17 @@ const code = `class WakePy:
         return 214
       case 'forks':
         return 14
-      `;
+      `,
+  }
+];
 
-const english = `WakePy
+const englishTab = [
+  <Tab>{
+    icon: 'document',
+    filename: 'WakePy.txt',
+    language: asciidoc,
+    mainPane: false,
+    code: `WakePy
 ======
 
 Wakepy is a package with an Python API and a CLI tool for keeping a system awake.
@@ -86,7 +97,10 @@ license:: MIT (https://www.tldrlegal.com/license/mit-license)
 downloads:: 20k/month
 stars:: 214
 forks:: 14
-`;
+`,
+  }
+];
+
 </script>
 
 <style>
