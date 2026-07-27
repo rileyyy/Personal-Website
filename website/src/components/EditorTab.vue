@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { LucideGithub, LucideBug, LucidePlay, LucideColumns2, Ellipsis, X } from 'lucide-vue-next';
+import { X } from 'lucide-vue-next';
 
 defineProps<{
   icon: string,

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "path": "^0.12.7",
+    "vue3-simple-icons": "^16.10.0"
+  }
+}

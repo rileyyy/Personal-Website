@@ -10,7 +10,8 @@
           <Settings class="settings-icon" />
 
           <a v-if="project.github" :href="project.github" target="_blank" class="github-link">
-            <img class="github-icon" src="@/assets/github-mark-white.svg" alt="GitHub Icon" /> GitHub
+            <GitHubIcon class="github-icon" />
+            GitHub
           </a>
         </div>
       </div>
@@ -22,6 +23,7 @@
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Settings } from 'lucide-vue-next';
+import { GitHubIcon } from 'vue3-simple-icons';
 import homeAssistantIcon from "@/assets/home-assistant-logomark.svg";
 
 const projects = ref([
