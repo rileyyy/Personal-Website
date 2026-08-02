@@ -10,8 +10,8 @@
 
 <script setup lang="ts">
 import { RouterView } from 'vue-router';
-import Sidebar from './components/SideBar.vue';
-import StatusBar from './components/StatusBar.vue';
+import Sidebar from '@/components/SideBar.vue';
+import StatusBar from '@/components/StatusBar.vue';
 </script>
 
 <style>

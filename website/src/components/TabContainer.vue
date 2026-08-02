@@ -30,9 +30,6 @@ var props = defineProps<{
   mainPane: boolean,
 }>();
 
-const getIcon = (icon: string) =>
-  `/node_modules/material-icon-theme/icons/${icon}.svg`;
-
 const activeTab = ref<Tab | null>(
   props.tabs.length > 0 ? props.tabs[0] : null
 );
