@@ -6,7 +6,7 @@
       <Construction class="construction-icon" />
     </div>
     <h2>You're welcome to look around but you might want to wear this: </h2>
-    <img class="hardhat" src="@/assets/hardhat.png">
+    <img class="hardhat" src="../assets/hardhat.png">
   </div>
 </template>
 

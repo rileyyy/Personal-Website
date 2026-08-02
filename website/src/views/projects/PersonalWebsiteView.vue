@@ -18,7 +18,7 @@ import csharp from 'highlight.js/lib/languages/csharp'
 import asciidoc from 'highlight.js/lib/languages/asciidoc'
 
 import CodeEditor from '../../components/CodeEditor.vue';
-import { Tab } from '@/models/Tab.ts';
+import { Tab } from '../../models/Tab.ts';
 
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('asciidoc', asciidoc)

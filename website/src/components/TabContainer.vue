@@ -22,7 +22,7 @@
 import { LucideBug, LucidePlay, LucideColumns2, Ellipsis } from 'lucide-vue-next';
 import { GitHubIcon } from 'vue3-simple-icons';
 import EditorTab from './EditorTab.vue';
-import { Tab } from '@/models/Tab.ts';
+import { Tab } from '../models/Tab.ts';
 import { ref } from 'vue';
 
 var props = defineProps<{

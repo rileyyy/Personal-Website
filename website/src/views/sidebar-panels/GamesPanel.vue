@@ -50,10 +50,48 @@ const sections = ref<Game[]>([
         slug: '',
       },
       {
+        name: 'Pantalaemonl',
+        icon: '',
+        slug: '',
+      },
+    ]
+  },
+  {
+    name: 'Old School Runescape (Leagues)',
+    open: false,
+    icon: 'folder-test',
+    slug: '',
+    entries: [
+      {
+        name: 'CptRiley (Twisted)',
+        icon: '',
+        slug: '',
+      },
+      {
+        name: 'CptRiley (Trailablazer)',
+        icon: '',
+        slug: '',
+      },
+      {
+        name: 'CptRiley (Shattered Relics)',
+        icon: '',
+        slug: '',
+      },
+      {
+        name: 'CptRiley (Trailblazed Reloaded)',
+        icon: '',
+        slug: '',
+      },
+      {
+        name: 'CptRiley (Raging Echoes)',
+        icon: '',
+        slug: '',
+      },
+      {
         name: 'CptRiley (Demonic Pacts)',
         icon: '',
         slug: '',
-      }
+      },
     ]
   },
   {
@@ -61,8 +99,32 @@ const sections = ref<Game[]>([
     open: false,
     icon: '',
     slug: '',
-    entries: [],
+    entries: [
+      {
+        name: 'Sadamantite',
+        icon: '',
+        slug: '',
+      },
+    ],
   },
+  {
+    name: 'RuneScape 3 (Leagues)',
+    open: false,
+    icon: '',
+    slug: '',
+    entries: [{
+      name: 'Pantalaemonl (Catalyst)',
+      icon: '',
+      slug: '',
+    },
+    {
+      name: 'Sadamantite (Equilibrium)',
+      icon: '',
+      slug: '',
+    },
+    ],
+  },
+
   {
     name: 'Factorio',
     open: false,

@@ -14,7 +14,7 @@ import { ref } from 'vue';
 
 import TabContainer from './TabContainer.vue';
 import EditorPane from './EditorPane.vue';
-import { Tab } from '@/models/Tab.ts';
+import { Tab } from '../models/Tab.ts';
 
 var props = defineProps<{
   tabs: Tab[],

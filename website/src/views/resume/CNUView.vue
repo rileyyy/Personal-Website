@@ -3,7 +3,7 @@
     <!-- Main Content -->
     <div>
       <header class="details-header">
-        <img src="@/assets/cnu-sails.png" class="university-logo" alt="University Logo" />
+        <img src="../../assets/cnu-sails.png" class="university-logo" alt="University Logo" />
         <div id="d0">
           <h1 class="name">Christopher Newport University</h1>
           <div class="detail-info">

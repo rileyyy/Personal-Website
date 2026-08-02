@@ -17,7 +17,7 @@ import python from 'highlight.js/lib/languages/python'
 import asciidoc from 'highlight.js/lib/languages/asciidoc'
 
 import CodeEditor from '../../components/CodeEditor.vue';
-import { Tab } from '@/models/Tab.ts';
+import { Tab } from '../../models/Tab.ts';
 
 hljs.registerLanguage('python', python)
 hljs.registerLanguage('asciidoc', asciidoc)

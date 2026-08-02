@@ -24,7 +24,7 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { Settings } from 'lucide-vue-next';
 import { GitHubIcon } from 'vue3-simple-icons';
-import homeAssistantIcon from "@/assets/home-assistant-logomark.svg";
+import homeAssistantIcon from "../../assets/home-assistant-logomark.svg";
 
 const projects = ref([
   {
