@@ -10,12 +10,14 @@ import TaurusTeleSysView from '../views/resume/TaurusTeleSysView.vue';
 import SwisslogView from '../views/resume/SwisslogView.vue';
 import WakepyView from '../views/projects/WakepyView.vue';
 import PersonalWebsiteView from '../views/projects/PersonalWebsiteView.vue';
+import ImpulseRadarView from '@/views/resume/ImpulseRadarView.vue';
 
 const routes: RouteRecordRaw[] = [
   { path: '/', component: HomeView },
 
   { path: '/resume', component: ResumeView },
   { path: '/education/cnu', component: CNUView },
+  { path: '/work/impulse-radar', component: ImpulseRadarView },
   { path: '/work/lake-shore', component: LakeShoreView },
   { path: '/work/taurus', component: TaurusTeleSysView },
   { path: '/work/swisslog', component: SwisslogView },

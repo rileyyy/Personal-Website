@@ -79,6 +79,11 @@ const resumeSections = ref<ResumeSection[]>([
     materialIcon: 'folderResource',
     entries: [
       {
+        materialIcon: 'rolldown',
+        slug: '/work/impulse-radar',
+        info: 'ImpulseRadar Sweden AB'
+      },
+      {
         materialIcon: 'testJs',
         slug: '/work/lake-shore',
         info: 'Lake Shore Cryotronics'

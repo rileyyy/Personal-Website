@@ -3,22 +3,21 @@
     <!-- Main Content -->
     <div>
       <header class="details-header">
-        <img src="https://cdn.brandfetch.io/idZinyBgYc/w/600/h/600/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" class="university-logo" alt="Company Logo" />
+        <img class="university-logo" src="https://cdn.brandfetch.io/id7x0XGKGg/w/600/h/300/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B" alt="Company Logo" />
         <div id="d0">
-          <h1 class="name">Swisslog Logistics</h1>
+          <h1 class="name">ImpulseRadar Sweden AB</h1>
           <div class="detail-info">
             <BadgeCheck class="icon icon-accent" />
-            <a class="school-url" href="https://https://www.swisslog.com//">swisslog.com</a>
+            <a class="school-url" href="https://https://impulseradargpr.com/">https://impulseradargpr.com</a>
             <p>|</p>
             <User class="icon" />
-            <p>3,290</p>
+            <p>35</p>
             <p>|</p>
-            <Star class="icon icon-yellow" />
             <Star class="icon icon-yellow" />
             <Star class="icon icon-yellow" />
             <p>(1)</p>
           </div>
-          <div class="motto">The human side of automation</div>
+          <div class="motto">To visualize the subsurface for everyone</div>
         </div>
       </header>
 
@@ -40,50 +39,36 @@
       <!-- Tab Content -->
       <section class="tab-content">
         <div v-if="activeTab === 'responsibilities'">
-          <h3>Contributed to ticket tracking solution</h3>
+          <h3>Designed and implemented UI/UX for Android application-based products</h3>
           <p>
-            The company used a common website for ticket tracking that another developer and I found to be sluggish and difficult to use.
-
-            Using publicly available APIs and SOAP requests for said website we were able to develop a desktop application that would make changes to the ticket as it was being worked on.
-            The application also provided visual indicators of urgency, priority, and other important statistics.
+            As my primary role I worked on and implemented the User Interface, User Experience (UI/UX), and communication layer for the ViewPoint2 software.
+            This software was responsible for collecting, storing, processing, and displaying ground penetrating radar data from our instruments.
+            It was also necessary to communicate with the other developer that worked on the data processing and image generation to seamlessly communicate between the dart and C libraries.
           </p>
 
-          <h3>Developed a package tracking application for automatic status notifications</h3>
+          <h3>Championed development best practices</h3>
           <p>
-            My manager became responsible for managing the local part department while I worked for Swisslog.
-            One of the issues they faced was tracking of packages due to the volume of packages and the variety of carriers.
-            I developed an application that would run daily and provide an email status update for the head of the department to show package statuses.
-          </p>
-
-          <h3>Communicated with customers to resolve issues they were facing</h3>
-          <p>
-            Frequently customers were facing issues with their systems.
-            Our team was responsible for rectifying these issues which were usually database related but were occasionally involving PLCs (Programmable Logic Controllers) or hardware.
-            When we were not able to resolve the issue it was standard procedure to identify the appropriate system engineer and act as an intermediary to help resolve the issue.
+            Best development practices include unit testing, clean coding standards, SOLID programming ideals, and correct usage of git version control.
+            As almost all previous projects were undertaken by single developers, it was necessary to try and implement these practices to support teams of multiple developers.
           </p>
         </div>
         <div v-if="activeTab === 'deliverables'">
           <p>
-            As this position was not truely a developer role, I do not have any publically available images of software I worked on.
+            The product I worked on is <a href="https://play.google.com/store/apps/details?id=com.impulseradar.viewpoint2&hl=en">ViewPoint2</a>. It was legacy software when I inherited it, and was intended to be a replacement for the original <a href="https://play.google.com/store/apps/details?id=se.impulseradar.viewpoint&hl=en">ViewPoint</a> software, with added features from other company software.
           </p>
-          <br>
-          <p>
-            One of the products I did get to work with was the AutoStore system when I worked as part of the set up for a customer. It was mostly debugging errors, running tests on the system, and guiding others who were applying labels and feeding the boxes into the system. All said though, the system is fascinating to watch run.
-          </p>
-
-          <img class="delivery-image" src="https://www.swisslog.com/-/media/swisslog/images/logistics-warehouse-distribution-automation/case-studies/retail--ecom/radwell-arlington/radwell-arlington-1.jpg?rev=6d343fe5e67144e39f3411b70fa67634&w=1400&hash=B859926A9A7B25BCB1AA69942B6EAE91" />
         </div>
         <div v-if="activeTab === 'company'">
           <p>
-            Swisslog is a global company with Swiss roots and one of the world's leading logistics automation companies. We are headquartered in Buchs/Aarau, Switzerland and stand for innovation, quality, industry-leading software and robotics technologies developed in-house.
+            ImpulseRadar is focused on bringing the latest technology to market, packaged in robust and user-friendly ways. As industry professionals, our staff have been influential in bringing to market innovative GPR solutions that have often driven paradigm shifts in the application of this effective non-destructive technology.
+
+            ImpulseRadar is Triple-A (AAA) rated by Dun & Bradstreet, in recognition of our high creditworthiness and capacity for meeting payment liabilities.
           </p>
-          <br>
           <p>
-            Swisslog delivers data-driven & robotic solutions for your logistics automation alongside reliable, modular service concepts. Collaborating with forward-thinking companies, we are committed to setting new standards in warehouse automation to provide future-proof products and solutions. As part of the KUKA Group, our customers trust the competence of our passionate employees – more than 15,000 people working across the globe.
-          </p>
-          <br>
-          <p>
-            Our range of services includes: consulting, concept studies, project implementation, customer service, cutting-edge technologies and software, all tailored to the specific requirements of your business.
+            Founded in 2015
+            Headquartered in Malå, Sweden
+            Office in Umeå, Sweden
+            Office in Charleston, SC, USA
+            Office in Kuala Lumpur, Malaysia
           </p>
         </div>
       </section>
@@ -93,13 +78,13 @@
         <table class="meta-item">
           <th>Roles</th>
           <tr>
-            <td>Incident Response Engineer</td>
+            <td>Software Development Engineer</td>
           </tr>
         </table>
         <table class="meta-item">
           <th>Dates</th>
           <tr>
-            <td>April 2019 to May 2024</td>
+            <td>August 2025 to Present</td>
           </tr>
         </table>
         <table class="meta-item">
@@ -108,16 +93,16 @@
           </thead>
           <tbody>
             <tr>
-              <td>C#/.NET</td>
+              <td>Dart</td>
             </tr>
             <tr>
-              <td>Java</td>
+              <td>Flutter</td>
             </tr>
             <tr>
-              <td>MySQL</td>
+              <td>Git</td>
             </tr>
             <tr>
-              <td>AutoHotKey</td>
+              <td>GitHub Actions</td>
             </tr>
           </tbody>
         </table>
@@ -128,30 +113,33 @@
           <tbody>
             <tr>
               <td>
-                <a class="reference-link" href="https://swisslog.com">Website</a>
+                <a class="reference-link" href="https://impulseradargpr.com">Website</a>
               </td>
             </tr>
             <tr>
               <td>
-                <a class="reference-link" href="https://www.linkedin.com/company/swisslog">LinkedIn</a>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <a class="reference-link"
-                   href="https://www.instagram.com/swisslog.logistics.automation/">Instagram</a>
+                <a class="reference-link" href="https://www.facebook.com/impulseradargpr">Facebook</a>
               </td>
             </tr>
             <tr>
               <td>
-                <a class="reference-link" href="https://www.youtube.com/c/SwisslogLogisticsAutomation/?sub_confirmation=1">Youtube</a>
+                <a class="reference-link" href="https://instagram.com/impulseradar">Instagram</a>
               </td>
             </tr>
             <tr>
               <td>
                 <a class="reference-link"
-                   href="https://www.facebook.com/swisslog.logistics.automation">Facebook</a>
+                   href="https://www.linkedin.com/company/impulseradar/">LinkedIn</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="reference-link" href="https://www.youtube.com/channel/UCNxTceA1g9rRbrGa6JlLoQg">YouTube</a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a class="reference-link" href="">+46 953 100 08</a>
               </td>
             </tr>
           </tbody>
@@ -196,9 +184,9 @@ const activeTab = ref("responsibilities");
 
 .university-logo {
   width: 100px;
-  height: 100px;
+  height: 50px;
   margin-right: 20px;
-  border-radius: 50px;
+  margin-top: 25px;
 }
 
 .name {
@@ -273,9 +261,14 @@ const activeTab = ref("responsibilities");
 .tab-content {
   font-size: 14px;
   padding: 0 16px;
-  width: 75%;
+  max-width: 75%;
   text-align: left;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  flex: 1 1 auto;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
 }
 
 .tab-content h3 {
@@ -291,11 +284,6 @@ const activeTab = ref("responsibilities");
   color: var(--accent-primary);
 }
 
-.delivery-image {
-  width: 80%;
-  padding: 16px 32px;
-}
-
 /* Meta-Data Sidebar */
 .meta-sidebar {
   flex: 1;
@@ -304,6 +292,11 @@ const activeTab = ref("responsibilities");
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1 1 auto;
+  max-height: 100vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
 }
 
 .meta-item {

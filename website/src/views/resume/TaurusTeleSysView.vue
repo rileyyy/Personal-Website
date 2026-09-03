@@ -3,7 +3,7 @@
     <!-- Main Content -->
     <div>
       <header class="details-header">
-        <img src="https://cdn.brandfetch.io/idw0gJQjK5/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" class="university-logo" alt="University Logo" />
+        <img src="https://cdn.brandfetch.io/idw0gJQjK5/w/400/h/400/theme/dark/icon.jpeg?c=1dxbfHSJFAPEGdCLU4o5B" class="university-logo" alt="Company Logo" />
         <div id="d0">
           <h1 class="name">Taurus TeleSys, Inc</h1>
           <div class="detail-info">

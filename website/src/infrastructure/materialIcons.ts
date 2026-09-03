@@ -26,6 +26,7 @@ import python from 'material-icon-theme/icons/python.svg';
 import pythonMisc from 'material-icon-theme/icons/python-misc.svg';
 import robot from 'material-icon-theme/icons/robot.svg';
 import rocket from 'material-icon-theme/icons/rocket.svg';
+import rolldown from 'material-icon-theme/icons/rolldown.svg';
 import stylelint from 'material-icon-theme/icons/stylelint.svg';
 import testJs from 'material-icon-theme/icons/test-js.svg';
 import typescriptDef from 'material-icon-theme/icons/typescript-def.svg'
@@ -61,6 +62,7 @@ const icons: Record<string, string> = {
   pythonMisc,
   robot,
   rocket,
+  rolldown,
   stylelint,
   testJs,
   typescriptDef,
