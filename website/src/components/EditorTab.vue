@@ -1,20 +1,27 @@
 <template>
   <div class="editor-tab" :class="{ selectedTab: selected }">
-    <img class="icon" :src="materialIcon(icon)" />
+    <img v-if="materialIcon" class="icon" :src="materialIcon" />
+    <component v-else-if="simpleIcon" :is="simpleIcon.component" :style="{ color: simpleIcon.color }" class="icon" />
     <span class="file-name">{{ filename }}</span>
     <X class="icon-small" />
   </div>
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { X } from 'lucide-vue-next';
-import { materialIcon } from '@/infrastructure/materialIcons';
+import { materialIcon as lookupMaterialIcon } from '@/infrastructure/materialIcons';
+import { simpleIcon as lookupSimpleIcon } from '@/infrastructure/simpleIcons';
 
-defineProps<{
-  icon: string,
+const props = defineProps<{
+  materialIcon?: string,
+  simpleIcon?: string,
   filename: string,
   selected: boolean,
 }>();
+
+const materialIcon = computed(() => props.materialIcon ? lookupMaterialIcon(props.materialIcon) : '');
+const simpleIcon = computed(() => props.simpleIcon ? lookupSimpleIcon(props.simpleIcon) : undefined);
 </script>
 
 <style scoped>

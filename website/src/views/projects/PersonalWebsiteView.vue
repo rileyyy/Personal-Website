@@ -25,7 +25,7 @@ hljs.registerLanguage('asciidoc', asciidoc)
 
 const devTabs = [
   <Tab>{
-    icon: 'vue',
+    materialIcon: 'vue',
     filename: 'Frontend.vue',
     language: javascript,
     code: `<template>
@@ -38,14 +38,14 @@ const devTabs = [
   },
 
   <Tab>{
-    icon: 'csharp',
+    materialIcon: 'csharp',
     filename: 'Backend.cs',
     language: csharp,
     code: ``,
   },
 
   <Tab>{
-    icon: 'MongoDB',
+    simpleIcon: 'mongoDb',
     filename: 'Database.txt',
     language: asciidoc,
     code: ``,
@@ -54,7 +54,7 @@ const devTabs = [
 
 const englishTab = [
   <Tab>{
-    icon: 'document',
+    materialIcon: 'document',
     filename: 'This Website.txt',
     language: asciidoc,
     code: ``,

@@ -4,13 +4,18 @@
     <div v-for="section in resumeSections" :key="section.name" class="folder">
       <div class="folder-header" @click="toggleSection(section.name)">
         <component class="arrow" :class="{ open: section.open }" :is="ChevronRight"></component>
-        <span><img class="icon" :src=getIcon(section.icon)>
+        <span>
+          <img v-if="section.materialIcon" class="icon" :src="getIcon(section.materialIcon)">
+          <component v-else-if="section.simpleIcon" :is="getSimpleIcon(section.simpleIcon)?.component"
+                     :style="{ color: getSimpleIcon(section.simpleIcon)?.color }" class="icon" />
           <p> {{ section.name }}</p>
         </span>
       </div>
       <div v-if="section.open" class="files">
         <RouterLink v-for="entry in section.entries" :key="entry.info" class="file" :to="entry.slug">
-          <img class="icon" :src=getIcon(entry.icon)>
+          <img v-if="entry.materialIcon" class="icon" :src="getIcon(entry.materialIcon)">
+          <component v-else-if="entry.simpleIcon" :is="getSimpleIcon(entry.simpleIcon)?.component"
+                     :style="{ color: getSimpleIcon(entry.simpleIcon)?.color }" class="icon" />
           <p>{{ entry.info }}</p>
         </RouterLink>
       </div>
@@ -23,20 +28,36 @@ import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { ChevronRight } from 'lucide-vue-next';
 import { materialIcon as getIcon } from '@/infrastructure/materialIcons';
+import { simpleIcon as getSimpleIcon } from '@/infrastructure/simpleIcons';
 
-const resumeSections = ref([
+interface ResumeEntry {
+  materialIcon?: string;
+  simpleIcon?: string;
+  slug: string;
+  info: string;
+}
+
+interface ResumeSection {
+  name: string;
+  open: boolean;
+  materialIcon?: string;
+  simpleIcon?: string;
+  entries: ResumeEntry[];
+}
+
+const resumeSections = ref<ResumeSection[]>([
   {
     name: 'Education',
     open: false,
-    icon: 'folderTest',
+    materialIcon: 'folderTest',
     entries: [
       {
-        icon: 'graphql',
+        materialIcon: 'graphql',
         slug: '/education/cnu',
         info: 'B.S. Computer Science'
       },
       {
-        icon: 'graphql',
+        materialIcon: 'graphql',
         slug: '/education/cnu',
         info: 'B.S. Computer Engineering'
       }]
@@ -44,20 +65,20 @@ const resumeSections = ref([
   {
     name: 'Employment',
     open: false,
-    icon: 'folderResource',
+    materialIcon: 'folderResource',
     entries: [
       {
-        icon: 'testJs',
+        materialIcon: 'testJs',
         slug: '/work/lake-shore',
         info: 'Lake Shore Cryotronics'
       },
       {
-        icon: 'rocket',
+        materialIcon: 'rocket',
         slug: '/work/taurus',
         info: 'Taurus TeleSys',
       },
       {
-        icon: 'robot',
+        materialIcon: 'robot',
         slug: '/work/swisslog',
         info: 'Swisslog Logistics'
       }]
@@ -65,75 +86,75 @@ const resumeSections = ref([
   {
     name: 'Skills',
     open: false,
-    icon: 'folderGulp',
+    materialIcon: 'folderGulp',
     entries: [
       {
-        icon: 'csharp',
+        materialIcon: 'csharp',
         slug: '',
         info: 'C#'
       },
       {
-        icon: 'android',
+        materialIcon: 'android',
         slug: '',
         info: 'Xamarin (Android)'
       },
       {
-        icon: 'cpp',
+        materialIcon: 'cpp',
         slug: '',
         info: 'C++'
       },
       {
-        icon: 'python',
+        materialIcon: 'python',
         slug: '',
         info: 'Python'
       },
       {
-        icon: 'database',
+        materialIcon: 'database',
         slug: '',
         info: 'MySQL'
       },
       {
-        icon: 'database',
+        simpleIcon: 'mongoDb',
         slug: '',
         info: 'MongoDB'
       },
       {
-        icon: 'azurePipelines',
+        materialIcon: 'azurePipelines',
         slug: '',
         info: 'Azure DevOps'
       },
       {
-        icon: 'stylelint',
+        materialIcon: 'stylelint',
         slug: '',
         info: 'Agile'
       },
       {
-        icon: 'git',
+        materialIcon: 'git',
         slug: '',
         info: 'Git'
       },
       {
-        icon: 'godot',
+        materialIcon: 'godot',
         slug: '',
         info: 'Godot'
       },
       {
-        icon: 'java',
+        materialIcon: 'java',
         slug: '',
         info: 'Java SE'
       },
       {
-        icon: 'docker',
+        materialIcon: 'docker',
         slug: '',
         info: 'Docker'
       },
       {
-        icon: 'vue',
+        materialIcon: 'vue',
         slug: '',
         info: 'Vue.js'
       },
       {
-        icon: 'html',
+        materialIcon: 'html',
         slug: '',
         info: 'HTML/CSS'
       }]
@@ -141,25 +162,25 @@ const resumeSections = ref([
   {
     name: 'Projects',
     open: false,
-    icon: 'folderYarn',
+    materialIcon: 'folderYarn',
     entries: [
       {
-        icon: 'nodejs',
+        materialIcon: 'nodejs',
         slug: '/project/this-site',
         info: 'This Website'
       },
       {
-        icon: 'pythonMisc',
+        materialIcon: 'pythonMisc',
         slug: '/project/wakepy',
         info: 'WakePy'
       },
       {
-        icon: 'drone',
+        materialIcon: 'drone',
         slug: '',
         info: 'PokeCraft'
       },
       {
-        icon: 'arduino',
+        materialIcon: 'arduino',
         slug: '',
         info: 'Home Assistant'
       }]

@@ -3,7 +3,8 @@
     <div class="tab-container">
       <EditorTab v-for="tab in tabs" :key="tab.filename"
                  :class="{ selectedTab: tab === activeTab }"
-                 :icon="tab.icon"
+                 :material-icon="tab.materialIcon"
+                 :simple-icon="tab.simpleIcon"
                  :filename="tab.filename"
                  @click="activeTab = tab"
                  :selected="tab === activeTab" />

@@ -25,7 +25,7 @@ hljs.registerLanguage('asciidoc', asciidoc)
 
 const pyTab = [
   <Tab>{
-    icon: 'python',
+    materialIcon: 'python',
     filename: 'WakePy.py',
     language: python,
     mainPane: true,
@@ -74,7 +74,7 @@ const pyTab = [
 
 const englishTab = [
   <Tab>{
-    icon: 'document',
+    materialIcon: 'document',
     filename: 'WakePy.txt',
     language: asciidoc,
     mainPane: false,
