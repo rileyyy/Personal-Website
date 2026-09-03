@@ -8,7 +8,7 @@
           <h1 class="name">Swisslog Logistics</h1>
           <div class="detail-info">
             <BadgeCheck class="icon icon-accent" />
-            <a class="school-url" href="https://lakeshore.com/">lakeshore.com</a>
+            <a class="school-url" href="https://https://www.swisslog.com//">swisslog.com</a>
             <p>|</p>
             <User class="icon" />
             <p>3,290</p>
@@ -43,7 +43,8 @@
           <h3>Contributed to ticket tracking solution</h3>
           <p>
             The company used a common website for ticket tracking that another developer and I found to be sluggish and difficult to use.
-            Using publically available APIs and SOAP requests for said website we were able to develop a desktop application that would make changes to the ticket as it was being worked on.
+
+            Using publicly available APIs and SOAP requests for said website we were able to develop a desktop application that would make changes to the ticket as it was being worked on.
             The application also provided visual indicators of urgency, priority, and other important statistics.
           </p>
 

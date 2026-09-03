@@ -25,24 +25,25 @@ import { RouterLink } from 'vue-router';
 import { Settings } from 'lucide-vue-next';
 import { GitHubIcon } from 'vue3-simple-icons';
 import homeAssistantIcon from "../../assets/home-assistant-logomark.svg";
+import { materialIcon } from '@/infrastructure/materialIcons';
 
 const projects = ref([
   {
-    icon: "/node_modules/material-icon-theme/icons/vue.svg",
+    icon: materialIcon("vue"),
     title: "This Website",
     description: "The very website you're looking at right now.",
     github: "https://github.com/rileyyy/Personal-Website/tree/sandbox/basic-vsc-design",
     slug: "/project/this-site"
   },
   {
-    icon: "/node_modules/material-icon-theme/icons/python.svg",
+    icon: materialIcon("python"),
     title: "WakePy",
     description: "Cross-platform wakelock / keep-awake / stay-awake written in Python.",
     github: "https://github.com/fohrloop/wakepy",
     slug: "/project/wakepy"
   },
   {
-    icon: "/node_modules/material-icon-theme/icons/godot.svg",
+    icon: materialIcon("godot"),
     title: "PokéCraft",
     description: "Pokémon meets World of Warcraft in this fan made project.",
     github: null,

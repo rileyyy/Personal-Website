@@ -22,12 +22,13 @@
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { ChevronRight } from 'lucide-vue-next';
+import { materialIcon as getIcon } from '@/infrastructure/materialIcons';
 
 const resumeSections = ref([
   {
     name: 'Education',
     open: false,
-    icon: 'folder-test',
+    icon: 'folderTest',
     entries: [
       {
         icon: 'graphql',
@@ -43,10 +44,10 @@ const resumeSections = ref([
   {
     name: 'Employment',
     open: false,
-    icon: 'folder-resource',
+    icon: 'folderResource',
     entries: [
       {
-        icon: 'test-js',
+        icon: 'testJs',
         slug: '/work/lake-shore',
         info: 'Lake Shore Cryotronics'
       },
@@ -64,7 +65,7 @@ const resumeSections = ref([
   {
     name: 'Skills',
     open: false,
-    icon: 'folder-gulp',
+    icon: 'folderGulp',
     entries: [
       {
         icon: 'csharp',
@@ -97,7 +98,7 @@ const resumeSections = ref([
         info: 'MongoDB'
       },
       {
-        icon: 'azure-pipelines',
+        icon: 'azurePipelines',
         slug: '',
         info: 'Azure DevOps'
       },
@@ -140,7 +141,7 @@ const resumeSections = ref([
   {
     name: 'Projects',
     open: false,
-    icon: 'folder-yarn',
+    icon: 'folderYarn',
     entries: [
       {
         icon: 'nodejs',
@@ -148,7 +149,7 @@ const resumeSections = ref([
         info: 'This Website'
       },
       {
-        icon: 'python-misc',
+        icon: 'pythonMisc',
         slug: '/project/wakepy',
         info: 'WakePy'
       },
@@ -164,9 +165,6 @@ const resumeSections = ref([
       }]
   },
 ]);
-
-const getIcon = (name: string) =>
-  `/node_modules/material-icon-theme/icons/${name}.svg`;
 
 const toggleSection = (name: string) => {
   const section = resumeSections.value.find((s) => s.name === name);

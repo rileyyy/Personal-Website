@@ -4,13 +4,13 @@
     <div v-for="section in sections" :key="section.name" class="folder">
       <div class="folder-header" @click="toggleSection(section.name)">
         <component class="arrow" :class="{ invisible: section.open === null, open: section.open }" :is="ChevronRight"></component>
-        <span><img class="icon" :src=getIcon(section.icon)>
+        <span><img class="icon" :src=materialIcon(section.icon)>
           <p> {{ section.name }}</p>
         </span>
       </div>
       <div v-if="section.open" class="files">
         <RouterLink v-for="entry in section.entries" :key="entry.name" class="file" :to="entry.slug">
-          <img class="icon" :src=getIcon(entry.icon)>
+          <img class="icon" :src=materialIcon(entry.icon)>
           <p>{{ entry.name }}</p>
         </RouterLink>
       </div>
@@ -22,6 +22,7 @@
 import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
 import { ChevronRight } from 'lucide-vue-next';
+import { materialIcon } from '@/infrastructure/materialIcons';
 
 interface Game {
   name: string;
@@ -41,7 +42,7 @@ const sections = ref<Game[]>([
   {
     name: 'Old School Runescape',
     open: false,
-    icon: 'folder-test',
+    icon: 'folderTest',
     slug: '',
     entries: [
       {
@@ -59,7 +60,7 @@ const sections = ref<Game[]>([
   {
     name: 'Old School Runescape (Leagues)',
     open: false,
-    icon: 'folder-test',
+    icon: 'folderTest',
     slug: '',
     entries: [
       {
@@ -134,10 +135,6 @@ const sections = ref<Game[]>([
   },
 
 ]);
-
-// todo: Update to get game icons from the server, not lucid icons
-const getIcon = (name: string) =>
-  `/node_modules/material-icon-theme/icons/${name}.svg`;
 
 const toggleSection = (name: string) => {
   const section = sections.value.find((s) => s.name === name);

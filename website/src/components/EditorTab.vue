@@ -1,6 +1,6 @@
 <template>
   <div class="editor-tab" :class="{ selectedTab: selected }">
-    <img class="icon" :src="getIcon(icon)" />
+    <img class="icon" :src="materialIcon(icon)" />
     <span class="file-name">{{ filename }}</span>
     <X class="icon-small" />
   </div>
@@ -8,15 +8,13 @@
 
 <script setup lang="ts">
 import { X } from 'lucide-vue-next';
+import { materialIcon } from '@/infrastructure/materialIcons';
 
 defineProps<{
   icon: string,
   filename: string,
   selected: boolean,
 }>();
-
-const getIcon = (icon: string) =>
-  `/node_modules/material-icon-theme/icons/${icon}.svg`;
 </script>
 
 <style scoped>
