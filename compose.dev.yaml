@@ -1,18 +1,49 @@
-# Production compose file — run on the server.
-# Pulls small, pre-built images from GHCR instead of building from source.
+# Local development compose file — builds from source with hot-reload.
 #
-#   docker compose pull
-#   docker compose up -d
+#   docker compose -f compose.dev.yaml up
+#   docker compose -f compose.dev.yaml --profile backend --profile database up
 #
 services:
   node-app:
-    image: ghcr.io/rileyyy/personal-website-node:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.node.dev
+      args:
+        ENVIRONMENT: ${ENVIRONMENT}
+    develop:
+      watch:
+        - action: sync
+          path: ./website
+          target: /app/website
+          ignore:
+            - website/node_modules
+        - action: rebuild
+          path: Dockerfile.node.dev
+        - action: rebuild
+          path: compose.dev.yaml
+        - action: sync+restart
+          path: ./website/package.json
+          target: /app/website/package.json
     ports:
       - "5173:5173"
     restart: always
+    environment:
+      - NODE_ENV=${ENVIRONMENT}
+    volumes:
+      - ./:/app
+      - /app/website/node_modules
 
   asp-net:
-    image: ghcr.io/rileyyy/personal-website-aspnet:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.aspnet.dev
+    develop:
+      watch:
+        - action: sync
+          path: ./data/
+          target: /data
+        - action: rebuild
+          path: ./database-interface/
     ports:
       - "25052:25052"
     depends_on:
@@ -24,7 +55,6 @@ services:
       - mongodb_password
     volumes:
       - ./data:/data
-    restart: always
     profiles: ['backend']
 
   mongodb:

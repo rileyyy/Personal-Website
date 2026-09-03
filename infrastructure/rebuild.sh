@@ -1,4 +1,4 @@
 #!
 systemctl stop website-control.service
-docker-compose build
+docker compose pull
 systemctl start website-control.service
