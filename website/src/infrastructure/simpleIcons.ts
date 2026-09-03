@@ -1,5 +1,5 @@
 import type { Component } from 'vue';
-import { ClaudeIcon, DotNetIcon, FlutterIcon, GitHubActionsIcon, GitHubIcon, MongoDbIcon, MySqlIcon, NuGetIcon, VirtualBoxIcon, VMwareIcon } from 'vue3-simple-icons';
+import { ClaudeIcon, DotNetIcon, FlutterIcon, GitHubActionsIcon, GitHubIcon, HomeAssistantIcon, MongoDbIcon, MySqlIcon, NuGetIcon, VirtualBoxIcon, VMwareIcon } from 'vue3-simple-icons';
 
 export interface SimpleIcon {
   component: Component;
@@ -11,7 +11,8 @@ const icons: Record<string, SimpleIcon> = {
   dotnet: { component: DotNetIcon, color: '#512BD4' },
   flutter: { component: FlutterIcon, color: '#02569B' },
   gitHub: { component: GitHubIcon, color: '#181717' },
-  gitHubActions: { component: GitHubActionsIcon, color: '##2088FF' },
+  gitHubActions: { component: GitHubActionsIcon, color: '#2088FF' },
+  homeAssistant: { component: HomeAssistantIcon, color: '#18BCF2' },
   mongoDb: { component: MongoDbIcon, color: '#47A248' },
   mysql: { component: MySqlIcon, color: '#4479A1' },
   nuget: { component: NuGetIcon, color: '#004880' },

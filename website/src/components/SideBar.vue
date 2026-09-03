@@ -91,28 +91,14 @@ const activeComponent = computed(() => {
 <style scoped>
 .sidebar-container {
   display: flex;
-  height: 100vh;
+  height: 100%;
   background-color: var(--slightly-darker-black);
-  scrollbar-width: thin;
-  scrollbar-color: var(--scroll-bar) transparent;
-}
-
-.sidebar-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.sidebar-container::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sidebar-container::-webkit-scrollbar-thumb {
-  background: var(--scroll-bar);
-  border-radius: 4px;
 }
 
 .icon-bar {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   padding: 8px 0;
   width: 50px;
   align-items: center;
@@ -147,8 +133,25 @@ const activeComponent = computed(() => {
 
 .details-panel {
   width: 275px;
+  height: 100%;
+  overflow-y: auto;
   background-color: var(--slightly-darker-black);
-  padding: 0 8px;
+  padding: 0 8px 20px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scroll-bar) transparent;
+}
+
+.details-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.details-panel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.details-panel::-webkit-scrollbar-thumb {
+  background: var(--scroll-bar);
+  border-radius: 4px;
 }
 
 .active-indicator {

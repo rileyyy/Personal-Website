@@ -261,12 +261,12 @@ const resumeSections = ref<ResumeSection[]>([
     materialIcon: 'folderYarn',
     entries: [
       {
-        materialIcon: 'nodejs',
+        materialIcon: 'vue',
         slug: '/project/this-site',
         info: 'This Website'
       },
       {
-        materialIcon: 'pythonMisc',
+        materialIcon: 'python',
         slug: '/project/wakepy',
         info: 'WakePy'
       },
@@ -276,7 +276,7 @@ const resumeSections = ref<ResumeSection[]>([
         info: 'PokeCraft'
       },
       {
-        materialIcon: 'arduino',
+        simpleIcon: 'homeAssistant',
         slug: '',
         info: 'Home Assistant'
       }]

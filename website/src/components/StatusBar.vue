@@ -11,10 +11,8 @@
 
 <style scoped>
 .status-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
+  flex-shrink: 0;
+  width: 100%;
   background-color: var(--slightly-darker-black);
   padding: 4px;
   display: flex;
