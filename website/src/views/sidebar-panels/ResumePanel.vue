@@ -2,7 +2,7 @@
   <div class="resume-panel">
     <h2 class="panel-title">Resume</h2>
     <div v-for="section in resumeSections" :key="section.name" class="folder">
-      <div class="folder-header" @click="toggleSection(section.name)">
+      <div class="folder-header" @click="toggle(section)">
         <component class="arrow" :class="{ open: section.open }" :is="ChevronRight"></component>
         <span>
           <img v-if="section.materialIcon" class="icon" :src="getIcon(section.materialIcon)">
@@ -12,12 +12,22 @@
         </span>
       </div>
       <div v-if="section.open" class="files">
-        <RouterLink v-for="entry in section.entries" :key="entry.info" class="file" :to="entry.slug">
-          <img v-if="entry.materialIcon" class="icon" :src="getIcon(entry.materialIcon)">
-          <component v-else-if="entry.simpleIcon" :is="getSimpleIcon(entry.simpleIcon)?.component"
-                     :style="{ color: getSimpleIcon(entry.simpleIcon)?.color }" class="icon" />
-          <p>{{ entry.info }}</p>
-        </RouterLink>
+        <template v-for="entry in section.entries" :key="entry.info">
+          <RouterLink class="file" :to="entry.slug">
+            <img v-if="entry.materialIcon" class="icon" :src="getIcon(entry.materialIcon)">
+            <component v-else-if="entry.simpleIcon" :is="getSimpleIcon(entry.simpleIcon)?.component"
+                       :style="{ color: getSimpleIcon(entry.simpleIcon)?.color }" class="icon" />
+            <p>{{ entry.info }}</p>
+          </RouterLink>
+          <div v-if="entry.entries" class="files">
+            <RouterLink v-for="sub in entry.entries" :key="sub.info" class="file" :to="sub.slug">
+              <img v-if="sub.materialIcon" class="icon" :src="getIcon(sub.materialIcon)">
+              <component v-else-if="sub.simpleIcon" :is="getSimpleIcon(sub.simpleIcon)?.component"
+                         :style="{ color: getSimpleIcon(sub.simpleIcon)?.color }" class="icon" />
+              <p>{{ sub.info }}</p>
+            </RouterLink>
+          </div>
+        </template>
       </div>
     </div>
   </div>
@@ -35,6 +45,7 @@ interface ResumeEntry {
   simpleIcon?: string;
   slug: string;
   info: string;
+  entries?: ResumeEntry[];
 }
 
 interface ResumeSection {
@@ -84,19 +95,31 @@ const resumeSections = ref<ResumeSection[]>([
       }]
   },
   {
-    name: 'Skills',
+    name: 'Languages',
     open: false,
-    materialIcon: 'folderGulp',
+    materialIcon: 'virtual',
     entries: [
       {
         materialIcon: 'csharp',
         slug: '',
-        info: 'C#'
-      },
-      {
-        materialIcon: 'android',
-        slug: '',
-        info: 'Xamarin (Android)'
+        info: 'C#',
+        entries: [
+          {
+            simpleIcon: 'dotnet',
+            slug: '',
+            info: 'MAUI'
+          },
+          {
+            simpleIcon: 'nuget',
+            slug: '',
+            info: 'NuGet'
+          },
+          {
+            materialIcon: 'android',
+            slug: '',
+            info: 'Xamarin'
+          },
+        ],
       },
       {
         materialIcon: 'cpp',
@@ -104,12 +127,58 @@ const resumeSections = ref<ResumeSection[]>([
         info: 'C++'
       },
       {
+        materialIcon: 'dart',
+        slug: '',
+        info: 'Dart',
+        entries: [
+          {
+            simpleIcon: 'flutter',
+            slug: '',
+            info: 'Flutter'
+          },
+        ],
+      },
+      {
+        materialIcon: 'java',
+        slug: '',
+        info: 'Java SE'
+      },
+      {
         materialIcon: 'python',
         slug: '',
         info: 'Python'
       },
       {
-        materialIcon: 'database',
+        materialIcon: 'vue',
+        slug: '',
+        info: 'Vue.js',
+        entries: [
+          {
+            materialIcon: 'html',
+            slug: '',
+            info: 'HTML'
+          },
+          {
+            materialIcon: 'css',
+            slug: '',
+            info: 'CSS'
+          },
+          {
+            materialIcon: 'typescriptDef',
+            slug: '',
+            info: 'TypeScript'
+          },
+        ]
+      },
+    ],
+  },
+  {
+    name: 'Databases',
+    open: false,
+    materialIcon: 'database',
+    entries: [
+      {
+        simpleIcon: 'mysql',
         slug: '',
         info: 'MySQL'
       },
@@ -118,15 +187,61 @@ const resumeSections = ref<ResumeSection[]>([
         slug: '',
         info: 'MongoDB'
       },
-      {
-        materialIcon: 'azurePipelines',
-        slug: '',
-        info: 'Azure DevOps'
-      },
+    ],
+  },
+  {
+    name: 'Tools',
+    open: false,
+    materialIcon: 'folderTools',
+    entries: [
       {
         materialIcon: 'stylelint',
         slug: '',
         info: 'Agile'
+      },
+      {
+        materialIcon: 'folderPipe',
+        slug: '',
+        info: 'CI/CD',
+        entries: [
+          {
+            materialIcon: 'azurePipelines',
+            slug: '',
+            info: 'Azure DevOps'
+          },
+          {
+            simpleIcon: 'gitHubActions',
+            slug: '',
+            info: 'GitHub Actions'
+          },
+        ]
+      },
+      {
+        materialIcon: 'folderServer',
+        slug: '',
+        info: 'Virtualization',
+        entries: [
+          {
+            materialIcon: 'docker',
+            slug: '',
+            info: 'Docker + Compose'
+          },
+          {
+            simpleIcon: 'virtualBox',
+            slug: '',
+            info: 'VirtualBox'
+          },
+          {
+            simpleIcon: 'vmWare',
+            slug: '',
+            info: 'VMware'
+          },
+        ]
+      },
+      {
+        simpleIcon: 'claude',
+        slug: '',
+        info: 'Claude'
       },
       {
         materialIcon: 'git',
@@ -138,26 +253,7 @@ const resumeSections = ref<ResumeSection[]>([
         slug: '',
         info: 'Godot'
       },
-      {
-        materialIcon: 'java',
-        slug: '',
-        info: 'Java SE'
-      },
-      {
-        materialIcon: 'docker',
-        slug: '',
-        info: 'Docker'
-      },
-      {
-        materialIcon: 'vue',
-        slug: '',
-        info: 'Vue.js'
-      },
-      {
-        materialIcon: 'html',
-        slug: '',
-        info: 'HTML/CSS'
-      }]
+    ]
   },
   {
     name: 'Projects',
@@ -187,9 +283,8 @@ const resumeSections = ref<ResumeSection[]>([
   },
 ]);
 
-const toggleSection = (name: string) => {
-  const section = resumeSections.value.find((s) => s.name === name);
-  if (section) section.open = !section.open;
+const toggle = (item: { open?: boolean }) => {
+  item.open = !item.open;
 };
 </script>
 
@@ -212,7 +307,7 @@ const toggleSection = (name: string) => {
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin: 4px 0;
+  padding: 4px 0;
 }
 
 .folder-header:hover {
